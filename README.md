@@ -31,7 +31,7 @@ Or just download it and place it where you want otherwise.
 Summary
 ===========
 - [Realist api](https://github.com/lingtalfi/Realist/blob/master/doc/api/Ling/Realist.md) (generated with [DocTools](https://github.com/lingtalfi/DocTools))
-- [Conception notes](https://github.com/lingtalfi/Realist/blob/master/doc/pages/)
+- [Conception notes](https://github.com/lingtalfi/Light-Realist/tree/master/doc/pages)
 - [Services](#services)
 
 
@@ -93,6 +93,10 @@ $easy_route.methods_collection:
 History Log
 =============
 
+- 1.0.1 -- 2019-09-03
+
+    - fix doc link
+    
 - 1.0.0 -- 2019-09-03
 
     - initial commit
