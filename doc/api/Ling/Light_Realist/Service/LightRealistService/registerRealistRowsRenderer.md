@@ -7,7 +7,7 @@ LightRealistService::registerRealistRowsRenderer
 
 
 
-LightRealistService::registerRealistRowsRenderer — Sets the duelistRowsRenderer.
+LightRealistService::registerRealistRowsRenderer — Registers a duelistRowsRenderer.
 
 
 
@@ -21,7 +21,7 @@ public [LightRealistService::registerRealistRowsRenderer](https://github.com/lin
 
 
 
-Sets the duelistRowsRenderer.
+Registers a duelistRowsRenderer.
 
 
 
@@ -53,7 +53,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [LightRealistService::registerRealistRowsRenderer](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L325-L328)
+See the source code for method [LightRealistService::registerRealistRowsRenderer](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L326-L329)
 
 
 See Also
@@ -61,5 +61,5 @@ See Also
 
 The [LightRealistService](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService.md) class.
 
-Previous method: [setBaseDir](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/setBaseDir.md)<br>Next method: [registerActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/registerActionHandler.md)<br>
+Previous method: [setBaseDir](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/setBaseDir.md)<br>Next method: [registerListRenderer](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/registerListRenderer.md)<br>
 

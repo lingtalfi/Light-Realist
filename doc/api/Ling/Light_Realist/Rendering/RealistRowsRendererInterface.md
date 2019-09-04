@@ -4,7 +4,7 @@
 
 The RealistRowsRendererInterface class
 ================
-2019-08-12 --> 2019-09-03
+2019-08-12 --> 2019-09-04
 
 
 
@@ -59,4 +59,4 @@ See the source code of [Ling\Light_Realist\Rendering\RealistRowsRendererInterfac
 
 SeeAlso
 ==============
-Previous class: [BaseRealistRowsRenderer](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer.md)<br>Next class: [LightRealistService](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService.md)<br>
+Previous class: [RealistListRendererInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RealistListRendererInterface.md)<br>Next class: [LightRealistService](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService.md)<br>

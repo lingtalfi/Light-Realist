@@ -54,6 +54,13 @@ It looks like this (all properties are optional):
 
 ```yaml
 rendering:
+    # this section configures the list renderer. See the list renderer section below for more info.
+    list_renderer:
+        identifier: string
+    
+    # the column labels is a piece of information that can be used by any renderer. 
+    column_labels: array of column => label
+
     open_admin_table: # control parameters related to the open admin table (see the open admin table protocol for
                       # more information: https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/open-admin-table-protocol.md)
         use_global_search: bool=true. Whether to use the global search widget (aka general_search). 
@@ -95,6 +102,17 @@ rendering:
          
 ```
  
+
+List renderer
+-------------
+
+A list renderer is basically the object which displays the list structure, including all gravitating widgets, such as the pagination,
+the search widget, etc...
+
+If we use an ajax based rows generator (which we recommend for admin tables), then the inner rows are generated separately
+by a specialized object called the "rows renderer".
+
+
 
 
 

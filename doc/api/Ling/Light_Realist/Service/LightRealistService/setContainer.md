@@ -49,7 +49,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [LightRealistService::setContainer](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L303-L306)
+See the source code for method [LightRealistService::setContainer](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L304-L307)
 
 
 See Also

@@ -387,7 +387,12 @@ if ("undefined" === typeof window.OpenAdminTableHelper) {
 
             },
             postTags: function (tags) {
+
+
                 var $this = this;
+
+                this.options.on_request_before();
+
 
                 $.post(this.options.service_url, {
                     request_id: this.options.request_id,
@@ -622,6 +627,13 @@ if ("undefined" === typeof window.OpenAdminTableHelper) {
             neck_filters_selector: '.oath-neck-filters',
             on_server_error: function (msg) {
                 console.log("Error from the server: " + msg)
+            },
+
+            /**
+             * Triggered just before a request is sent to the server.
+             */
+            on_request_before: function () {
+
             },
             on_request_after: function (jContainer) {
 

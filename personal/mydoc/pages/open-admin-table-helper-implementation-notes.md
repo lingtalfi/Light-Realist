@@ -11,7 +11,14 @@ This tool helps you implement the open-admin-table protocol in your gui.
 It uses the realist-tag-transfer.js script under the hood (i.e. it's a dependency).
 
 
-Note: this is just one possible implementation out of many.
+Note: this is just one possible implementation out of many, the official name of this implementation 
+is "Open Admin Table One" protocol implementation.
+
+
+
+  
+
+ 
 
 
 
@@ -516,7 +523,6 @@ Ric implementation
 
 By default, we implement ric by using the [ric admin table helper](https://github.com/lingtalfi/JRicAdminTableHelper) js tool.
 See the documentation of this tool for more details.
-
 
 
 

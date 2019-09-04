@@ -46,7 +46,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [LightRealistService::__construct](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L102-L109)
+See the source code for method [LightRealistService::__construct](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L113-L121)
 
 
 See Also

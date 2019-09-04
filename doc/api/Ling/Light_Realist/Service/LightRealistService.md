@@ -4,7 +4,7 @@
 
 The LightRealistService class
 ================
-2019-08-12 --> 2019-09-03
+2019-08-12 --> 2019-09-04
 
 
 
@@ -64,6 +64,7 @@ class <span class="pl-k">LightRealistService</span>  {
     - protected [Ling\ParametrizedSqlQuery\ParametrizedSqlQueryUtil](https://github.com/lingtalfi/ParametrizedSqlQuery/blob/master/doc/api/Ling/ParametrizedSqlQuery/ParametrizedSqlQueryUtil.md) [$parametrizedSqlQuery](#property-parametrizedSqlQuery) ;
     - protected [Ling\Light_Realist\Rendering\RealistRowsRendererInterface[]](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RealistRowsRendererInterface.md) [$realistRowsRenderers](#property-realistRowsRenderers) ;
     - protected [Ling\Light_Realist\ActionHandler\LightRealistActionHandlerInterface[]](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ActionHandler/LightRealistActionHandlerInterface.md) [$actionHandlers](#property-actionHandlers) ;
+    - protected [Ling\Light_Realist\Rendering\RealistListRendererInterface[]](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RealistListRendererInterface.md) [$listRenderers](#property-listRenderers) ;
 
 - Methods
     - public [__construct](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/__construct.md)() : void
@@ -71,9 +72,12 @@ class <span class="pl-k">LightRealistService</span>  {
     - public [setContainer](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/setContainer.md)([Ling\Light\ServiceContainer\LightServiceContainerInterface](https://github.com/lingtalfi/Light/blob/master/doc/api/Ling/Light/ServiceContainer/LightServiceContainerInterface.md) $container) : void
     - public [setBaseDir](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/setBaseDir.md)(string $baseDir) : void
     - public [registerRealistRowsRenderer](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/registerRealistRowsRenderer.md)(string $identifier, [Ling\Light_Realist\Rendering\RealistRowsRendererInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RealistRowsRendererInterface.md) $realistRowsRenderer) : void
+    - public [registerListRenderer](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/registerListRenderer.md)(string $identifier, [Ling\Light_Realist\Rendering\RealistListRendererInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RealistListRendererInterface.md) $renderer) : void
     - public [registerActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/registerActionHandler.md)([Ling\Light_Realist\ActionHandler\LightRealistActionHandlerInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ActionHandler/LightRealistActionHandlerInterface.md) $handler) : void
     - public [getActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/getActionHandler.md)(string $id) : [LightRealistActionHandlerInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ActionHandler/LightRealistActionHandlerInterface.md)
+    - public [getListRendererByRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/getListRendererByRequestId.md)(string $requestId) : [RealistListRendererInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RealistListRendererInterface.md)
     - protected [error](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/error.md)(string $message) : void
+    - protected [getConfigurationArrayByRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/getConfigurationArrayByRequestId.md)(string $requestId) : array
 
 }
 
@@ -111,7 +115,14 @@ Properties
 
 - <span id="property-actionHandlers"><b>actionHandlers</b></span>
 
-    This property holds the (ric ajax) actionHandlers for this instance.
+    This property holds the (ric/ajax) actionHandlers for this instance.
+    
+    
+
+- <span id="property-listRenderers"><b>listRenderers</b></span>
+
+    This property holds the listRenderers for this instance.
+    It's an array of identifier => RealistListRendererInterface instance
     
     
 
@@ -124,10 +135,13 @@ Methods
 - [LightRealistService::executeRequestById](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/executeRequestById.md) &ndash; - nb_rows: int, the number of returned rows (i.e.
 - [LightRealistService::setContainer](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/setContainer.md) &ndash; Sets the container.
 - [LightRealistService::setBaseDir](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/setBaseDir.md) &ndash; Sets the baseDir.
-- [LightRealistService::registerRealistRowsRenderer](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/registerRealistRowsRenderer.md) &ndash; Sets the duelistRowsRenderer.
+- [LightRealistService::registerRealistRowsRenderer](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/registerRealistRowsRenderer.md) &ndash; Registers a duelistRowsRenderer.
+- [LightRealistService::registerListRenderer](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/registerListRenderer.md) &ndash; Registers a list renderer.
 - [LightRealistService::registerActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/registerActionHandler.md) &ndash; Registers an action handler.
 - [LightRealistService::getActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/getActionHandler.md) &ndash; Returns the action handler identified by the given id.
+- [LightRealistService::getListRendererByRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/getListRendererByRequestId.md) &ndash; Returns a configured list renderer.
 - [LightRealistService::error](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/error.md) &ndash; Throws the given error message as an exception.
+- [LightRealistService::getConfigurationArrayByRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/getConfigurationArrayByRequestId.md) &ndash; Returns the configuration array corresponding to the given request id.
 
 
 

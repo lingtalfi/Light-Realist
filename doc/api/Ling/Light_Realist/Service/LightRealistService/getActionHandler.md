@@ -54,7 +54,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [LightRealistService::getActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L351-L357)
+See the source code for method [LightRealistService::getActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L363-L369)
 
 
 See Also
@@ -62,5 +62,5 @@ See Also
 
 The [LightRealistService](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService.md) class.
 
-Previous method: [registerActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/registerActionHandler.md)<br>Next method: [error](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/error.md)<br>
+Previous method: [registerActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/registerActionHandler.md)<br>Next method: [getListRendererByRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/getListRendererByRequestId.md)<br>
 

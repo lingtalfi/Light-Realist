@@ -9,6 +9,8 @@ use Ling\Light\ServiceContainer\LightServiceContainerInterface;
 use Ling\Light_Database\LightDatabasePdoWrapper;
 use Ling\Light_Realist\ActionHandler\LightRealistActionHandlerInterface;
 use Ling\Light_Realist\Exception\LightRealistException;
+use Ling\Light_Realist\OpenAdminTable\OpenAdminTableRendererInterface;
+use Ling\Light_Realist\Rendering\RealistListRendererInterface;
 use Ling\Light_Realist\Rendering\RealistRowsRendererInterface;
 use Ling\ParametrizedSqlQuery\ParametrizedSqlQueryUtil;
 
@@ -89,11 +91,20 @@ class LightRealistService
 
 
     /**
-     * This property holds the (ric ajax) actionHandlers for this instance.
+     * This property holds the (ric/ajax) actionHandlers for this instance.
      *
      * @var LightRealistActionHandlerInterface[]
      */
     protected $actionHandlers;
+
+
+    /**
+     * This property holds the listRenderers for this instance.
+     * It's an array of identifier => RealistListRendererInterface instance
+     *
+     * @var RealistListRendererInterface[]
+     */
+    protected $listRenderers;
 
 
     /**
@@ -106,6 +117,7 @@ class LightRealistService
         $this->parametrizedSqlQuery = new ParametrizedSqlQueryUtil();
         $this->realistRowsRenderers = [];
         $this->actionHandlers = [];
+        $this->listRenderers = [];
     }
 
 
@@ -152,20 +164,9 @@ class LightRealistService
      */
     public function executeRequestById(string $requestId, array $params = []): array
     {
-        $p = explode(":", $requestId, 2);
-        $fileId = $p[0];
-        $queryId = $p[1];
-        $filePath = $this->baseDir . "/$fileId.byml";
-        if (false === file_exists($filePath)) {
-            $this->error("File not found: $filePath.");
-        }
+        $requestDeclaration = $this->getConfigurationArrayByRequestId($requestId);
 
-        $arr = BabyYamlUtil::readFile($filePath);
-        if (false === array_key_exists($queryId, $arr)) {
-            $this->error("Query not found with id: $queryId, in file $filePath.");
-        }
 
-        $requestDeclaration = $arr[$queryId];
         $tags = $params['tags'] ?? [];
 
 
@@ -317,7 +318,7 @@ class LightRealistService
 
 
     /**
-     * Sets the duelistRowsRenderer.
+     * Registers a duelistRowsRenderer.
      *
      * @param string $identifier
      * @param RealistRowsRendererInterface $realistRowsRenderer
@@ -325,6 +326,17 @@ class LightRealistService
     public function registerRealistRowsRenderer(string $identifier, RealistRowsRendererInterface $realistRowsRenderer)
     {
         $this->realistRowsRenderers[$identifier] = $realistRowsRenderer;
+    }
+
+    /**
+     * Registers a list renderer.
+     *
+     * @param string $identifier
+     * @param RealistListRendererInterface $renderer
+     */
+    public function registerListRenderer(string $identifier, RealistListRendererInterface $renderer)
+    {
+        $this->listRenderers[$identifier] = $renderer;
     }
 
     /**
@@ -356,6 +368,38 @@ class LightRealistService
         throw new LightRealistException("No action handler found with id=$id.");
     }
 
+
+    /**
+     * Returns a configured list renderer.
+     *
+     *
+     * @param string $requestId
+     * @return RealistListRendererInterface
+     * @throws \Exception
+     */
+    public function getListRendererByRequestId(string $requestId): RealistListRendererInterface
+    {
+        $requestDeclaration = $this->getConfigurationArrayByRequestId($requestId);
+        $rendering = $requestDeclaration['rendering']??[];
+        $listRendererConf = $rendering['list_renderer'] ?? [];
+        $listRendererId = $listRendererConf['identifier'] ?? null;
+        if (null === $listRendererId) {
+            $this->error("The list renderer id was not defined (requestId=$requestId).");
+        }
+        if (false === array_key_exists($listRendererId, $this->listRenderers)) {
+            $this->error("List renderer not found with identifier $listRendererId (requestId=$requestId).");
+        }
+
+
+        $listRenderer = $this->listRenderers[$listRendererId];
+
+        // a list renderer should be able to prepare itself.
+        // Note: some might need the service container?, we could pass it to them if that happened,
+        // but for now we try to be conservative and pass only one argument as long as possible.
+        $listRenderer->prepareByRequestDeclaration($requestId, $requestDeclaration);
+        return $listRenderer;
+    }
+
     //--------------------------------------------
     //
     //--------------------------------------------
@@ -371,5 +415,28 @@ class LightRealistService
         throw new LightRealistException($message);
     }
 
+    /**
+     * Returns the configuration array corresponding to the given request id.
+     *
+     * @param string $requestId
+     * @return array
+     * @throws \Exception
+     */
+    protected function getConfigurationArrayByRequestId(string $requestId): array
+    {
+        $p = explode(":", $requestId, 2);
+        $fileId = $p[0];
+        $queryId = $p[1];
+        $filePath = $this->baseDir . "/$fileId.byml";
+        if (false === file_exists($filePath)) {
+            $this->error("File not found: $filePath.");
+        }
+
+        $arr = BabyYamlUtil::readFile($filePath);
+        if (false === array_key_exists($queryId, $arr)) {
+            $this->error("Query not found with id: $queryId, in file $filePath.");
+        }
+        return $arr[$queryId];
+    }
 
 }

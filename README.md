@@ -93,6 +93,11 @@ $easy_route.methods_collection:
 History Log
 =============
 
+- 1.1.0 -- 2019-09-04
+
+    - removed OpenAdminTableRendererInterface
+    - added RealistListRendererInterface
+    
 - 1.0.1 -- 2019-09-03
 
     - fix doc link

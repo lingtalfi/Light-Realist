@@ -87,7 +87,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [LightRealistService::executeRequestById](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L153-L286)
+See the source code for method [LightRealistService::executeRequestById](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L165-L287)
 
 
 See Also
