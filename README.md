@@ -93,6 +93,10 @@ $easy_route.methods_collection:
 History Log
 =============
 
+- 1.2.0 -- 2019-09-04
+
+    - update OpenAdminTableBaseRealistListRenderer->prepareByRequestDeclaration 
+    
 - 1.1.1 -- 2019-09-04
 
     - testing new repository name sync

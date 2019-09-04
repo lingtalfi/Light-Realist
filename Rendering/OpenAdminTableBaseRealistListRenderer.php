@@ -4,8 +4,13 @@
 namespace Ling\Light_Realist\Rendering;
 
 
+use Ling\Light\ServiceContainer\LightServiceContainerInterface;
+
 /**
  * The OpenAdminTableBaseRealistListRenderer class.
+ * Helps implementing the "Open Admin Table One" protocol.
+ * See more details in the @page(open admin table helper implementation notes).
+ *
  */
 class OpenAdminTableBaseRealistListRenderer implements RealistListRendererInterface
 {
@@ -49,6 +54,24 @@ class OpenAdminTableBaseRealistListRenderer implements RealistListRendererInterf
      */
     protected $requestId;
 
+    /**
+     * This property holds the container for this instance.
+     * @var LightServiceContainerInterface
+     */
+    protected $container;
+
+
+    /**
+     *
+     * This property holds the collapsibleColumnIndexes for this instance.
+     *
+     * This is a property specific to the @page(responsive table helper tool).
+     *
+     *
+     * @var array|string
+     */
+    protected $collapsibleColumnIndexes;
+
 
     /**
      * Builds the OpenAdminTableBaseRealistListRenderer instance.
@@ -64,15 +87,18 @@ class OpenAdminTableBaseRealistListRenderer implements RealistListRendererInterf
             "order" => true,
         ];
         $this->requestId = null;
+        $this->container = null;
+        $this->collapsibleColumnIndexes = [];
     }
 
     /**
      * @implementation
      */
-    public function prepareByRequestDeclaration(string $requestId, array $requestDeclaration)
+    public function prepareByRequestDeclaration(string $requestId, array $requestDeclaration, LightServiceContainerInterface $container)
     {
 
         $this->setRequestId($requestId);
+        $this->setContainer($container);
 
         $rendering = $requestDeclaration['rendering'] ?? [];
         $labels = $rendering['column_labels'] ?? [];
@@ -85,6 +111,12 @@ class OpenAdminTableBaseRealistListRenderer implements RealistListRendererInterf
 
         $widgetStatuses = $openAdminTable['widget_statuses'] ?? [];
         $this->setWidgetStatuses($widgetStatuses);
+
+
+        $responsiveTableHelper = $rendering['responsive_table_helper'] ?? [];
+        $collapsibleColumnIndexes = $responsiveTableHelper['collapsible_column_indexes'] ?? [];
+        $this->setCollapsibleColumnIndexes($collapsibleColumnIndexes);
+
     }
 
 
@@ -132,6 +164,28 @@ class OpenAdminTableBaseRealistListRenderer implements RealistListRendererInterf
     {
         $this->requestId = $requestId;
     }
+
+    /**
+     * Sets the container.
+     *
+     * @param LightServiceContainerInterface $container
+     */
+    public function setContainer(LightServiceContainerInterface $container)
+    {
+        $this->container = $container;
+    }
+
+    /**
+     * Sets the collapsibleColumnIndexes.
+     *
+     * @param mixed $collapsibleColumnIndexes
+     */
+    public function setCollapsibleColumnIndexes($collapsibleColumnIndexes)
+    {
+        $this->collapsibleColumnIndexes = $collapsibleColumnIndexes;
+    }
+
+
 
 
 

@@ -68,7 +68,16 @@ rendering:
         use_number_of_rows: bool=true. Whether to use the number of rows widget.  
         use_checkbox: bool=true. Whether to use the checkbox widget.
         use_neck_filters: bool=true. Whether to use the neck filters widget.
-        use_debug_window: bool=false. Whether to use the debug window widget.  
+        use_debug_window: bool=false. Whether to use the debug window widget.
+
+  
+    # If you use the responsive table helper tool, you can configure some of its properties
+    # directly from the realist configuration (if your concrete renderer can handle it).
+    # https://github.com/lingtalfi/JResponsiveTableHelper
+    # In fact, since this tool is so useful, we've included it in the Light_Realist distribution,
+    # so that it's already there when you import the Light_Realist planet.
+    responsive_table_helper:
+        collapsible_column_indexes: [] # it could be also a string, see the documentation for more details.
                 
 
     rows_renderer: # defines how the rows will be rendered (more info in the rows renderer section later in this document)
@@ -93,11 +102,6 @@ rendering:
             name: string=action. The column name in the row.
             label: string=Actions. The label to use in the gui.
 
-        # If you use the responsive table helper tool, you can configure some of its properties
-        # directly from the realist configuration (if your concrete renderer can handle it).
-        # https://github.com/lingtalfi/JResponsiveTableHelper
-        responsive_table_helper:
-            collapsibleColumnIndexes: []
         
          
 ```

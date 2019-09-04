@@ -380,7 +380,7 @@ class LightRealistService
     public function getListRendererByRequestId(string $requestId): RealistListRendererInterface
     {
         $requestDeclaration = $this->getConfigurationArrayByRequestId($requestId);
-        $rendering = $requestDeclaration['rendering']??[];
+        $rendering = $requestDeclaration['rendering'] ?? [];
         $listRendererConf = $rendering['list_renderer'] ?? [];
         $listRendererId = $listRendererConf['identifier'] ?? null;
         if (null === $listRendererId) {
@@ -396,7 +396,7 @@ class LightRealistService
         // a list renderer should be able to prepare itself.
         // Note: some might need the service container?, we could pass it to them if that happened,
         // but for now we try to be conservative and pass only one argument as long as possible.
-        $listRenderer->prepareByRequestDeclaration($requestId, $requestDeclaration);
+        $listRenderer->prepareByRequestDeclaration($requestId, $requestDeclaration, $this->container);
         return $listRenderer;
     }
 
