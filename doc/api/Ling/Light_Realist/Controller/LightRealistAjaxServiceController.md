@@ -50,7 +50,7 @@ Methods
 
 - [LightRealistAjaxServiceController::handleJsonRequest](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Controller/LightRealistAjaxServiceController/handleJsonRequest.md) &ndash; and returns the appropriate response.
 - [LightRealistAjaxServiceController::error](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Controller/LightRealistAjaxServiceController/error.md) &ndash; Throws an error message.
-- [LightRealistAjaxServiceController::prepareTags](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Controller/LightRealistAjaxServiceController/prepareTags.md) &ndash; Returns the tags in the format expected by the executeRequestById method.
+- [LightRealistAjaxServiceController::prepareTags](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Controller/LightRealistAjaxServiceController/prepareTags.md) &ndash; Returns the tags in the format expected by the LightRealistService->executeRequestById method.
 - LightController::__construct &ndash; Builds the LightController instance.
 - LightController::setLight &ndash; Sets the light instance.
 - LightController::getLight &ndash; Returns the light application.

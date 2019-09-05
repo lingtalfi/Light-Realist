@@ -37,6 +37,7 @@ The following modules are recognized and handled by this tool:
 - number of rows info
 - head columns sort
 - neck filters
+- number of items per page
 - pagination
 
 
@@ -79,6 +80,7 @@ Multiple elements (aka modules) are recognized:
 - the advanced search widget (composed of a form and a submit button)
 - the head columns sort (composed of clickable icons or elements)
 - the neck filters (composed of various html control elements and buttons, depending on the data type)
+- the number of items per page (composed of single select element)
 - the pagination (composed of clickable elements)
 
 
@@ -123,6 +125,10 @@ The default interaction between them and the (php) backend service is the follow
      In other words, the default behaviour of neck filters is that they can act as complementary searching tools for
      a global/advanced search.
      
+- the number of items per page:       
+      When the user selects a value, the request is left unchanged except for the pagination's page_length part.
+      This widget is bound to the pagination widget, in that their data feed the same tag (the limit tag).
+      
 - the pagination:       
       When the user clicks a pagination link, the request is left unchanged except for the pagination.
       In other words, we re-use all the other widgets, and we left them as they are.
@@ -144,6 +150,7 @@ The css classes are:
 - oath-head-columns-sort
 - oath-neck-filters
 - oath-pagination
+- oath-number-of-items-per-page
 
 Then, for each module, implement the markup that you use.
 If not preceded by a question mark, the markup is mandatory.
@@ -221,6 +228,18 @@ If not preceded by a question mark, the markup is mandatory.
         - .oath-clear-btn: add this class to every clear button that applies to a specific neck filter
     - ?.oath-clear-all-btn: add this class to the clear all button if you use one
      
+- number of items per page: 
+
+    - .oath-nipp-selector: add this class to the select holding the values.
+        Note: the all value is a convention used to mean: show all the pages (i.e. no pagination),
+        and it should be treated as such on the server side.
+        
+    - the data-rtt-extra-tag_group=pagination attribute should be set        
+    - the data-rtt-tag=limit attribute should be set (see the [realist tag transfer protocol](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/realist-tag-transfer-protocol.md) for more information)        
+    - the data-rtt-variable=page_length attribute should be set        
+        
+      
+
 - pagination: see the "pagination markup" section for more details
 
 
@@ -295,6 +314,11 @@ Options (default values)
 
 
 
+Note: there is no number_of_items_per_page option, as it shares the same configuration as the pagination widget.
+In other words, when either the pagination widget or the number_of_items_per_page widget are triggered by the user,
+the pagination option is used.
+
+
 
 Primary groups
 ---------------
@@ -351,7 +375,7 @@ We have 5 widgets gravitating around the main list:
 - advanced_search
 - head_columns_sort
 - neck_filters
-- pagination
+- pagination (optionally including number_of_items_per_page)
 
 
 I assume that you already understand the combine_with_request technique, which I found quite flexible.

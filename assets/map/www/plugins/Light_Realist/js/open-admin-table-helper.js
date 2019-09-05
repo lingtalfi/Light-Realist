@@ -34,6 +34,9 @@ if ("undefined" === typeof window.OpenAdminTableHelper) {
             this.jTable = this.jContainer.find(this.options.table_selector);
             this.useSpinKit = this.options.use_spinkit_helper;
 
+            // I use this to fix pagination inconsistency that can come from de-synced number of items per page and the page number.
+            this.nbTotalRows = null;
+
 
             // initializing containers
             this.containers = {};
@@ -64,7 +67,13 @@ if ("undefined" === typeof window.OpenAdminTableHelper) {
             }
             var jPagination = this.jContainer.find('.oath-pagination');
             if (jPagination.length) {
+
                 this.containers.pagination = jPagination;
+                var jNumberOfItemsPerPage = this.jContainer.find('.oath-number-of-items-per-page');
+                if (jNumberOfItemsPerPage.length) {
+                    this.containers.number_of_items_per_page = jNumberOfItemsPerPage;
+                }
+
             }
 
 
@@ -257,24 +266,67 @@ if ("undefined" === typeof window.OpenAdminTableHelper) {
                         }
                         var page = jNumberHolder.attr('data-page-number');
                         jPagination.find('[data-rtt-variable="page"]').attr('data-rtt-value', page);
-
                         $this.executeModule("pagination");
                         return false;
                     });
                 }
 
 
-                this.postTags([]);
+                //----------------------------------------
+                // NUMBER OF ITEMS PER PAGE
+                //----------------------------------------
+                var jNumberOfItemsPerPage = this.getModuleContainer("number_of_items_per_page");
+                if (jNumberOfItemsPerPage) {
+                    var jNippSelector = jNumberOfItemsPerPage.find(".oath-nipp-selector");
+                    jNippSelector.on('change', function () {
+                        $this.executeModule("pagination");
+                        return false;
+                    });
+                }
+
+
+                // this.postTags([]);
+                /**
+                 * I first execute the pagination module to be consistent with the gui,
+                 * especially the number of items per page selector which might be out of sync if we had
+                 * just called the postTags method.
+                 */
+                this.executeModule("pagination");
 
             },
             executeModule: function (moduleName) {
                 var $this = this;
+
+
+                /**
+                 * Fix pagination inconsistencies first
+                 */
+                if (
+                    null !== this.nbTotalRows &&
+                    "pagination" === moduleName) {
+                    var jNumberOfItemsPerPage = this.getModuleContainer("number_of_items_per_page");
+                    if (jNumberOfItemsPerPage) {
+                        var newValue = jNumberOfItemsPerPage.find(".oath-nipp-selector").val();
+                        var jPagination = this.getModuleContainer("pagination");
+                        var currentPage = jPagination.find('[data-rtt-variable="page"]').attr('data-rtt-value');
+
+                        var newOffset = parseInt(currentPage) * parseInt(newValue);
+                        if (newOffset > this.nbTotalRows) {
+                            /**
+                             * I put this to 1, seems solid, but we could use another heuristic.
+                             */
+                            jPagination.find('[data-rtt-variable="page"]').attr('data-rtt-value', 1);
+                        }
+                    }
+                }
+
 
                 var realist = new RealistTagTransfer({
                     jContainer: this.jContainer
                 });
                 var allTags = realist.collectTags();
                 var allTagsByGroup = this.groupTags(allTags);
+
 
                 var tags = [];
 
@@ -430,7 +482,7 @@ if ("undefined" === typeof window.OpenAdminTableHelper) {
                             }
                             var jFirst = jNumberOfRowsInfo.find('.nbri-current-first');
                             if (jFirst.length) {
-                                jFirst.html(data.current_page_first);
+                                jFirst.html(data.current_page_first + 1);
                             }
                             var jLast = jNumberOfRowsInfo.find('.nbri-current-last');
                             if (jLast.length) {
@@ -477,6 +529,7 @@ if ("undefined" === typeof window.OpenAdminTableHelper) {
 
                     var currentPage = parseInt(data.page);
                     var nbPages = data.nb_pages;
+                    this.nbTotalRows = data.nb_total_rows;
 
                     var firstPage = 1;
                     var firstPageIsDisabled = false;
@@ -542,6 +595,19 @@ if ("undefined" === typeof window.OpenAdminTableHelper) {
                         jOldNew = jNew;
                     }
                     jRemove.remove();
+
+
+                    /**
+                     * Eventually update the page number, which might have change.
+                     * This might happen for instance if you go on page 4 of a list, and then you change the number of items per page
+                     * from 25 to 500.
+                     * In that case, the page 4 might not exist anymore, and so the server would give us the real page,
+                     * which we inject back into our gui for consistency.
+                     *
+                     */
+                    jPagination.find('[data-rtt-variable="page"]').attr('data-rtt-value', currentPage);
+
+
                 }
             },
             updateSpecialPaginationLink(jPagination, type, pageNumber, isDisabled, disabledClass) {

@@ -96,7 +96,7 @@ class LightRealistAjaxServiceController extends LightController
 
 
     /**
-     * Returns the tags in the format expected by the executeRequestById method.
+     * Returns the tags in the format expected by the LightRealistService->executeRequestById method.
      *
      * @param array $tags
      * @return array

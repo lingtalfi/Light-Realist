@@ -47,7 +47,7 @@ With:
 
 Params an array containing the following:
 
-- ?tags: the tags to use with the request. (see [the realist conception notes](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/realist-conception-notes.md) for more details).
+- ?tags: the tags to use with the request. (see [the realist tag transfer protocol](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/realist-tag-transfer-protocol.md) for more details).
 
 
 If the sql query is not valid, an exception will be thrown.

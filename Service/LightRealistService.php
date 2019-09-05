@@ -150,7 +150,7 @@ class LightRealistService
      *
      * Params an array containing the following:
      *
-     * - ?tags: the tags to use with the request. (see @page(the realist conception notes) for more details).
+     * - ?tags: the tags to use with the request. (see @page(the realist tag transfer protocol) for more details).
      *
      *
      * If the sql query is not valid, an exception will be thrown.

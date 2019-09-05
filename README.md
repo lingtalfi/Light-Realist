@@ -93,6 +93,10 @@ $easy_route.methods_collection:
 History Log
 =============
 
+- 1.4.0 -- 2019-09-05
+
+    - add the number_of_items_per_row widget in open admin protocol implementation one
+    
 - 1.3.0 -- 2019-09-05
 
     - add BaseRealistRowsRenderer->getUrlByRoute and extractRic methods. 

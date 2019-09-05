@@ -7,7 +7,7 @@ LightRealistAjaxServiceController::prepareTags
 
 
 
-LightRealistAjaxServiceController::prepareTags — Returns the tags in the format expected by the executeRequestById method.
+LightRealistAjaxServiceController::prepareTags — Returns the tags in the format expected by the LightRealistService->executeRequestById method.
 
 
 
@@ -21,7 +21,7 @@ protected [LightRealistAjaxServiceController::prepareTags](https://github.com/li
 
 
 
-Returns the tags in the format expected by the executeRequestById method.
+Returns the tags in the format expected by the LightRealistService->executeRequestById method.
 
 
 
