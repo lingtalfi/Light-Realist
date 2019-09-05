@@ -153,7 +153,8 @@ Also, there are some reserved variable names, which basically trigger automatica
 - $column: check that this variable is one of the fields defined with the **base_fields** setting
 - $direction: check that this variable is either asc or desc
 - $operator: check that this variable is an operator defined in the [open admin table protocol operators](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/open-admin-table-protocol.md)
-- $page: converts the variable to an int. The "all" special value means: no pagination at all (i.e. there is only one page with all the rows in it)
+- $page: converts the variable to an int. 
+- $page_length: converts the variable to an int. The "all" special value means: no pagination at all (i.e. there is only one page with all the rows in it)
 
 If the check fails, the request is rejected.
 

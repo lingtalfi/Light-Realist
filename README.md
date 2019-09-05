@@ -93,6 +93,10 @@ $easy_route.methods_collection:
 History Log
 =============
 
+- 1.6.1 -- 2019-09-05
+
+    - fix typo in duelist, "all" special value is now recognized as a page_length (i.e. not page)
+    
 - 1.6.0 -- 2019-09-05
 
     - update duelist, "all" special value is now recognized as a page
