@@ -93,6 +93,10 @@ $easy_route.methods_collection:
 History Log
 =============
 
+- 1.6.0 -- 2019-09-05
+
+    - update duelist, "all" special value is now recognized as a page
+
 - 1.5.0 -- 2019-09-05
 
     - add .oath-row-select-checkbox recommendation in the open admin table helper implementation notes
