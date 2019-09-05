@@ -30,7 +30,7 @@ Or just download it and place it where you want otherwise.
 
 Summary
 ===========
-- [Realist api](https://github.com/lingtalfi/Realist/blob/master/doc/api/Ling/Realist.md) (generated with [DocTools](https://github.com/lingtalfi/DocTools))
+- [Realist api](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist.md) (generated with [DocTools](https://github.com/lingtalfi/DocTools))
 - [Conception notes](https://github.com/lingtalfi/Light-Realist/tree/master/doc/pages)
 - [Services](#services)
 
@@ -93,6 +93,10 @@ $easy_route.methods_collection:
 History Log
 =============
 
+- 1.4.1 -- 2019-09-05
+
+    - fix link to api
+    
 - 1.4.0 -- 2019-09-05
 
     - add the number_of_items_per_row widget in open admin protocol implementation one
