@@ -193,7 +193,7 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
                     }
                 }
 
-                $value = '<input class="rath-emitter" type="checkbox" ' . $sAttr . ' />';
+                $value = '<input class="rath-emitter oath-row-select-checkbox" type="checkbox" ' . $sAttr . ' />';
                 break;
             default:
                 break;

@@ -93,6 +93,10 @@ $easy_route.methods_collection:
 History Log
 =============
 
+- 1.5.0 -- 2019-09-05
+
+    - add .oath-row-select-checkbox recommendation in the open admin table helper implementation notes
+    
 - 1.4.1 -- 2019-09-05
 
     - fix link to api

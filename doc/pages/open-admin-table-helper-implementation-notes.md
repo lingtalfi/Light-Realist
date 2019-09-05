@@ -82,6 +82,7 @@ Multiple elements (aka modules) are recognized:
 - the neck filters (composed of various html control elements and buttons, depending on the data type)
 - the number of items per page (composed of single select element)
 - the pagination (composed of clickable elements)
+- the checkbox (composed of a checkbox per row)
 
 
 
@@ -155,6 +156,14 @@ The css classes are:
 Then, for each module, implement the markup that you use.
 If not preceded by a question mark, the markup is mandatory.
 
+
+
+
+- checkbox:
+    - .oath-row-select-checkbox add this class to the checkboxes. It's not necessary to wrap this module, as for now it's just a courtesy for the renderers,
+        so that they can toggle all checkboxes at once, using a master checkbox of their own.
+        
+     
 - number of rows:
     - .nbri-total: add this class to the span or element which will receive the total number of rows.
     - .nbri-current-first: add this class to the span or element which will receive the current page's first element offset.
