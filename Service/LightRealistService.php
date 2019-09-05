@@ -5,6 +5,7 @@ namespace Ling\Light_Realist\Service;
 
 
 use Ling\BabyYaml\BabyYamlUtil;
+use Ling\Light\ServiceContainer\LightServiceContainerAwareInterface;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
 use Ling\Light_Database\LightDatabasePdoWrapper;
 use Ling\Light_Realist\ActionHandler\LightRealistActionHandlerInterface;
@@ -204,6 +205,11 @@ class LightRealistService
         }
 
         if ($rowsRendererInstance instanceof RealistRowsRendererInterface) {
+
+
+            if ($rowsRendererInstance instanceof LightServiceContainerAwareInterface) {
+                $rowsRendererInstance->setContainer($this->container);
+            }
 
             $ric = $requestDeclaration['ric'] ?? [];
             $rowsRendererInstance->setRic($ric);

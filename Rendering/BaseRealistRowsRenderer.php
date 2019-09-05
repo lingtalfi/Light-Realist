@@ -4,12 +4,15 @@
 namespace Ling\Light_Realist\Rendering;
 
 
+use Ling\Light\ReverseRouter\LightReverseRouterInterface;
+use Ling\Light\ServiceContainer\LightServiceContainerAwareInterface;
+use Ling\Light\ServiceContainer\LightServiceContainerInterface;
+
 /**
  * The BaseRealistRowsRenderer interface.
  *
- *
  */
-class BaseRealistRowsRenderer implements RealistRowsRendererInterface
+class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServiceContainerAwareInterface
 {
 
 
@@ -19,6 +22,13 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface
      * @var array
      */
     protected $types;
+
+
+    /**
+     * This property holds the container for this instance.
+     * @var LightServiceContainerInterface
+     */
+    protected $container;
 
     /**
      * This property holds the dynamicColumns for this instance.
@@ -48,7 +58,18 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface
         $this->types = [];
         $this->dynamicColumns = [];
         $this->ric = [];
+        $this->container = null;
     }
+
+
+    /**
+     * @implementation
+     */
+    public function setContainer(LightServiceContainerInterface $container)
+    {
+        $this->container = $container;
+    }
+
 
     /**
      * @implementation
@@ -178,5 +199,48 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface
                 break;
         }
         return $value;
+    }
+
+    //--------------------------------------------
+    //
+    //--------------------------------------------
+    /**
+     * Returns the url corresponding to the given route, using the reverse_router service.
+     *
+     * For parameters, it's a proxy to the @page(LightReverseRouterInterface) (i.e. see their doc for more details).
+     *
+     *
+     * @param string $route
+     * @param array $urlParameters
+     * @param bool|null=null $useAbsolute
+     * @return string
+     * @throws \Exception
+     */
+    protected function getUrlByRoute(string $route, array $urlParameters = [], bool $useAbsolute = null): string
+    {
+        /**
+         * @var $rr LightReverseRouterInterface
+         */
+        $rr = $this->container->get("reverse_router");
+        return $rr->getUrl($route, $urlParameters, $useAbsolute);
+    }
+
+
+    /**
+     * Returns an array of ricColumn => value
+     *
+     * @param array $row
+     * @return array
+     */
+    protected function extractRic(array $row): array
+    {
+        $ret = [];
+        foreach ($this->ric as $col) {
+            if (array_key_exists($col, $row)) {
+                $ret[$col] = $row[$col];
+            }
+            // else let the dev figure it out (since it's rendering, I don't want to crash the design)
+        }
+        return $ret;
     }
 }

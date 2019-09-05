@@ -93,6 +93,10 @@ $easy_route.methods_collection:
 History Log
 =============
 
+- 1.3.0 -- 2019-09-05
+
+    - add BaseRealistRowsRenderer->getUrlByRoute and extractRic methods. 
+    
 - 1.2.0 -- 2019-09-04
 
     - update OpenAdminTableBaseRealistListRenderer->prepareByRequestDeclaration 

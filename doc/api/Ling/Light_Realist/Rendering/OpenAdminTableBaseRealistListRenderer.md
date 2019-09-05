@@ -4,7 +4,7 @@
 
 The OpenAdminTableBaseRealistListRenderer class
 ================
-2019-08-12 --> 2019-09-04
+2019-08-12 --> 2019-09-05
 
 
 
@@ -29,7 +29,7 @@ class <span class="pl-k">OpenAdminTableBaseRealistListRenderer</span> implements
 - Properties
     - protected array [$dataTypes](#property-dataTypes) ;
     - protected array [$labels](#property-labels) ;
-    - protected Ling\Light_Realist\Rendering\bool[] [$useWidgets](#property-useWidgets) ;
+    - protected bool[] [$useWidgets](#property-useWidgets) ;
     - protected string [$requestId](#property-requestId) ;
     - protected [Ling\Light\ServiceContainer\LightServiceContainerInterface](https://github.com/lingtalfi/Light/blob/master/doc/api/Ling/Light/ServiceContainer/LightServiceContainerInterface.md) [$container](#property-container) ;
     - protected array|string [$collapsibleColumnIndexes](#property-collapsibleColumnIndexes) ;
@@ -98,7 +98,7 @@ Properties
 
     This property holds the collapsibleColumnIndexes for this instance.
     
-    This is a property specific to the responsive table helper tool.
+    This is a property specific to the [responsive table helper tool](https://github.com/lingtalfi/JResponsiveTableHelper).
     
     
 

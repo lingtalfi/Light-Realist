@@ -22,7 +22,7 @@ public [OpenAdminTableBaseRealistListRenderer::prepareByRequestDeclaration](http
 
 
 Prepares the list renderer with the given request declaration.
-See the duelist page for more details.
+See the [duelist page](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/duelist.md) for more details.
 
 
 
