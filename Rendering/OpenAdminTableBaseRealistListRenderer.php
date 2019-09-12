@@ -4,6 +4,7 @@
 namespace Ling\Light_Realist\Rendering;
 
 
+use Ling\Bat\ArrayTool;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
 
 /**
@@ -74,6 +75,14 @@ class OpenAdminTableBaseRealistListRenderer implements RealistListRendererInterf
 
 
     /**
+     * This property holds the listActionGroups for this instance.
+     * More details in the @page(list action handler conception notes).
+     * @var array
+     */
+    protected $listActionGroups;
+
+
+    /**
      * Builds the OpenAdminTableBaseRealistListRenderer instance.
      */
     public function __construct()
@@ -89,6 +98,7 @@ class OpenAdminTableBaseRealistListRenderer implements RealistListRendererInterf
         $this->requestId = null;
         $this->container = null;
         $this->collapsibleColumnIndexes = [];
+        $this->listActionGroups = [];
     }
 
     /**
@@ -103,6 +113,12 @@ class OpenAdminTableBaseRealistListRenderer implements RealistListRendererInterf
         $rendering = $requestDeclaration['rendering'] ?? [];
         $labels = $rendering['column_labels'] ?? [];
         $this->setLabels($labels);
+
+
+        $listActionGroups = $rendering['list_action_groups'] ?? [];
+        $this->container->get('realist')->decorateListActionGroups($listActionGroups);
+        $this->setListActionGroups($listActionGroups);
+
 
         $openAdminTable = $rendering['open_admin_table'] ?? [];
         $dataTypes = $openAdminTable['data_types'] ?? [];
@@ -185,6 +201,16 @@ class OpenAdminTableBaseRealistListRenderer implements RealistListRendererInterf
         $this->collapsibleColumnIndexes = $collapsibleColumnIndexes;
     }
 
+    /**
+     * Sets the listActionGroups.
+     *
+     * @param array $listActionGroups
+     */
+    public function setListActionGroups(array $listActionGroups)
+    {
+        $this->listActionGroups = $listActionGroups;
+    }
+
 
 
 
@@ -221,4 +247,17 @@ class OpenAdminTableBaseRealistListRenderer implements RealistListRendererInterf
         return (array_key_exists($identifier, $this->useWidgets) && true === $this->useWidgets[$identifier]);
     }
 
+
+    /**
+     * Returns the array of leaf items (i.e. an item not containing any child) from the list action group.
+     * @return array
+     */
+    protected function getListActionGroupLeafItems(): array
+    {
+        $ret = [];
+        ArrayTool::walkRowsRecursive($this->listActionGroups, function ($v) use (&$ret) {
+            $ret[] = $v;
+        }, 'items', false);
+        return $ret;
+    }
 }

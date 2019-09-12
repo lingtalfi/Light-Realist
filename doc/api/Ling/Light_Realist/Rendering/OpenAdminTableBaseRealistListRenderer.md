@@ -4,7 +4,7 @@
 
 The OpenAdminTableBaseRealistListRenderer class
 ================
-2019-08-12 --> 2019-09-05
+2019-08-12 --> 2019-09-12
 
 
 
@@ -33,6 +33,7 @@ class <span class="pl-k">OpenAdminTableBaseRealistListRenderer</span> implements
     - protected string [$requestId](#property-requestId) ;
     - protected [Ling\Light\ServiceContainer\LightServiceContainerInterface](https://github.com/lingtalfi/Light/blob/master/doc/api/Ling/Light/ServiceContainer/LightServiceContainerInterface.md) [$container](#property-container) ;
     - protected array|string [$collapsibleColumnIndexes](#property-collapsibleColumnIndexes) ;
+    - protected array [$listActionGroups](#property-listActionGroups) ;
 
 - Methods
     - public [__construct](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/__construct.md)() : void
@@ -43,8 +44,10 @@ class <span class="pl-k">OpenAdminTableBaseRealistListRenderer</span> implements
     - public [setRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setRequestId.md)(string $requestId) : void
     - public [setContainer](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setContainer.md)([Ling\Light\ServiceContainer\LightServiceContainerInterface](https://github.com/lingtalfi/Light/blob/master/doc/api/Ling/Light/ServiceContainer/LightServiceContainerInterface.md) $container) : void
     - public [setCollapsibleColumnIndexes](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setCollapsibleColumnIndexes.md)(?$collapsibleColumnIndexes) : void
+    - public [setListActionGroups](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setListActionGroups.md)(array $listActionGroups) : void
     - protected [getDataType](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/getDataType.md)(string $columnName) : string
     - protected [isWidgetEnabled](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/isWidgetEnabled.md)(string $identifier) : bool
+    - protected [getListActionGroupLeafItems](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/getListActionGroupLeafItems.md)() : array
 
 }
 
@@ -102,6 +105,13 @@ Properties
     
     
 
+- <span id="property-listActionGroups"><b>listActionGroups</b></span>
+
+    This property holds the listActionGroups for this instance.
+    More details in the list action handler conception notes.
+    
+    
+
 
 
 Methods
@@ -115,8 +125,10 @@ Methods
 - [OpenAdminTableBaseRealistListRenderer::setRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setRequestId.md) &ndash; Sets the requestId.
 - [OpenAdminTableBaseRealistListRenderer::setContainer](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setContainer.md) &ndash; Sets the container.
 - [OpenAdminTableBaseRealistListRenderer::setCollapsibleColumnIndexes](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setCollapsibleColumnIndexes.md) &ndash; Sets the collapsibleColumnIndexes.
+- [OpenAdminTableBaseRealistListRenderer::setListActionGroups](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setListActionGroups.md) &ndash; Sets the listActionGroups.
 - [OpenAdminTableBaseRealistListRenderer::getDataType](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/getDataType.md) &ndash; Returns the data type of the column.
 - [OpenAdminTableBaseRealistListRenderer::isWidgetEnabled](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/isWidgetEnabled.md) &ndash; Returns whether the widget identified by $identifier is enabled.
+- [OpenAdminTableBaseRealistListRenderer::getListActionGroupLeafItems](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/getListActionGroupLeafItems.md) &ndash; Returns the array of leaf items (i.e.
 
 
 

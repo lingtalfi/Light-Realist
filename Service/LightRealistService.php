@@ -10,7 +10,7 @@ use Ling\Light\ServiceContainer\LightServiceContainerInterface;
 use Ling\Light_Database\LightDatabasePdoWrapper;
 use Ling\Light_Realist\ActionHandler\LightRealistActionHandlerInterface;
 use Ling\Light_Realist\Exception\LightRealistException;
-use Ling\Light_Realist\OpenAdminTable\OpenAdminTableRendererInterface;
+use Ling\Light_Realist\ListActionHandler\LightRealistListActionHandlerInterface;
 use Ling\Light_Realist\Rendering\RealistListRendererInterface;
 use Ling\Light_Realist\Rendering\RealistRowsRendererInterface;
 use Ling\ParametrizedSqlQuery\ParametrizedSqlQueryUtil;
@@ -93,10 +93,20 @@ class LightRealistService
 
     /**
      * This property holds the (ric/ajax) actionHandlers for this instance.
+     * It's an array of LightRealistActionHandlerInterface instances.
      *
      * @var LightRealistActionHandlerInterface[]
      */
     protected $actionHandlers;
+
+
+    /**
+     * This property holds the listActionHandlers for this instance.
+     * It's an array of LightRealistListActionHandlerInterface instances.
+     *
+     * @var LightRealistListActionHandlerInterface[]
+     */
+    protected $listActionHandlers;
 
 
     /**
@@ -118,6 +128,7 @@ class LightRealistService
         $this->parametrizedSqlQuery = new ParametrizedSqlQueryUtil();
         $this->realistRowsRenderers = [];
         $this->actionHandlers = [];
+        $this->listActionHandlers = [];
         $this->listRenderers = [];
     }
 
@@ -360,6 +371,19 @@ class LightRealistService
 
 
     /**
+     * Registers a list action handler.
+     *
+     * @param LightRealistListActionHandlerInterface $handler
+     */
+    public function registerListActionHandler(LightRealistListActionHandlerInterface $handler)
+    {
+        $ids = $handler->getHandledIds();
+        foreach ($ids as $id) {
+            $this->listActionHandlers[$id] = $handler;
+        }
+    }
+
+    /**
      * Returns the action handler identified by the given id.
      *
      * @param string $id
@@ -372,6 +396,22 @@ class LightRealistService
             return $this->actionHandlers[$id];
         }
         throw new LightRealistException("No action handler found with id=$id.");
+    }
+
+
+    /**
+     * Returns the list action handler identified by the given id.
+     *
+     * @param string $id
+     * @return LightRealistListActionHandlerInterface
+     * @throws \Exception
+     */
+    public function getListActionHandler(string $id): LightRealistListActionHandlerInterface
+    {
+        if (array_key_exists($id, $this->listActionHandlers)) {
+            return $this->listActionHandlers[$id];
+        }
+        throw new LightRealistException("List action handler not found with id=$id.");
     }
 
 
@@ -404,6 +444,39 @@ class LightRealistService
         // but for now we try to be conservative and pass only one argument as long as possible.
         $listRenderer->prepareByRequestDeclaration($requestId, $requestDeclaration, $this->container);
         return $listRenderer;
+    }
+
+
+    /**
+     * Decorates the given list action group array.
+     *
+     * This method is mainly used to translate an action id string from
+     * the request declaration into actual javascript code, with the help of
+     * the ListActionHandler objects.
+     *
+     * The given groups array structure is an array of @page(toolbar items).
+     *
+     * @param array $groups
+     * @throws \Exception
+     */
+    public function decorateListActionGroups(array &$groups)
+    {
+        foreach ($groups as $k => $group) {
+            if (array_key_exists('action_id', $group)) {
+
+                $actionId = $group['action_id'];
+                if (array_key_exists($actionId, $this->listActionHandlers)) {
+                    $handler = $this->listActionHandlers[$actionId];
+                    $rawCallable = $handler->getJsActionCode($actionId);
+
+                    $groups[$k]['js_code'] = $rawCallable;
+                } else {
+                    $this->error("No list action handler defined for action $actionId.");
+                }
+            } else {
+                // assuming this is a parent, we can ignore it
+            }
+        }
     }
 
     //--------------------------------------------
