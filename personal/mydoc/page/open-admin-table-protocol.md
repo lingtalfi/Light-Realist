@@ -198,33 +198,11 @@ The available filter operators
 -----------------
 
 
-Here is the list of operators available.
+We use the [susco](https://github.com/lingtalfi/NotationFan/blob/master/sql-unofficial-standard-comparison-operators.md) list.
 
 Note: both the rows generator and the renderer have an implicit knowledge of them.
 
 
-| Operator notation  | Real value in a sql query  |
-|-------------------|----------|
-| =                 | =  |
-| >                 | >  |
-| >=                | >=  |
-| <                 |  < |
-| <=                | <=  |
-| !=                |  != |
-| like              |  LIKE |
-| %like%            |  LIKE %...% |
-| %like             |   LIKE %... |
-| like%             |   LIKE ...% |
-| not_like          | NOT LIKE  |
-| %not_like%        | NOT LIKE %...%  |
-| %not_like         | NOT LIKE %...  |
-| not_like%         | NOT LIKE ...%  |
-| in                | IN( ... )  |
-| not_in            |  NOT IN( ... ) |
-| between           | BETWEEN( ... AND ... )  |
-| not_between       | NOT BETWEEN( ... AND ... )  |
-| null              |  IS NULL |
-| is_not_null          | IS NOT NULL |
 
 
 

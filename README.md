@@ -93,6 +93,10 @@ $easy_route.methods_collection:
 History Log
 =============
 
+- 1.6.3 -- 2019-09-16
+
+    - update documentation link to susco
+    
 - 1.6.2 -- 2019-09-12
 
     - update documentation link to ric
