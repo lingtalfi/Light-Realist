@@ -194,8 +194,20 @@ class LightRealistService
          * @var $db LightDatabasePdoWrapper
          */
         $db = $this->container->get("database");
-        $rows = $db->fetchAll($stmt, $markers);
-        $countRow = $db->fetch($countStmt, $markers);
+
+        try {
+
+            $rows = $db->fetchAll($stmt, $markers);
+            $countRow = $db->fetch($countStmt, $markers);
+        } catch (\Exception $e) {
+            // sometimes it's easier to have the stmt displayed too, when debugging
+            $debugMsg = "<ul>
+<li><b>Query</b>: $stmt</li>
+<li><b>Error</b>: {$e->getMessage()}</li>
+</ul>
+";
+            throw new LightRealistException($debugMsg);
+        }
 
         //--------------------------------------------
         // RENDERING THE ROWS

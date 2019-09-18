@@ -84,6 +84,7 @@ https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/conception-note
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/duelist-conception-notes.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/duelist.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/implementation-styles.md
+https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/list-action-handler-conception-notes.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/open-admin-table-helper-implementation-notes.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/open-admin-table-protocol.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/realist-conception-notes.md

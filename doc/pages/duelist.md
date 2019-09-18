@@ -444,22 +444,7 @@ Ric
 2019-09-03
 
 
-Ric is an acronym, it stands for row identifier columns.
-It's basically an array of the columns which identify a row uniquely.
-
-Usually, the ric is equivalent to the columns of the primary key of the table if it has a one.
-Or, if the table doesn't have a primary key, all the columns.
-Alternately, the developer can always override the ric manually.
-
-This ric concept is generally useful when the gui wants to interact with a row in particular.
-This happens a lot with admin tables, where the user can select one or more lines (rows) in the table,
-and apply a general action on them.
-
-Or, on an individual row, if there is an action button, this action button generally requires the ric information
-if this action is executed by the backend server.
-
-Although ric is mainly used by the gui, it's just an array of column names, and so we write it in the model 
-configuration, where it conceptually fits better, I believe.
+See the official [ric definition](https://github.com/lingtalfi/NotationFan/blob/master/ric.md).
 
      
 

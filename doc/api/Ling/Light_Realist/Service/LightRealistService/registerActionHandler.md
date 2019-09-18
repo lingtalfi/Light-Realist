@@ -49,7 +49,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [LightRealistService::registerActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L364-L370)
+See the source code for method [LightRealistService::registerActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L376-L382)
 
 
 See Also
