@@ -27,7 +27,7 @@ This method is mainly used to translate an action id string from
 the request declaration into actual javascript code, with the help of
 the ListActionHandler objects.
 
-The given groups array structure is an array of toolbar items.
+The given groups array structure is an array of [toolbar items](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/list-action-handler-conception-notes.md#the-toolbar-item).
 
 
 

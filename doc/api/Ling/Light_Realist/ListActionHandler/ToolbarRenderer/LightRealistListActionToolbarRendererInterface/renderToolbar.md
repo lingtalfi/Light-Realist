@@ -23,7 +23,7 @@ abstract public [LightRealistListActionToolbarRendererInterface::renderToolbar](
 
 Returns the html for the toolbar, based on the given groups.
 
-The structure of the groups is defined in the list action handler conception notes.
+The structure of the groups is defined in the [list action handler conception notes](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/list-action-handler-conception-notes.md).
 
 
 

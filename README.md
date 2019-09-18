@@ -93,6 +93,11 @@ $easy_route.methods_collection:
 History Log
 =============
 
+- 1.6.4 -- 2019-09-18
+
+    - fix RealistListRendererInterface->render method not existing
+    - fix doc links
+    
 - 1.6.3 -- 2019-09-16
 
     - update documentation link to susco

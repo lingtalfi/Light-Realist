@@ -26,7 +26,7 @@ Executes the list action identified by the given action id.
 If something goes wrong, throw an exception (it will be caught, and the error message will be sent
 to the user).
 
-Otherwise, return a standard ajax communication protocol response.
+Otherwise, return a standard [ajax communication protocol](https://github.com/lingtalfi/AjaxCommunicationProtocol) response.
 
 
 

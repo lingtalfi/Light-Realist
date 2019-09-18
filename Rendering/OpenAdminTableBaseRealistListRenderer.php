@@ -13,7 +13,7 @@ use Ling\Light\ServiceContainer\LightServiceContainerInterface;
  * See more details in the @page(open admin table helper implementation notes).
  *
  */
-class OpenAdminTableBaseRealistListRenderer implements RealistListRendererInterface
+abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRendererInterface
 {
 
 
