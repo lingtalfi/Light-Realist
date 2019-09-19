@@ -1,6 +1,6 @@
 Ling/Light_Realist
 ================
-2019-08-12 --> 2019-09-18
+2019-08-12 --> 2019-09-19
 
 
 
@@ -20,6 +20,8 @@ Table of contents
     - [LightRealistAjaxServiceController::handleJsonRequest](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Controller/LightRealistAjaxServiceController/handleJsonRequest.md) &ndash; and returns the appropriate response.
     - LightController::__construct &ndash; Builds the LightController instance.
     - LightController::setLight &ndash; Sets the light instance.
+- [RealistDynamicInjectionHandlerInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/DynamicInjection/RealistDynamicInjectionHandlerInterface.md) &ndash; The RealistDynamicInjectionHandlerInterface interface.
+    - [RealistDynamicInjectionHandlerInterface::handle](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/DynamicInjection/RealistDynamicInjectionHandlerInterface/handle.md) &ndash; Returns a result depending on the given arguments.
 - [LightRealistException](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Exception/LightRealistException.md) &ndash; The LightRealistException class.
 - [LightRealistAbstractListActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListActionHandler/LightRealistAbstractListActionHandler.md) &ndash; The LightRealistAbstractListActionHandler class.
     - [LightRealistAbstractListActionHandler::__construct](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListActionHandler/LightRealistAbstractListActionHandler/__construct.md) &ndash; Builds the LightRealistAbstractActionHandler instance.
@@ -78,6 +80,7 @@ Table of contents
     - [LightRealistService::registerListRenderer](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/registerListRenderer.md) &ndash; Registers a list renderer.
     - [LightRealistService::registerActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/registerActionHandler.md) &ndash; Registers an action handler.
     - [LightRealistService::registerListActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/registerListActionHandler.md) &ndash; Registers a list action handler.
+    - [LightRealistService::registerDynamicInjectionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/registerDynamicInjectionHandler.md) &ndash; Registers a [dynamic injection handler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/duelist.md#dynamic-injection).
     - [LightRealistService::getActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/getActionHandler.md) &ndash; Returns the action handler identified by the given id.
     - [LightRealistService::getListActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/getListActionHandler.md) &ndash; Returns the list action handler identified by the given id.
     - [LightRealistService::getListRendererByRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/getListRendererByRequestId.md) &ndash; Returns a configured list renderer.

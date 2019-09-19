@@ -5,10 +5,12 @@ namespace Ling\Light_Realist\Service;
 
 
 use Ling\BabyYaml\BabyYamlUtil;
+use Ling\Bat\SmartCodeTool;
 use Ling\Light\ServiceContainer\LightServiceContainerAwareInterface;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
 use Ling\Light_Database\LightDatabasePdoWrapper;
 use Ling\Light_Realist\ActionHandler\LightRealistActionHandlerInterface;
+use Ling\Light_Realist\DynamicInjection\RealistDynamicInjectionHandlerInterface;
 use Ling\Light_Realist\Exception\LightRealistException;
 use Ling\Light_Realist\ListActionHandler\LightRealistListActionHandlerInterface;
 use Ling\Light_Realist\Rendering\RealistListRendererInterface;
@@ -117,6 +119,16 @@ class LightRealistService
      */
     protected $listRenderers;
 
+    /**
+     * This property holds the dynamicInjectionHandlers for this instance.
+     * It's an array of identifier => RealistDynamicInjectionHandlerInterface
+     *
+     * Usually the identifier is a plugin name.
+     *
+     * @var RealistDynamicInjectionHandlerInterface[]
+     */
+    protected $dynamicInjectionHandlers;
+
 
     /**
      * Builds the LightRealistService instance.
@@ -130,6 +142,7 @@ class LightRealistService
         $this->actionHandlers = [];
         $this->listActionHandlers = [];
         $this->listRenderers = [];
+        $this->dynamicInjectionHandlers = [];
     }
 
 
@@ -395,6 +408,18 @@ class LightRealistService
         }
     }
 
+
+    /**
+     * Registers a @page(dynamic injection handler).
+     * @param string $identifier
+     * @param RealistDynamicInjectionHandlerInterface $handler
+     */
+    public function registerDynamicInjectionHandler(string $identifier, RealistDynamicInjectionHandlerInterface $handler)
+    {
+        $this->dynamicInjectionHandlers[$identifier] = $handler;
+    }
+
+
     /**
      * Returns the action handler identified by the given id.
      *
@@ -506,6 +531,24 @@ class LightRealistService
         throw new LightRealistException($message);
     }
 
+
+    /**
+     * Returns the realist dynamic injection handler associated with the given identifier,
+     * or throws an exception if it's not there.
+     *
+     * @param string $identifier
+     * @return RealistDynamicInjectionHandlerInterface
+     * @throws \Exception
+     */
+    protected function getDynamicInjectionHandler(string $identifier): RealistDynamicInjectionHandlerInterface
+    {
+        if (array_key_exists($identifier, $this->dynamicInjectionHandlers)) {
+            return $this->dynamicInjectionHandlers[$identifier];
+        }
+        throw new LightRealistException("Dynamic injection handler not found with identifier $identifier.");
+    }
+
+
     /**
      * Returns the configuration array corresponding to the given request id.
      *
@@ -527,7 +570,19 @@ class LightRealistService
         if (false === array_key_exists($queryId, $arr)) {
             $this->error("Query not found with id: $queryId, in file $filePath.");
         }
-        return $arr[$queryId];
+        $ret = $arr[$queryId];
+
+
+        // dynamic injection phase
+        SmartCodeTool::replaceSmartCodeFunction($ret, "REALIST", function ($identifier) {
+            $handler = $this->getDynamicInjectionHandler($identifier);
+            $args = func_get_args();
+            array_shift($args);
+            return $handler->handle($args);
+        });
+
+
+        return $ret;
     }
 
 }

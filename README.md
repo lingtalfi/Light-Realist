@@ -93,6 +93,10 @@ $easy_route.methods_collection:
 History Log
 =============
 
+- 1.7.0 -- 2019-09-19
+
+    - add dynamic injection concept and (careless) implementation
+    
 - 1.6.5 -- 2019-09-18
 
     - fix doc links page -> pages
