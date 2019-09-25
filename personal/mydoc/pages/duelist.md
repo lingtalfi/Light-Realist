@@ -13,6 +13,7 @@ Table of Contents
 * [The limit setting](#the-limit-setting)
 * [Options](#options)
 * [Routines](#routines)
+* [Csrf token](#csrf-token)
  * [The operator_and_value routine](#the-operator_and_value-routine)
 * [Building the where expression](#building-the-where-expression)
   * [Where groups](#where-groups)
@@ -49,6 +50,7 @@ We can conceptually divide the request declaration settings in sections:
 - limit setting 
 - options
 - routines
+- csrf token
 
 
 
@@ -287,6 +289,44 @@ The available routines are:
 
 
 
+Csrf token
+--------------
+
+As duelist was meant to be invoked from an ajax service, it's naturally vulnerable to csrf attacks.
+The csrf_token option allows us to secure the ajax service.
+
+It's an array or null. An example is this:
+
+```yaml
+csrf_token:
+    name: realist-request
+    value: REALIST(Light_Kit_Admin, csrf_token, realist-request)
+```
+
+If the value is null, or if the **csrf_token** key doesn't exist in the **requestDeclaration** array,
+then no csrf check will be performed (not recommended).
+
+If it's an array, it must contain the following entries:
+
+- name: the name of the csrf token to validate against
+- value: the value of the token. Note: in the above example I used the [dynamic injection](#dynamic-injection) notation
+    to generate the csrf token value on the fly (rather than using a hard-coded value).
+    
+
+Usually, the name "realist-request" is used for a token used to protect a realist/duelist request.    
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### The operator_and_value routine
 
 This routine transforms some special inner markers in a **tagExpression**.
@@ -474,98 +514,64 @@ Dynamic injection
 2019-09-19
 
 
-So basically, the duelist uses a configuration array.
+Dynamic injection is basically the duelist way of allowing dynamic variables into the (otherwise static) configuration array.
+
+It allows this kind of syntax:
 
 ```yaml
-fruits:
-    a: apple
-    b: banana
-    c: cherry
-sports:
-    - judo
-    - karate
-    - kungfu
+csrf_token:
+    name: realist-request
+    value: REALIST(Light_Realist, csrf_token, realist-request)
 ```
 
-Dynamic injection allows us to replace the content of a configuration value dynamically, by using the REALIST(args) notation,
-where args is a comma separated list of arguments, using smart code notation (https://github.com/lingtalfi/Bat/blob/master/SmartCodeTool.md).
+See more details in the [duelist conceptions notes](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/duelist-conception-notes.md#dynamic-injection).
 
-The first argument is the identifier of the handler of the function (owned by a plugin who registered the handler in advance), 
-and the rest of the arguments will be passed to the handler.
+Now the **Light_Realist** plugin comes with its own dynamic injection handler, which exposes the following actions
 
-Because there are many plugins, I opted that a handler is an object rather than just a callable, the idea being that each plugin provides
-only one handler that handles all the use cases for that plugin.
+- csrf_token
+- route
 
-I provide a **RealistDynamicInjectionHandlerInterface** for that purpose.
-
-
-So for instance if the plugin **MyPlugin** registers a realist dynamic injection handler with identifier **MyPlugin**,
-we can imagine that this array:
-
-
-
-```yaml
-fruits:
-    a: apple
-    b: REALIST(MyPlugin, sayWord, hello )
-    c: cherry
-sports:
-    - judo
-    - karate
-    - kungfu
-```
-
-Would be converted by the realist tools to:
-
-```yaml
-fruits:
-    a: apple
-    b: hello
-    c: cherry
-sports:
-    - judo
-    - karate
-    - kungfu
-```
-
-
-All registrations of realist dynamic injection handlers is done via the realist service.
+In **Light_Realist**, the action is the second argument of the dynamic injection call.
  
-The result of a handler doesn't have to be a string, it could be an array, an object, an int, anything.
 
-If the handler returns a "stringable" result, then we can embed the handler call in a bigger string.
 
-For instance, we can do this:
+The csrf_token action
+----------
+The **csrf_token** action basically creates a token with the name given in the third argument, but only if it's not an ajax page (the router defines
+whether the page is an ajax page).
+
+If the page is an ajax page, then the csrf token will not be created.
+
+To understand why, we need to understand that the duelist idea fits in the larger idea that is the [realist idea](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/realist-conception-notes.md),
+which has two sides: a main side (displaying the regular page) and an ajax side (the backend server).
+
+in **Light_Realist**, by design, the request declaration array is used by both sides.
+
+The creation of a csrf token is created on the main side, and that's how we provide the token value to the js tools accompanying realist. 
+
+Those js tools then send the csrf token via ajax to the backend server which needs to check the csrf token value.
+This backend service also needs to access the request declaration array. But if it were re-interpreting the dynamic injection tags, it would create
+a new csrf token value, and the csrf token validation would fail. 
+
+You see, the csrf token dynamic injection tag was very active and dangerous: it created a csrf token every time you called it. Not something to take lightly.
+That's why I had to reduce its power by preventing it to create a token on the ajax side, so that the csrf validation could be done.
+
+
+
+The route action
+----------
+The **route** action is straightforward: it returns the url of the given route.
+
+Example:
 
 ```yaml
-fruits:
-    b: My name is REALIST(MyPlugin, sayWord, paul )
+params:
+    url: REALIST(Light_Realist, route, lah_route-ajax_handler)
 ```
-
-This would give us:
-
-```yaml
-fruits:
-    b: My name is paul
-```
-
 
 
 
 
  
-
-
-
-
-
-
  
 
-
-
-
-         
-
-
- 

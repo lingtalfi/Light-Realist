@@ -28,7 +28,6 @@ Note: in the implementation the boundary between those two sides is sometimes bl
 The model part is described by the [duelist idea](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/duelist.md).
 
 
-
 So basically the babyYaml file contains one or more **request declaration(s)**, and each **request declaration** controls the parameters
 for one list.
 
@@ -37,6 +36,8 @@ A **request declaration** is an array of so-called settings.
 In addition to the duelist idea, realist provides the following settings:  
 
 - **rendering**: used to control the gui side (see more details in the **Rendering** section below) 
+
+
 
 
 

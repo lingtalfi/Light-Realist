@@ -10,6 +10,19 @@ This tool helps you implement the open-admin-table protocol in your gui.
 
 It uses the realist-tag-transfer.js script under the hood (i.e. it's a dependency).
 
+We also use the [AjaxHandler](https://github.com/lingtalfi/Light_AjaxHandler) plugin under the hood,
+to avoid multiplying routes.
+
+
+For the ajax handler parameters to request a realist (this might be used by other plugins):
+- The handlerId is: Light_Realist
+- The actionId is: realist-request 
+
+
+For CSRF protection, we use token named "realist-request", which value is carried by the csrf_token
+property (in $_POST). 
+
+
 
 Note: this is just one possible implementation out of many, the official name of this implementation 
 is "Open Admin Table One" protocol implementation.
@@ -558,8 +571,8 @@ Ric implementation
 By default, we implement ric by using the [ric admin table helper](https://github.com/lingtalfi/JRicAdminTableHelper) js tool.
 See the documentation of this tool for more details.
 
-Because this tool is so useful, we've included in the Light_Realist distribution (so that when you import Light_Realist,
-it's already there in your application).
+Because this tool is so useful, we've included it as a dependency of the **Light_Realist** planet, so that when you import **Light_Realist**
+you also get the ric admin table helper in your application.
 
 
 

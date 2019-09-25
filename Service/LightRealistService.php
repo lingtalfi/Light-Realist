@@ -8,6 +8,7 @@ use Ling\BabyYaml\BabyYamlUtil;
 use Ling\Bat\SmartCodeTool;
 use Ling\Light\ServiceContainer\LightServiceContainerAwareInterface;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
+use Ling\Light_Csrf\Service\LightCsrfService;
 use Ling\Light_Database\LightDatabasePdoWrapper;
 use Ling\Light_Realist\ActionHandler\LightRealistActionHandlerInterface;
 use Ling\Light_Realist\DynamicInjection\RealistDynamicInjectionHandlerInterface;
@@ -129,6 +130,13 @@ class LightRealistService
      */
     protected $dynamicInjectionHandlers;
 
+    /**
+     * This property holds the _requestDeclarationCache for this instance.
+     * An array of requestId => requestDeclaration array
+     * @var array
+     */
+    private $_requestDeclarationCache;
+
 
     /**
      * Builds the LightRealistService instance.
@@ -143,6 +151,7 @@ class LightRealistService
         $this->listActionHandlers = [];
         $this->listRenderers = [];
         $this->dynamicInjectionHandlers = [];
+        $this->_requestDeclarationCache = [];
     }
 
 
@@ -175,6 +184,10 @@ class LightRealistService
      * Params an array containing the following:
      *
      * - ?tags: the tags to use with the request. (see @page(the realist tag transfer protocol) for more details).
+     * - ?csrf_token: string|null. the value of the csrf token to check against. If not passed or null, no csrf checking will be performed.
+     * - ?csrf_token_pass: bool. If true, will bypass the csrf_token validation.
+     *          Usually, you only want to use this if you've already checked for another csrf token earlier (i.e. you
+     *          already trust that the user is who she claimed she is).
      *
      *
      * If the sql query is not valid, an exception will be thrown.
@@ -190,6 +203,19 @@ class LightRealistService
     public function executeRequestById(string $requestId, array $params = []): array
     {
         $requestDeclaration = $this->getConfigurationArrayByRequestId($requestId);
+
+
+        //--------------------------------------------
+        // CHECKING CSRF TOKEN
+        //--------------------------------------------
+        $csrfTokenPass = $params['csrf_token_pass'] ?? false;
+        $csrfToken = $requestDeclaration['csrf_token'] ?? null;
+        if (false === $csrfTokenPass) {
+            if (null !== $csrfToken) {
+                $csrfTokenName = $csrfToken['name'] ?? "realist-request";
+                $this->checkCsrfToken($csrfTokenName, $params);
+            }
+        }
 
 
         $tags = $params['tags'] ?? [];
@@ -516,6 +542,70 @@ class LightRealistService
         }
     }
 
+
+    /**
+     * Returns the configuration array corresponding to the given request id.
+     *
+     * See the @page(request id) page for more info about the request id.
+     *
+     * @param string $requestId
+     * @return array
+     * @throws \Exception
+     */
+    public function getConfigurationArrayByRequestId(string $requestId): array
+    {
+
+        if (array_key_exists($requestId, $this->_requestDeclarationCache)) {
+            return $this->_requestDeclarationCache[$requestId];
+        }
+
+        if ('not implemented yet' === "requestIdHandlerInterface") {
+            $ret = [];
+        } else {
+
+            //--------------------------------------------
+            // FALLBACK MECHANISM
+            //--------------------------------------------
+            $p = explode(":", $requestId, 3);
+            $n = count($p);
+            if (3 === $n) {
+                list($pluginName, $resourceId, $requestDeclarationId) = $p;
+            } elseif (2 === $n) {
+                list($pluginName, $resourceId) = $p;
+                $requestDeclarationId = 'default';
+            } else {
+                $this->error("Invalid syntax for the requestId $requestId using the fallback mechanism.");
+            }
+
+
+            $fileId = "config/data/$pluginName/Light_Realist/$resourceId";
+            $filePath = $this->baseDir . "/$fileId.byml";
+            if (false === file_exists($filePath)) {
+                $this->error("File not found: $filePath for requestId $requestId.");
+            }
+
+            $arr = BabyYamlUtil::readFile($filePath);
+            if (false === array_key_exists($requestDeclarationId, $arr)) {
+                $this->error("Query not found with request declaration id: $requestDeclarationId, in file $filePath.");
+            }
+            $ret = $arr[$requestDeclarationId];
+
+
+            // dynamic injection phase
+            SmartCodeTool::replaceSmartCodeFunction($ret, "REALIST", function ($identifier) {
+                $handler = $this->getDynamicInjectionHandler($identifier);
+                $args = func_get_args();
+                array_shift($args);
+                return $handler->handle($args);
+            });
+        }
+
+
+        $this->_requestDeclarationCache[$requestId] = $ret;
+        return $ret;
+    }
+
+
     //--------------------------------------------
     //
     //--------------------------------------------
@@ -543,46 +633,36 @@ class LightRealistService
     protected function getDynamicInjectionHandler(string $identifier): RealistDynamicInjectionHandlerInterface
     {
         if (array_key_exists($identifier, $this->dynamicInjectionHandlers)) {
-            return $this->dynamicInjectionHandlers[$identifier];
+            $handler = $this->dynamicInjectionHandlers[$identifier];
+            if ($handler instanceof LightServiceContainerAwareInterface) {
+                $handler->setContainer($this->container);
+            }
+            return $handler;
         }
         throw new LightRealistException("Dynamic injection handler not found with identifier $identifier.");
     }
 
 
     /**
-     * Returns the configuration array corresponding to the given request id.
+     * Checks whether the csrf token is valid, throws an exception if that's not the case.
      *
-     * @param string $requestId
-     * @return array
+     * @param string $tokenName
+     * @param array $params
      * @throws \Exception
      */
-    protected function getConfigurationArrayByRequestId(string $requestId): array
+    protected function checkCsrfToken(string $tokenName, array $params)
     {
-        $p = explode(":", $requestId, 2);
-        $fileId = $p[0];
-        $queryId = $p[1];
-        $filePath = $this->baseDir . "/$fileId.byml";
-        if (false === file_exists($filePath)) {
-            $this->error("File not found: $filePath.");
+        if (array_key_exists("csrf_token", $params)) {
+            /**
+             * @var $csrf LightCsrfService
+             */
+            $csrf = $this->container->get("csrf");
+            if (true === $csrf->isValid($tokenName, $params['csrf_token'], true)) {
+                return;
+            }
+            $this->error("Invalid csrf token value provided for token $tokenName.");
         }
+        $this->error("The \"csrf_token\" key was not provided with the payload.");
 
-        $arr = BabyYamlUtil::readFile($filePath);
-        if (false === array_key_exists($queryId, $arr)) {
-            $this->error("Query not found with id: $queryId, in file $filePath.");
-        }
-        $ret = $arr[$queryId];
-
-
-        // dynamic injection phase
-        SmartCodeTool::replaceSmartCodeFunction($ret, "REALIST", function ($identifier) {
-            $handler = $this->getDynamicInjectionHandler($identifier);
-            $args = func_get_args();
-            array_shift($args);
-            return $handler->handle($args);
-        });
-
-
-        return $ret;
     }
-
 }

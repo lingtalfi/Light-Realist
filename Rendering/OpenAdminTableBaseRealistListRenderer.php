@@ -55,6 +55,15 @@ abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRende
      */
     protected $requestId;
 
+
+    /**
+     * This property holds the csrfToken for this instance.
+     * The csrf token value.
+     *
+     * @var string
+     */
+    protected $csrfToken;
+
     /**
      * This property holds the container for this instance.
      * @var LightServiceContainerInterface
@@ -99,6 +108,7 @@ abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRende
         $this->container = null;
         $this->collapsibleColumnIndexes = [];
         $this->listActionGroups = [];
+
     }
 
     /**
@@ -132,6 +142,14 @@ abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRende
         $responsiveTableHelper = $rendering['responsive_table_helper'] ?? [];
         $collapsibleColumnIndexes = $responsiveTableHelper['collapsible_column_indexes'] ?? [];
         $this->setCollapsibleColumnIndexes($collapsibleColumnIndexes);
+
+
+        $csrfToken = $requestDeclaration['csrf_token'] ?? null;
+        if (is_array($csrfToken)) {
+            $csrfTokenValue = $csrfToken['value'] ?? "not_defined";
+            $this->setCsrfToken($csrfTokenValue);
+        }
+
 
     }
 
@@ -210,6 +228,17 @@ abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRende
     {
         $this->listActionGroups = $listActionGroups;
     }
+
+    /**
+     * Sets the csrfToken value.
+     *
+     * @param string $csrfToken
+     */
+    public function setCsrfToken(string $csrfToken)
+    {
+        $this->csrfToken = $csrfToken;
+    }
+
 
 
 

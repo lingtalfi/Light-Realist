@@ -190,7 +190,109 @@ unless the super gui does that for us (would be better actually).
 
 So those are my two cents about the future implementation of the flexible advanced search.  
  
+
+
+
  
+Dynamic injection
+-------------------
+2019-09-19
+
+
+So basically, the duelist uses a configuration array.
+
+```yaml
+fruits:
+    a: apple
+    b: banana
+    c: cherry
+sports:
+    - judo
+    - karate
+    - kungfu
+```
+
+Dynamic injection allows us to replace the content of a configuration value dynamically, by using the REALIST(args) notation,
+where args is a comma separated list of arguments, using smart code notation (https://github.com/lingtalfi/Bat/blob/master/SmartCodeTool.md).
+
+The first argument is the identifier of the handler of the function (owned by a plugin who registered the handler in advance), 
+and the rest of the arguments will be passed to the handler.
+
+Because there are many plugins, I opted that a handler is an object rather than just a callable, the idea being that each plugin provides
+only one handler that handles all the use cases for that plugin.
+
+I provide a **RealistDynamicInjectionHandlerInterface** for that purpose.
+
+
+So for instance if the plugin **MyPlugin** registers a realist dynamic injection handler with identifier **MyPlugin**,
+we can imagine that this array:
+
+
+
+```yaml
+fruits:
+    a: apple
+    b: REALIST(MyPlugin, sayWord, hello )
+    c: cherry
+sports:
+    - judo
+    - karate
+    - kungfu
+```
+
+Would be converted by the realist tools to:
+
+```yaml
+fruits:
+    a: apple
+    b: hello
+    c: cherry
+sports:
+    - judo
+    - karate
+    - kungfu
+```
+
+
+All registrations of realist dynamic injection handlers is done via the realist service.
  
+The result of a handler doesn't have to be a string, it could be an array, an object, an int, anything.
+
+If the handler returns a "stringable" result, then we can embed the handler call in a bigger string.
+
+For instance, we can do this:
+
+```yaml
+fruits:
+    b: My name is REALIST(MyPlugin, sayWord, paul )
+```
+
+This would give us:
+
+```yaml
+fruits:
+    b: My name is paul
+```
+
+
+
+
+
+ 
+
+
+
+
+
+
+ 
+
+
+
+
+         
+
+
+  
 
 
