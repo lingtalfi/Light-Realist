@@ -3,6 +3,11 @@ Open Admin Table Helper - implementation notes
 2019-08-19
 
 
+Note: this is just one possible implementation out of many, the official name of this implementation 
+is "Open Admin Table One" protocol implementation.
+
+
+
 
 This tool helps you implement the open-admin-table protocol in your gui.
 
@@ -23,9 +28,6 @@ For CSRF protection, we use token named "realist-request", which value is carrie
 property (in $_POST). 
 
 
-
-Note: this is just one possible implementation out of many, the official name of this implementation 
-is "Open Admin Table One" protocol implementation.
 
 
 
@@ -52,7 +54,6 @@ The following modules are recognized and handled by this tool:
 - neck filters
 - number of items per page
 - pagination
-- toolbar
 
 
 

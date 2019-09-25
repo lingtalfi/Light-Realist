@@ -5,9 +5,9 @@ namespace Ling\Light_Realist\ListActionHandler;
 
 
 /**
- * The LightRealistListActionHandlerInterface interface.
+ * The LightRealistListGeneralActionHandlerInterface interface.
  */
-interface LightRealistListActionHandlerInterface
+interface LightRealistListGeneralActionHandlerInterface
 {
 
     /**
@@ -16,6 +16,7 @@ interface LightRealistListActionHandlerInterface
      * @return array
      */
     public function getHandledIds(): array;
+
 
     /**
      * Returns the js action code for this list action.

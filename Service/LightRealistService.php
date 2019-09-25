@@ -14,8 +14,10 @@ use Ling\Light_Realist\ActionHandler\LightRealistActionHandlerInterface;
 use Ling\Light_Realist\DynamicInjection\RealistDynamicInjectionHandlerInterface;
 use Ling\Light_Realist\Exception\LightRealistException;
 use Ling\Light_Realist\ListActionHandler\LightRealistListActionHandlerInterface;
+use Ling\Light_Realist\ListActionHandler\LightRealistListGeneralActionHandlerInterface;
 use Ling\Light_Realist\Rendering\RealistListRendererInterface;
 use Ling\Light_Realist\Rendering\RealistRowsRendererInterface;
+use Ling\Light_User\LightUserInterface;
 use Ling\ParametrizedSqlQuery\ParametrizedSqlQueryUtil;
 
 /**
@@ -111,6 +113,12 @@ class LightRealistService
      */
     protected $listActionHandlers;
 
+    /**
+     * This property holds the listGeneralActionHandlers for this instance.
+     * @var LightRealistListGeneralActionHandlerInterface[]
+     */
+    protected $listGeneralActionHandlers;
+
 
     /**
      * This property holds the listRenderers for this instance.
@@ -149,6 +157,7 @@ class LightRealistService
         $this->realistRowsRenderers = [];
         $this->actionHandlers = [];
         $this->listActionHandlers = [];
+        $this->listGeneralActionHandlers = [];
         $this->listRenderers = [];
         $this->dynamicInjectionHandlers = [];
         $this->_requestDeclarationCache = [];
@@ -436,6 +445,20 @@ class LightRealistService
 
 
     /**
+     * Registers a list general action handler.
+     *
+     * @param LightRealistListGeneralActionHandlerInterface $handler
+     */
+    public function registerListGeneralActionHandler(LightRealistListGeneralActionHandlerInterface $handler)
+    {
+        $ids = $handler->getHandledIds();
+        foreach ($ids as $id) {
+            $this->listGeneralActionHandlers[$id] = $handler;
+        }
+    }
+
+
+    /**
      * Registers a @page(dynamic injection handler).
      * @param string $identifier
      * @param RealistDynamicInjectionHandlerInterface $handler
@@ -458,7 +481,7 @@ class LightRealistService
         if (array_key_exists($id, $this->actionHandlers)) {
             return $this->actionHandlers[$id];
         }
-        throw new LightRealistException("No action handler found with id=$id.");
+        throw new LightRealistException("No action handler found with id $id.");
     }
 
 
@@ -474,7 +497,22 @@ class LightRealistService
         if (array_key_exists($id, $this->listActionHandlers)) {
             return $this->listActionHandlers[$id];
         }
-        throw new LightRealistException("List action handler not found with id=$id.");
+        throw new LightRealistException("List action handler not found with id $id.");
+    }
+
+    /**
+     * Returns the list general action handler identified by the given id.
+     *
+     * @param string $id
+     * @return LightRealistListGeneralActionHandlerInterface
+     * @throws \Exception
+     */
+    public function getListGeneralActionHandler(string $id): LightRealistListGeneralActionHandlerInterface
+    {
+        if (array_key_exists($id, $this->listGeneralActionHandlers)) {
+            return $this->listGeneralActionHandlers[$id];
+        }
+        throw new LightRealistException("List general action handler not found with id $id.");
     }
 
 
@@ -511,34 +549,126 @@ class LightRealistService
 
 
     /**
-     * Decorates the given list action group array.
+     * Prepares the given list action group array.
      *
      * This method is mainly used to translate an action id string from
      * the request declaration into actual javascript code, with the help of
      * the ListActionHandler objects.
+     *
+     * It also removes the actions which the user doesn't have the permission for.
      *
      * The given groups array structure is an array of @page(toolbar items).
      *
      * @param array $groups
      * @throws \Exception
      */
-    public function decorateListActionGroups(array &$groups)
+    public function prepareListActionGroups(array &$groups)
     {
-        foreach ($groups as $k => $group) {
-            if (array_key_exists('action_id', $group)) {
 
-                $actionId = $group['action_id'];
-                if (array_key_exists($actionId, $this->listActionHandlers)) {
-                    $handler = $this->listActionHandlers[$actionId];
+        $user = null;
+
+        foreach ($groups as $k => $group) {
+            // handling recursion
+            if (array_key_exists("items", $group)) {
+                $groupItems = $group['items'];
+                $this->prepareListActionGroups($groupItems);
+                $group['items'] = $groupItems;
+            } else {
+
+                //--------------------------------------------
+                // PERMISSION FILTERING
+                //--------------------------------------------
+                if (array_key_exists("right", $group)) {
+                    $right = $group['right'];
+                    if (null === $user) {
+                        /**
+                         * @var $user LightUserInterface
+                         */
+                        $user = $this->container->get("user_manager")->getUser();
+                    }
+                    if (false === $user->hasRight($right)) {
+                        unset($groups[$k]);
+                        continue;
+                    }
+                }
+
+
+                //--------------------------------------------
+                // JS CODE TRANSLATION
+                //--------------------------------------------
+                if (array_key_exists('action_id', $group)) {
+                    $actionId = $group['action_id'];
+
+                    if (array_key_exists($actionId, $this->listActionHandlers)) {
+                        $handler = $this->listActionHandlers[$actionId];
+                        $rawCallable = $handler->getJsActionCode($actionId);
+
+                        $groups[$k]['js_code'] = $rawCallable;
+                    } else {
+                        $this->error("No list action handler defined for action $actionId.");
+                    }
+                } else {
+                    // assuming this is a parent, we can ignore it
+                }
+            }
+        }
+    }
+
+
+    /**
+     * Prepares the given action group array.
+     *
+     * This method is mainly used to translate an action id string from
+     * the request declaration into actual javascript code, with the help of
+     * the ListGeneralActionHandler objects.
+     *
+     * It also removes the actions which the user doesn't have the permission for.
+     *
+     * See the @page(list general actions) for more details.
+     *
+     * @param array $generalActions
+     * @throws \Exception
+     */
+    public function prepareListGeneralActions(array &$generalActions)
+    {
+
+        $user = null;
+
+        foreach ($generalActions as $k => $item) {
+            //--------------------------------------------
+            // PERMISSION FILTERING
+            //--------------------------------------------
+            if (array_key_exists("right", $item)) {
+                $right = $item['right'];
+                if (null === $user) {
+                    /**
+                     * @var $user LightUserInterface
+                     */
+                    $user = $this->container->get("user_manager")->getUser();
+                }
+                if (false === $user->hasRight($right)) {
+                    unset($generalActions[$k]);
+                    continue;
+                }
+            }
+
+            //--------------------------------------------
+            // JS CODE TRANSLATION
+            //--------------------------------------------
+            if (array_key_exists('action_id', $item)) {
+                $actionId = $item['action_id'];
+                if (array_key_exists($actionId, $this->listGeneralActionHandlers)) {
+                    $handler = $this->listGeneralActionHandlers[$actionId];
                     $rawCallable = $handler->getJsActionCode($actionId);
 
-                    $groups[$k]['js_code'] = $rawCallable;
+                    $generalActions[$k]['js_code'] = $rawCallable;
                 } else {
-                    $this->error("No list action handler defined for action $actionId.");
+                    $this->error("No list general action handler defined for action $actionId.");
                 }
             } else {
                 // assuming this is a parent, we can ignore it
             }
+
         }
     }
 

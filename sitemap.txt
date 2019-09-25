@@ -92,6 +92,7 @@ https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/list-action-han
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/open-admin-table-helper-implementation-notes.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/open-admin-table-protocol.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/realist-conception-notes.md
+https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/realist-registry-js.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/realist-server-conception-notes.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/realist-tag-transfer-js-implementation-notes.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/realist-tag-transfer-protocol.md

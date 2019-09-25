@@ -93,6 +93,12 @@ $easy_route.methods_collection:
 History Log
 =============
 
+- 1.9.0 -- 2019-09-25
+
+    - update list action handler, removed the execute and getButton methods  
+    - add realist-registry   
+    - add general_actions concept
+
 - 1.8.0 -- 2019-09-25
 
     - update open admin table helper main implementation, now uses ajax handler 

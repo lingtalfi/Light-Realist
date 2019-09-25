@@ -26,25 +26,6 @@ abstract class LightRealistBaseListActionHandler extends LightRealistAbstractLis
         ];
     }
 
-    /**
-     * @overrides
-     */
-    public function doExecute(string $actionId, array $params = []): array
-    {
-        switch ($actionId) {
-            case "Light_Realist-delete_rows":
-                return ["tarace"];
-                break;
-            case "Light_Realist-print":
-                return ["tarace"];
-                break;
-            case "Light_Realist-rows_to_csv":
-                return ["tarace"];
-                break;
-            default:
-                break;
-        }
-    }
 
 
     /**
@@ -55,10 +36,7 @@ abstract class LightRealistBaseListActionHandler extends LightRealistAbstractLis
         $rawCallable = '';
         switch ($actionId) {
             case "Light_Realist-delete_rows":
-                $rawCallable = 'function f(){
-                console.log("TAMERE");
-                return "pou";
-                }';
+                $rawCallable = $this->getJsCodeByFileName("delete_rows.js");
                 break;
             case "Light_Realist-print":
                 $rawCallable = $this->getJsCodeByFileName("print.js");

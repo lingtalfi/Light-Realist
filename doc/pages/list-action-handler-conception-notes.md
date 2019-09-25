@@ -20,9 +20,12 @@ A **list action handler** is composed of three parts:
 
 - a js action: a js callable which handles the action of the button, including fetching/processing the data from a server if required.
             This callable is triggered when the button is clicked.
-- the button: which is just the html of the button    
-- the execute part: this is optional and is only used if the "list action handler" needs the help of a php server.
+- the button: which is just the html of the button. This is handled by a renderer. 
+
+
+- the execute part:  this is optional and is only used if the "list action handler" needs the help of a php server.
         If that's the case, the execute part is the php code that does the job and return the appropriate response.
+        UPDATE 2019-09-25: now this is totally decoupled from the list action handler:
         
         
 Rather than implementing this from scratch on your own, we have some tools to help you with the implementation.
@@ -43,35 +46,12 @@ specialized in specific rows actions, while the **list action handler** interfac
 selected rows and/or on the list in general.
 
 
-This interface features the **execute** method:
-
-
-- execute ( string id,  array params ): array
-
-
-For the returned array, we propose to use the response format described in the [ajax communication protocol](https://github.com/lingtalfi/AjaxCommunicationProtocol).
-
-
-
 
 The button part
 ------------
 
-This part is just about returning the html code for the button.
-The **LightRealistListActionHandlerInterface** features the getButton method for that.
-
-- getButton ( string id )
-
-
-Now sometimes you want to dispose the buttons in a certain manner; for instance you want to group all the buttons related to exporting the data in a button group dropdown.
-We use a button disposer object for that, and provide a **LightRealistListActionToolbarRendererInterface** that you can implement, it will create the actual html of the whole tool bar.
-
-It features the following method:
-
-- getToolbar ( array groups ):string
-
-
-The groups parameter being an array of toolbar items.
+This is handled by a renderer.
+We provide a group of toolbar items.
 See the toolbar item section later in this document for more information.
 
     
@@ -222,17 +202,6 @@ Note: you still need to include the assets manually, but the aforementioned js t
     
     
     
-    
-Personal notes about this design
-------------------------
-
-I chose this design for at least the following reasons:
-
-
-- we extend new actions using php (it's easier for me to manage with php than js)
-- an action can be seen as an atomic block (if we used a JsActionHandler type of object, then we
-        would need to create two objects for every new action added: the JsActionHandler and the ExecuteHandler)
-        
         
 
 

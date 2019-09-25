@@ -90,6 +90,18 @@ abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRende
      */
     protected $listActionGroups;
 
+    /**
+     * This property holds the listGeneralActions for this instance.
+     * @var array
+     */
+    protected $listGeneralActions;
+
+    /**
+     * This property holds the containerCssId for this instance.
+     * @var string
+     */
+    protected $containerCssId;
+
 
     /**
      * Builds the OpenAdminTableBaseRealistListRenderer instance.
@@ -108,6 +120,8 @@ abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRende
         $this->container = null;
         $this->collapsibleColumnIndexes = [];
         $this->listActionGroups = [];
+        $this->listGeneralActions = [];
+        $this->containerCssId = null;
 
     }
 
@@ -126,8 +140,13 @@ abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRende
 
 
         $listActionGroups = $rendering['list_action_groups'] ?? [];
-        $this->container->get('realist')->decorateListActionGroups($listActionGroups);
+        $this->container->get('realist')->prepareListActionGroups($listActionGroups);
         $this->setListActionGroups($listActionGroups);
+
+
+        $listGeneralActions = $rendering['list_general_actions'] ?? [];
+        $this->container->get('realist')->prepareListGeneralActions($listGeneralActions);
+        $this->setListGeneralActions($listGeneralActions);
 
 
         $openAdminTable = $rendering['open_admin_table'] ?? [];
@@ -152,6 +171,17 @@ abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRende
 
 
     }
+
+    /**
+     * @implementation
+     */
+    public function setContainerCssId(string $cssId)
+    {
+        $this->containerCssId = $cssId;
+    }
+
+
+
 
 
     //--------------------------------------------
@@ -228,6 +258,17 @@ abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRende
     {
         $this->listActionGroups = $listActionGroups;
     }
+
+    /**
+     * Sets the listGeneralActions.
+     *
+     * @param array $listGeneralActions
+     */
+    public function setListGeneralActions(array $listGeneralActions)
+    {
+        $this->listGeneralActions = $listGeneralActions;
+    }
+
 
     /**
      * Sets the csrfToken value.

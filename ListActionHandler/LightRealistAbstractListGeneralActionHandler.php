@@ -5,9 +5,9 @@ namespace Ling\Light_Realist\ListActionHandler;
 
 
 /**
- * The LightRealistAbstractListActionHandler class.
+ * The LightRealistAbstractListGeneralActionHandler class.
  */
-abstract class LightRealistAbstractListActionHandler implements LightRealistListActionHandlerInterface
+abstract class LightRealistAbstractListGeneralActionHandler implements LightRealistListGeneralActionHandlerInterface
 {
     /**
      * This property holds the handledIds for this instance.

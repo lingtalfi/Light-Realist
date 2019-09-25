@@ -32,6 +32,11 @@ class LightRealistAjaxHandler extends ContainerAwareLightAjaxHandler
 
 
         switch ($actionId) {
+            case "Light_Realist-delete":
+                $response = [
+                    "type" => "success",
+                ];
+                break;
             case "Light_Realist-print":
                 if (array_key_exists("request_id", $params)) {
                     if (array_key_exists("rics", $params) && is_array($params['rics'])) {

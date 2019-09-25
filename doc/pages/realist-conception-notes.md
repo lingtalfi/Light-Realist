@@ -60,6 +60,22 @@ rendering:
     list_renderer:
         identifier: string
     
+    # the list general actions. See the "List general actions" sections for more details 
+    list_general_actions:
+        -
+            action_id: Light_Kit_Admin-generate
+            text: Generate
+            icon: fas fa-print
+          csrf_token:
+                name: Light_Kit_Admin-list_action-generate
+                value: REALIST(Light_Realist, csrf_token, Light_Kit_Admin-list_action-generate)
+            params:
+                url: REALIST(Light_Realist, route, lah_route-ajax_handler)
+                ajax_handler_id: Light_Kit_Admin
+                ajax_action_id: Light_Kit_Admin-generate_random_rows
+                request_id: Light_Kit_Admin:lud_user
+            right: Light_Kit_Admin.admin
+        
     # The list action groups, see the list action groups section below for more details
     list_action_groups:
         -
@@ -125,6 +141,9 @@ rendering:
          
 ```
  
+ 
+ 
+ 
 
 List renderer
 -------------
@@ -134,6 +153,8 @@ the search widget, etc...
 
 If we use an ajax based rows generator (which we recommend for admin tables), then the inner rows are generated separately
 by a specialized object called the "rows renderer".
+
+
 
 
 
@@ -221,4 +242,213 @@ List action groups
 
 
 We suggest using the [list action handler conception notes](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/list-action-handler-conception-notes.md).   
+
+
+
+List general actions 
+-----------------
+2019-09-25
+
+
+Same as list action groups, except that they are using a **ListGeneralActionHandler** object to handle them,
+and the items cannot be nested (i.e. no recursion is allowed).
+
+### Button markup
+ 
+We recommend that a list general action button has the following markup:
+
+- lgah-button: this css class should be added to the button/link.  
+- data-action-id: this html attribute should be set, with the value being the value of the **action_id**.
+
+
+We provide a **list-general-action-handler-helper.js** tool to help with the implementation.
+      
+      
+### Js code
+
+The callable is the function f, same as for the list action handler, but the arguments are different:
+
+
+- function f (jTrigger, jContainer, params);
+
+With:
+
+- jTrigger: the jquery element clicked by the user to trigger the action
+- jContainer: the jquery element containing this realist gui
+- params: the hep params bound to the jTrigger. More about hep parameters here: https://github.com/lingtalfi/NotationFan/blob/master/html-element-parameters.md
+
+
+      
+
+
+
+A full realist requestDeclaration example
+====================
+2019-09-25
+
+
+Taken from the Light_Kit_Admin plugin (still under construction at the moment when I write those lines):
+
+
+```yaml
+default:
+    table: lud_user
+    ric:
+        - id
+    base_fields:
+        - id
+        - identifier
+        - pseudo
+        - avatar_url
+        - extra
+
+    order: []
+        col_order: $column $direction
+    where: []
+        general_search: <
+            id like :%expression% or
+            identifier like :%expression% or
+            pseudo like :%expression% or
+            avatar_url like :%expression% or
+            extra like :%expression%
+        >
+        generic_filter: $column $operator :operator_value
+        generic_sub_filter: $column like :%operator_value%
+        in_ids: id in ($ids)
+
+    limit:
+        page: $page
+        page_length: $page_length
+
+    options:
+        wiring: []
+        default_limit_page: 1
+        default_limit_page_length: 20
+        where:
+            mode: groups
+            masks:
+                -
+                    participants:
+                        - generic_filter
+                        - generic_sub_filter
+                    mask: {generic_filter} AND {generic_sub_filter}
+                -
+                    participants:
+                        - general_search
+                        - generic_sub_filter
+                    mask: {general_search} AND {generic_sub_filter}
+
+        tag_options:
+            generic_filter:
+                operator_and_value:
+                    source: operator
+                    target: operator_value
+    csrf_token:
+        name: realist-request
+        value: REALIST(Light_Realist, csrf_token, realist-request)
+    rendering:
+        list_general_actions:
+            -
+                action_id: Light_Kit_Admin-generate
+                text: Generate
+                icon: fas fa-spray-can
+                csrf_token:
+                    name: Light_Kit_Admin-list_action-generate
+                    value: REALIST(Light_Realist, csrf_token, Light_Kit_Admin-list_action-generate)
+                params:
+                    url: REALIST(Light_Realist, route, lah_route-ajax_handler)
+                    ajax_handler_id: Light_Kit_Admin
+                    ajax_action_id: Light_Kit_Admin-generate_random_rows
+                    request_id: Light_Kit_Admin:lud_user
+                right: Light_Kit_Admin.admin
+
+        list_action_groups:
+            -
+                action_id: Light_Realist-print
+                text: Print
+                icon: fas fa-print
+                csrf_token:
+                    name: Light_Realist-list_action-print
+                    value: REALIST(Light_Realist, csrf_token, Light_Realist-list_action-print)
+                params:
+                    url: REALIST(Light_Realist, route, lah_route-ajax_handler)
+                    ajax_handler_id: Light_Realist
+                    ajax_action_id: Light_Realist-print
+                    request_id: Light_Kit_Admin:lud_user
+                right: Light_Kit_Admin.admin
+            -
+                action_id: Light_Realist-delete_rows
+                text: Delete
+                icon: far fa-trash-alt
+                csrf_token:
+                    name: Light_Realist-list_action-delete
+                    value: REALIST(Light_Realist, csrf_token, Light_Realist-list_action-delete)
+                params:
+                    url: REALIST(Light_Realist, route, lah_route-ajax_handler)
+                    ajax_handler_id: Light_Realist
+                    ajax_action_id: Light_Realist-delete
+                    request_id: Light_Kit_Admin:lud_user
+                right: Light_Kit_Admin.admin
+            -
+                text: Share
+                icon: fas fa-share-square
+                items:
+                    -
+                        action_id: Light_Realist-rows_to_csv
+                        icon: far fa-envelope
+                        text: Csv
+
+
+        list_renderer:
+            identifier: Light_Kit_Admin
+        responsive_table_helper:
+            collapsible_column_indexes: admin
+        open_admin_table:
+            widget_statuses:
+                debug_window: true
+                global_search: true
+                advanced_search: true
+                toolbar: true
+                table: true
+                head: true
+                head_sort: true
+                checkbox: true
+                neck_filters: true
+                pagination: true
+                number_of_items_per_page: true
+                number_of_rows_info: true
+            data_types:
+                id: number
+                identifier: string
+                pseudo: string
+                avatar_url: string
+                extra: string
+                actions: action
+        column_labels:
+            id: "#"
+            identifier: Identifier
+            pseudo: Pseudo
+            avatar_url: Avatar url
+            extra: Extra
+            actions: Actions
+        rows_renderer:
+            identifier: Light_Kit_Admin
+#                class: Ling\Light_Kit_Admin\Realist\Rendering\LightKitAdminRealistRowsRenderer
+            types:
+                avatar_url:
+                    type: image
+                    width: 100
+                action:
+                    type: lka_generic_ric_form_link
+                    text: Edit
+                    route: lka_route-user_profile
+
+                checkbox: checkbox
+            checkbox_column: []
+            action_column: []
+
+
+
+
+```
 
