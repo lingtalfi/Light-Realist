@@ -602,8 +602,13 @@ class LightRealistService
                     if (array_key_exists($actionId, $this->listActionHandlers)) {
                         $handler = $this->listActionHandlers[$actionId];
                         $rawCallable = $handler->getJsActionCode($actionId);
-
                         $groups[$k]['js_code'] = $rawCallable;
+
+                        $modal = $handler->getModalCode($actionId);
+                        if (null !== $modal) {
+                            $this->container->get('html_page_copilot')->addModal($modal);
+                        }
+
                     } else {
                         $this->error("No list action handler defined for action $actionId.");
                     }
@@ -662,6 +667,13 @@ class LightRealistService
                     $rawCallable = $handler->getJsActionCode($actionId);
 
                     $generalActions[$k]['js_code'] = $rawCallable;
+
+                    $modal = $handler->getModalCode($actionId);
+                    if (null !== $modal) {
+                        $this->container->get('html_page_copilot')->addModal($modal);
+                    }
+
+
                 } else {
                     $this->error("No list general action handler defined for action $actionId.");
                 }

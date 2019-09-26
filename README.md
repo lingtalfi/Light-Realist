@@ -93,6 +93,10 @@ $easy_route.methods_collection:
 History Log
 =============
 
+- 1.10.2 -- 2019-09-26
+
+    - fix modal implementation forgotten part 2
+
 - 1.10.1 -- 2019-09-26
 
     - fix modal implementation forgotten
