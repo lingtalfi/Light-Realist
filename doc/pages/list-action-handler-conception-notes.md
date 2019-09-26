@@ -190,7 +190,7 @@ The structure of an item is the following:
         to transmit the parameters.
 - ?right: string. The [permission](https://github.com/lingtalfi/Light_User/blob/master/doc/pages/permission-conception-notes.md)
             required to access the service (if any).          
-    
+- ?modal: string. If the toolbar item requires some modal, we can add it with the html of the modal here.     
     
 To help with the js implementation, the realist planet has some dependencies to some js tools that you can use out of the box:
 

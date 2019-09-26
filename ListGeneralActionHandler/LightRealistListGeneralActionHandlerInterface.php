@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Ling\Light_Realist\ListActionHandler;
+namespace Ling\Light_Realist\ListGeneralActionHandler;
 
 
 /**

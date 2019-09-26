@@ -14,7 +14,7 @@ use Ling\Light_Realist\ActionHandler\LightRealistActionHandlerInterface;
 use Ling\Light_Realist\DynamicInjection\RealistDynamicInjectionHandlerInterface;
 use Ling\Light_Realist\Exception\LightRealistException;
 use Ling\Light_Realist\ListActionHandler\LightRealistListActionHandlerInterface;
-use Ling\Light_Realist\ListActionHandler\LightRealistListGeneralActionHandlerInterface;
+use Ling\Light_Realist\ListGeneralActionHandler\LightRealistListGeneralActionHandlerInterface;
 use Ling\Light_Realist\Rendering\RealistListRendererInterface;
 use Ling\Light_Realist\Rendering\RealistRowsRendererInterface;
 use Ling\Light_User\LightUserInterface;

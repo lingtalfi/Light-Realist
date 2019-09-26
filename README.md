@@ -93,6 +93,11 @@ $easy_route.methods_collection:
 History Log
 =============
 
+- 1.10.0 -- 2019-09-26
+
+    - add modal support for toolbar item and list general action items
+    - fix wrong location for list general action handler class
+     
 - 1.9.0 -- 2019-09-25
 
     - update list action handler, removed the execute and getButton methods  
