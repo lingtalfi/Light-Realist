@@ -93,6 +93,10 @@ $easy_route.methods_collection:
 History Log
 =============
 
+- 1.10.1 -- 2019-09-26
+
+    - fix modal implementation forgotten
+    
 - 1.10.0 -- 2019-09-26
 
     - add modal support for toolbar item and list general action items

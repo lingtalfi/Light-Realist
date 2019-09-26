@@ -34,6 +34,13 @@ abstract class LightRealistAbstractListActionHandler implements LightRealistList
     }
 
 
+    /**
+     * @implementation
+     */
+    public function getModalCode(string $actionId): ?string
+    {
+        return null;
+    }
 
 
     //--------------------------------------------

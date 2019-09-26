@@ -33,6 +33,16 @@ abstract class LightRealistAbstractListGeneralActionHandler implements LightReal
         return $this->handledIds;
     }
 
+    /**
+     * @implementation
+     */
+    public function getModalCode(string $actionId): ?string
+    {
+        return null;
+    }
+
+
+
 
 
 
