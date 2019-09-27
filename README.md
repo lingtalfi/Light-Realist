@@ -93,9 +93,15 @@ $easy_route.methods_collection:
 History Log
 =============
 
+- 1.11.0 -- 2019-09-27
+
+    - removed LightRealistListActionHandlerInterface->getHandledIds
+    - removed LightRealistListGeneralActionHandlerInterface->getHandledIds
+    - fix open admin table helper js pagination inconsistencies when changing nipp selector
+    
 - 1.10.3 -- 2019-09-26
 
-    - fix problem with un-synchronized DocBuilder
+    - fix problem with un-synchronized DocBuilder not generating doc
     
 - 1.10.2 -- 2019-09-26
 

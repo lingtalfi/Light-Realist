@@ -58,7 +58,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [LightRealistTool::getToolbarItemByActionId](https://github.com/lingtalfi/Light_Realist/blob/master/Tool/LightRealistTool.php#L26-L37)
+See the source code for method [LightRealistTool::getToolbarItemByActionId](https://github.com/lingtalfi/Light_Realist/blob/master/Tool/LightRealistTool.php#L27-L44)
 
 
 See Also
@@ -66,5 +66,5 @@ See Also
 
 The [LightRealistTool](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool.md) class.
 
-Next method: [checkAjaxToken](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool/checkAjaxToken.md)<br>
+Next method: [getListGeneralActionItemByActionId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool/getListGeneralActionItemByActionId.md)<br>
 

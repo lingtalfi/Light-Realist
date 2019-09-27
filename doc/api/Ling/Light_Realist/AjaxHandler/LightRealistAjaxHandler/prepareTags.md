@@ -49,7 +49,7 @@ Returns array.
 
 Source Code
 ===========
-See the source code for method [LightRealistAjaxHandler::prepareTags](https://github.com/lingtalfi/Light_Realist/blob/master/AjaxHandler/LightRealistAjaxHandler.php#L183-L195)
+See the source code for method [LightRealistAjaxHandler::prepareTags](https://github.com/lingtalfi/Light_Realist/blob/master/AjaxHandler/LightRealistAjaxHandler.php#L116-L128)
 
 
 See Also
@@ -57,5 +57,5 @@ See Also
 
 The [LightRealistAjaxHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/AjaxHandler/LightRealistAjaxHandler.md) class.
 
-Previous method: [error](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/AjaxHandler/LightRealistAjaxHandler/error.md)<br>Next method: [checkCsrfTokenByToolbarItem](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/AjaxHandler/LightRealistAjaxHandler/checkCsrfTokenByToolbarItem.md)<br>
+Previous method: [error](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/AjaxHandler/LightRealistAjaxHandler/error.md)<br>
 

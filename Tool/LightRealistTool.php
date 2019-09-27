@@ -3,6 +3,7 @@
 
 namespace Ling\Light_Realist\Tool;
 
+use Ling\Bat\ArrayTool;
 use Ling\Bat\BDotTool;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
 use Ling\Light_Csrf\Service\LightCsrfService;
@@ -27,13 +28,40 @@ class LightRealistTool
     {
         $listActionGroups = BDotTool::getDotValue("rendering.list_action_groups", $requestDeclaration);
         if ($listActionGroups) {
-            foreach ($listActionGroups as $group) {
-                if ($actionId === $group['action_id']) {
-                    return $group;
+            $matchingItem = null;
+            ArrayTool::walkRowsRecursive($listActionGroups, function ($item) use (&$matchingItem, $actionId) {
+                if (null === $matchingItem) {
+                    if ($actionId === $item['action_id']) {
+                        $matchingItem = $item;
+                    }
                 }
+            }, 'items');
+            if (null !== $matchingItem) {
+                return $matchingItem;
             }
         }
         throw new LightRealistException("Toolbar item not found with actionId $actionId.");
+    }
+
+    /**
+     * Returns the @page(list general action item) identified by the given actionId.
+     *
+     * @param string $actionId
+     * @param array $requestDeclaration
+     * @return array
+     * @throws \Exception
+     */
+    public static function getListGeneralActionItemByActionId(string $actionId, array $requestDeclaration): array
+    {
+        $items = BDotTool::getDotValue("rendering.list_general_actions", $requestDeclaration);
+        if ($items) {
+            foreach ($items as $item) {
+                if ($actionId === $item['action_id']) {
+                    return $item;
+                }
+            }
+        }
+        throw new LightRealistException("List general action item not found with actionId $actionId.");
     }
 
 

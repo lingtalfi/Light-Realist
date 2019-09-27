@@ -54,7 +54,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [LightRealistService::error](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L761-L764)
+See the source code for method [LightRealistService::error](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L813-L816)
 
 
 See Also
@@ -62,5 +62,5 @@ See Also
 
 The [LightRealistService](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService.md) class.
 
-Previous method: [getConfigurationArrayByRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/getConfigurationArrayByRequestId.md)<br>Next method: [getDynamicInjectionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/getDynamicInjectionHandler.md)<br>
+Previous method: [checkPermissionByGenericActionItem](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/checkPermissionByGenericActionItem.md)<br>Next method: [getDynamicInjectionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/getDynamicInjectionHandler.md)<br>
 

@@ -50,7 +50,7 @@ Returns string | null.
 
 Source Code
 ===========
-See the source code for method [LightRealistAbstractListActionHandler::getModalCode](https://github.com/lingtalfi/Light_Realist/blob/master/ListActionHandler/LightRealistAbstractListActionHandler.php#L40-L43)
+See the source code for method [LightRealistAbstractListActionHandler::getModalCode](https://github.com/lingtalfi/Light_Realist/blob/master/ListActionHandler/LightRealistAbstractListActionHandler.php#L15-L18)
 
 
 See Also
@@ -58,5 +58,5 @@ See Also
 
 The [LightRealistAbstractListActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListActionHandler/LightRealistAbstractListActionHandler.md) class.
 
-Previous method: [getHandledIds](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListActionHandler/LightRealistAbstractListActionHandler/getHandledIds.md)<br>Next method: [setHandledIds](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListActionHandler/LightRealistAbstractListActionHandler/setHandledIds.md)<br>
+
 

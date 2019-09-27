@@ -4,7 +4,7 @@
 
 The LightRealistTool class
 ================
-2019-08-12 --> 2019-09-26
+2019-08-12 --> 2019-09-27
 
 
 
@@ -26,6 +26,7 @@ class <span class="pl-k">LightRealistTool</span>  {
 
 - Methods
     - public static [getToolbarItemByActionId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool/getToolbarItemByActionId.md)(string $actionId, array $requestDeclaration) : array
+    - public static [getListGeneralActionItemByActionId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool/getListGeneralActionItemByActionId.md)(string $actionId, array $requestDeclaration) : array
     - public static [checkAjaxToken](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool/checkAjaxToken.md)(array $token, string $tokenValue, [Ling\Light\ServiceContainer\LightServiceContainerInterface](https://github.com/lingtalfi/Light/blob/master/doc/api/Ling/Light/ServiceContainer/LightServiceContainerInterface.md) $container) : void
     - public static [ricsToIntegersOnlyInString](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool/ricsToIntegersOnlyInString.md)(array $rics) : string
 
@@ -40,6 +41,7 @@ Methods
 ==============
 
 - [LightRealistTool::getToolbarItemByActionId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool/getToolbarItemByActionId.md) &ndash; Returns the [toolbar item](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/list-action-handler-conception-notes.md#the-toolbar-item) identified by the given actionId.
+- [LightRealistTool::getListGeneralActionItemByActionId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool/getListGeneralActionItemByActionId.md) &ndash; Returns the [list general action item](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/realist-conception-notes.md#list-general-actions) identified by the given actionId.
 - [LightRealistTool::checkAjaxToken](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool/checkAjaxToken.md) &ndash; Checks whether the given token is valid.
 - [LightRealistTool::ricsToIntegersOnlyInString](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool/ricsToIntegersOnlyInString.md) &ndash; Returns a comma separated list of integers, based on the given rics.
 

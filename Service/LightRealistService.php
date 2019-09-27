@@ -17,6 +17,7 @@ use Ling\Light_Realist\ListActionHandler\LightRealistListActionHandlerInterface;
 use Ling\Light_Realist\ListGeneralActionHandler\LightRealistListGeneralActionHandlerInterface;
 use Ling\Light_Realist\Rendering\RealistListRendererInterface;
 use Ling\Light_Realist\Rendering\RealistRowsRendererInterface;
+use Ling\Light_Realist\Tool\LightRealistTool;
 use Ling\Light_User\LightUserInterface;
 use Ling\ParametrizedSqlQuery\ParametrizedSqlQueryUtil;
 
@@ -432,29 +433,32 @@ class LightRealistService
 
     /**
      * Registers a list action handler.
+     * List action ids should be formatted like this:
      *
+     * - list action id: {pluginName}.{listActionName}
+     *
+     *
+     * @param string $pluginName
      * @param LightRealistListActionHandlerInterface $handler
      */
-    public function registerListActionHandler(LightRealistListActionHandlerInterface $handler)
+    public function registerListActionHandler(string $pluginName, LightRealistListActionHandlerInterface $handler)
     {
-        $ids = $handler->getHandledIds();
-        foreach ($ids as $id) {
-            $this->listActionHandlers[$id] = $handler;
-        }
+        $this->listActionHandlers[$pluginName] = $handler;
     }
 
 
     /**
      * Registers a list general action handler.
+     * List general action ids should be formatted like this:
      *
+     * - list general action id: {pluginName}.{listGeneralActionName}
+     *
+     * @param string $pluginName
      * @param LightRealistListGeneralActionHandlerInterface $handler
      */
-    public function registerListGeneralActionHandler(LightRealistListGeneralActionHandlerInterface $handler)
+    public function registerListGeneralActionHandler(string $pluginName, LightRealistListGeneralActionHandlerInterface $handler)
     {
-        $ids = $handler->getHandledIds();
-        foreach ($ids as $id) {
-            $this->listGeneralActionHandlers[$id] = $handler;
-        }
+        $this->listGeneralActionHandlers[$pluginName] = $handler;
     }
 
 
@@ -494,8 +498,9 @@ class LightRealistService
      */
     public function getListActionHandler(string $id): LightRealistListActionHandlerInterface
     {
-        if (array_key_exists($id, $this->listActionHandlers)) {
-            return $this->listActionHandlers[$id];
+        $pluginName = explode(".", $id)[0];
+        if (array_key_exists($pluginName, $this->listActionHandlers)) {
+            return $this->listActionHandlers[$pluginName];
         }
         throw new LightRealistException("List action handler not found with id $id.");
     }
@@ -509,8 +514,9 @@ class LightRealistService
      */
     public function getListGeneralActionHandler(string $id): LightRealistListGeneralActionHandlerInterface
     {
-        if (array_key_exists($id, $this->listGeneralActionHandlers)) {
-            return $this->listGeneralActionHandlers[$id];
+        $pluginName = explode(".", $id)[0];
+        if (array_key_exists($pluginName, $this->listGeneralActionHandlers)) {
+            return $this->listGeneralActionHandlers[$pluginName];
         }
         throw new LightRealistException("List general action handler not found with id $id.");
     }
@@ -591,6 +597,13 @@ class LightRealistService
                         continue;
                     }
                 }
+                if (array_key_exists("micro_permission", $group)) {
+                    $mp = $group['micro_permission'];
+                    if (false === $this->container->get("micro_permission")->hasMicroPermission($mp)) {
+                        unset($groups[$k]);
+                        continue;
+                    }
+                }
 
 
                 //--------------------------------------------
@@ -599,19 +612,15 @@ class LightRealistService
                 if (array_key_exists('action_id', $group)) {
                     $actionId = $group['action_id'];
 
-                    if (array_key_exists($actionId, $this->listActionHandlers)) {
-                        $handler = $this->listActionHandlers[$actionId];
-                        $rawCallable = $handler->getJsActionCode($actionId);
-                        $groups[$k]['js_code'] = $rawCallable;
+                    $handler = $this->getListActionHandler($actionId);
+                    $rawCallable = $handler->getJsActionCode($actionId);
+                    $groups[$k]['js_code'] = $rawCallable;
 
-                        $modal = $handler->getModalCode($actionId);
-                        if (null !== $modal) {
-                            $this->container->get('html_page_copilot')->addModal($modal);
-                        }
-
-                    } else {
-                        $this->error("No list action handler defined for action $actionId.");
+                    $modal = $handler->getModalCode($actionId);
+                    if (null !== $modal) {
+                        $this->container->get('html_page_copilot')->addModal($modal);
                     }
+
                 } else {
                     // assuming this is a parent, we can ignore it
                 }
@@ -640,43 +649,23 @@ class LightRealistService
         $user = null;
 
         foreach ($generalActions as $k => $item) {
-            //--------------------------------------------
-            // PERMISSION FILTERING
-            //--------------------------------------------
-            if (array_key_exists("right", $item)) {
-                $right = $item['right'];
-                if (null === $user) {
-                    /**
-                     * @var $user LightUserInterface
-                     */
-                    $user = $this->container->get("user_manager")->getUser();
-                }
-                if (false === $user->hasRight($right)) {
-                    unset($generalActions[$k]);
-                    continue;
-                }
-            }
 
             //--------------------------------------------
             // JS CODE TRANSLATION
             //--------------------------------------------
             if (array_key_exists('action_id', $item)) {
                 $actionId = $item['action_id'];
-                if (array_key_exists($actionId, $this->listGeneralActionHandlers)) {
-                    $handler = $this->listGeneralActionHandlers[$actionId];
-                    $rawCallable = $handler->getJsActionCode($actionId);
+                $handler = $this->getListGeneralActionHandler($actionId);
+                $rawCallable = $handler->getJsActionCode($actionId);
 
-                    $generalActions[$k]['js_code'] = $rawCallable;
+                $generalActions[$k]['js_code'] = $rawCallable;
 
-                    $modal = $handler->getModalCode($actionId);
-                    if (null !== $modal) {
-                        $this->container->get('html_page_copilot')->addModal($modal);
-                    }
-
-
-                } else {
-                    $this->error("No list general action handler defined for action $actionId.");
+                $modal = $handler->getModalCode($actionId);
+                if (null !== $modal) {
+                    $this->container->get('html_page_copilot')->addModal($modal);
                 }
+
+
             } else {
                 // assuming this is a parent, we can ignore it
             }
@@ -746,6 +735,69 @@ class LightRealistService
         $this->_requestDeclarationCache[$requestId] = $ret;
         return $ret;
     }
+
+
+    /**
+     * Performs the csrf validation if necessary (i.e. if the csrf_token key is defined in the @page(generic action item) configuration),
+     * and throws an exception in case of a csrf validation failure.
+     *
+     * The params array originates from the user (i.e. not trusted).
+     *
+     * @param array $item
+     * @param array $params
+     * @throws \Exception
+     */
+    public function checkCsrfTokenByGenericActionItem(array $item, array $params)
+    {
+        if (array_key_exists("csrf_token", $item)) {
+            if (array_key_exists("csrf_token", $params)) {
+                $tokenValue = $params['csrf_token'];
+                LightRealistTool::checkAjaxToken($item['csrf_token'], $tokenValue, $this->container);
+            } else {
+                $this->error("The csrf_token entry was not provided with the post params.");
+            }
+        }
+    }
+
+
+    /**
+     * Checks whether there is a permission restriction for the given @page(generic action item),
+     * and if so checks whether the user is granted that permission.
+     * If not, this method throws an exception.
+     *
+     * Note: both the @page(permission) and @page(micro permissions) systems are checked.
+     *
+     *
+     *
+     *
+     * @param array $item
+     * @throws \Exception
+     */
+    public function checkPermissionByGenericActionItem(array $item)
+    {
+        if (array_key_exists("right", $item)) {
+            $right = $item['right'];
+
+            /**
+             * @var $user LightUserInterface
+             */
+            $user = $this->container->get("user_manager")->getUser();
+            if (false === $user->hasRight($right)) {
+                $this->error("Permission denied, missing the permission: $right.");
+            }
+        }
+        if (array_key_exists("micro_permission", $item)) {
+            $mp = $item['micro_permission'];
+
+            /**
+             * @var $user LightUserInterface
+             */
+            if (false === $this->container->get("micro_permission")->hasMicroPermission($mp)) {
+                $this->error("Permission denied, missing the micro-permission: $mp.");
+            }
+        }
+    }
+
 
 
     //--------------------------------------------

@@ -10,12 +10,6 @@ namespace Ling\Light_Realist\ListGeneralActionHandler;
 interface LightRealistListGeneralActionHandlerInterface
 {
 
-    /**
-     * Returns the array of handled list action ids.
-     *
-     * @return array
-     */
-    public function getHandledIds(): array;
 
 
     /**

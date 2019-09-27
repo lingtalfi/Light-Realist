@@ -50,7 +50,7 @@ Returns string | null.
 
 Source Code
 ===========
-See the source code for method [LightRealistListActionHandlerInterface::getModalCode](https://github.com/lingtalfi/Light_Realist/blob/master/ListActionHandler/LightRealistListActionHandlerInterface.php#L37-L37)
+See the source code for method [LightRealistListActionHandlerInterface::getModalCode](https://github.com/lingtalfi/Light_Realist/blob/master/ListActionHandler/LightRealistListActionHandlerInterface.php#L30-L30)
 
 
 See Also

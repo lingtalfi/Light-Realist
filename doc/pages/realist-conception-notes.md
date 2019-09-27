@@ -127,13 +127,15 @@ rendering:
                 - ...(the options to use, depending on the type)
             - ...(add your custom types here)
     
-        checkbox_column: # The special checkbox dynamic column settings. The checkbox is  See the "Rows renderer" section below.
+        checkbox_column: # The special "checkbox" dynamic column settings. See the "Rows renderer" section below.
                          # It basically prepends a checkbox column to each returned row.  
+                         # Remove this key entirely (or comment it) to not use this system  
             name: string=checkbox. The column name in the row. 
             label: string=#. The label to use in the gui.
 
-        action_column: # The special action dynamic column settings. The checkbox is  See the "Rows renderer" section below.
+        action_column: # The special "action" dynamic column settings. See the "Rows renderer" section below.
                        # It basically appends an "action" column to each returned row. 
+                         # Remove this key entirely (or comment it) to not use this system 
             name: string=action. The column name in the row.
             label: string=Actions. The label to use in the gui.
 

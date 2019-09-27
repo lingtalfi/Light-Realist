@@ -4,7 +4,7 @@
 
 The LightRealistAjaxHandler class
 ================
-2019-08-12 --> 2019-09-26
+2019-08-12 --> 2019-09-27
 
 
 
@@ -31,8 +31,6 @@ class <span class="pl-k">LightRealistAjaxHandler</span> extends [ContainerAwareL
     - public [handle](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/AjaxHandler/LightRealistAjaxHandler/handle.md)(string $actionId, array $params) : array
     - protected [error](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/AjaxHandler/LightRealistAjaxHandler/error.md)(string $msg) : void
     - protected [prepareTags](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/AjaxHandler/LightRealistAjaxHandler/prepareTags.md)(array $tags) : array
-    - protected [checkCsrfTokenByToolbarItem](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/AjaxHandler/LightRealistAjaxHandler/checkCsrfTokenByToolbarItem.md)(array $toolbarItem, array $params) : void
-    - protected [checkPermissionByToolbarItem](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/AjaxHandler/LightRealistAjaxHandler/checkPermissionByToolbarItem.md)(array $toolbarItem) : void
 
 - Inherited methods
     - public ContainerAwareLightAjaxHandler::__construct() : void
@@ -52,8 +50,6 @@ Methods
 - [LightRealistAjaxHandler::handle](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/AjaxHandler/LightRealistAjaxHandler/handle.md) &ndash; Process the given parameters, and returns the appropriate response.
 - [LightRealistAjaxHandler::error](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/AjaxHandler/LightRealistAjaxHandler/error.md) &ndash; Throws an error message.
 - [LightRealistAjaxHandler::prepareTags](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/AjaxHandler/LightRealistAjaxHandler/prepareTags.md) &ndash; Returns the tags in the format expected by the LightRealistService->executeRequestById method.
-- [LightRealistAjaxHandler::checkCsrfTokenByToolbarItem](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/AjaxHandler/LightRealistAjaxHandler/checkCsrfTokenByToolbarItem.md) &ndash; Performs the csrf validation if necessary (i.e.
-- [LightRealistAjaxHandler::checkPermissionByToolbarItem](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/AjaxHandler/LightRealistAjaxHandler/checkPermissionByToolbarItem.md) &ndash; and if so check whether the user is granted that permission.
 - ContainerAwareLightAjaxHandler::__construct &ndash; Builds the ContainerAwareLightAjaxHandler instance.
 - ContainerAwareLightAjaxHandler::setContainer &ndash; Sets the light service container interface.
 - ContainerAwareLightAjaxHandler::getContainer &ndash; Returns the container instance.

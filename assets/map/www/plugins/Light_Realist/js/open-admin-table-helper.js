@@ -34,8 +34,9 @@ if ("undefined" === typeof window.OpenAdminTableHelper) {
             this.jTable = this.jContainer.find(this.options.table_selector);
             this.useSpinKit = this.options.use_spinkit_helper;
 
-            // I use this to fix pagination inconsistency that can come from de-synced number of items per page and the page number.
+            // I use these to fix pagination inconsistency that can come from de-synced number of items per page and the page number.
             this.nbTotalRows = null;
+            this.nippFlag = false;
 
 
             // initializing containers
@@ -279,7 +280,9 @@ if ("undefined" === typeof window.OpenAdminTableHelper) {
                 if (jNumberOfItemsPerPage) {
                     var jNippSelector = jNumberOfItemsPerPage.find(".oath-nipp-selector");
                     jNippSelector.on('change', function () {
+                        $this.nippFlag = true;
                         $this.executeModule("pagination");
+                        $this.nippFlag = false;
                         return false;
                     });
                 }
@@ -302,6 +305,7 @@ if ("undefined" === typeof window.OpenAdminTableHelper) {
                  * Fix pagination inconsistencies first
                  */
                 if (
+                    true === $this.nippFlag &&
                     null !== this.nbTotalRows &&
                     "pagination" === moduleName) {
                     var jNumberOfItemsPerPage = this.getModuleContainer("number_of_items_per_page");

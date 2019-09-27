@@ -11,13 +11,6 @@ interface LightRealistListActionHandlerInterface
 {
 
     /**
-     * Returns the array of handled list action ids.
-     *
-     * @return array
-     */
-    public function getHandledIds(): array;
-
-    /**
      * Returns the js action code for this list action.
      *
      * @param string $actionId

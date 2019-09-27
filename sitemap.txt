@@ -93,6 +93,8 @@ https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realis
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RealistRowsRendererInterface.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/__construct.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/checkCsrfToken.md
+https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/checkCsrfTokenByGenericActionItem.md
+https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/checkPermissionByGenericActionItem.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/decorateListActionGroups.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/error.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/executeRequestById.md
@@ -114,6 +116,7 @@ https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realis
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/setContainer.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool/checkAjaxToken.md
+https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool/getListGeneralActionItemByActionId.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool/getToolbarItemByActionId.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool/ricsToIntegersOnlyInString.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool.md
@@ -123,6 +126,7 @@ https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/conception-note
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/conception-notes.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/duelist-conception-notes.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/duelist.md
+https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/generic-action-item.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/implementation-styles.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/list-action-handler-conception-notes.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/open-admin-table-helper-implementation-notes.md

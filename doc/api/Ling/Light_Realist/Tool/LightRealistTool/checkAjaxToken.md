@@ -66,7 +66,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [LightRealistTool::checkAjaxToken](https://github.com/lingtalfi/Light_Realist/blob/master/Tool/LightRealistTool.php#L54-L69)
+See the source code for method [LightRealistTool::checkAjaxToken](https://github.com/lingtalfi/Light_Realist/blob/master/Tool/LightRealistTool.php#L82-L97)
 
 
 See Also
@@ -74,5 +74,5 @@ See Also
 
 The [LightRealistTool](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool.md) class.
 
-Previous method: [getToolbarItemByActionId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool/getToolbarItemByActionId.md)<br>Next method: [ricsToIntegersOnlyInString](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool/ricsToIntegersOnlyInString.md)<br>
+Previous method: [getListGeneralActionItemByActionId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool/getListGeneralActionItemByActionId.md)<br>Next method: [ricsToIntegersOnlyInString](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool/ricsToIntegersOnlyInString.md)<br>
 

@@ -54,7 +54,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [LightRealistService::getListGeneralActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L510-L516)
+See the source code for method [LightRealistService::getListGeneralActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L515-L522)
 
 
 See Also

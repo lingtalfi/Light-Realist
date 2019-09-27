@@ -132,8 +132,9 @@ This tool implements all the recommendations of this document.
 The toolbar item
 -------------------
 
-A toolbar item is either a group of buttons or a standalone button.
-The structure of an item is the following:
+A toolbar item represents either a group of buttons or a standalone button.
+
+The structure of such an item is the following:
 
 - text: string, the label of the group or item 
 - ?action_id: string, the identifier of the action. This applies only to the leaves of the tree (i.e. it does not apply to
@@ -189,6 +190,8 @@ The structure of an item is the following:
         We use the [hep](https://github.com/lingtalfi/NotationFan/blob/master/html-element-parameters.md) idea
         to transmit the parameters.
 - ?right: string. The [permission](https://github.com/lingtalfi/Light_User/blob/master/doc/pages/permission-conception-notes.md)
+            required to access the service (if any).          
+- ?micro_permission: string. The [micro-permission](https://github.com/lingtalfi/Light_MicroPermission/)
             required to access the service (if any).          
 - ?modal: string. If the toolbar item requires some modal, we can add it with the html of the modal here.     
     

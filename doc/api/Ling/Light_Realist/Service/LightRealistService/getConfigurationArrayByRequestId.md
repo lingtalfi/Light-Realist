@@ -56,7 +56,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [LightRealistService::getConfigurationArrayByRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L697-L748)
+See the source code for method [LightRealistService::getConfigurationArrayByRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L686-L737)
 
 
 See Also
@@ -64,5 +64,5 @@ See Also
 
 The [LightRealistService](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService.md) class.
 
-Previous method: [prepareListGeneralActions](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/prepareListGeneralActions.md)<br>Next method: [error](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/error.md)<br>
+Previous method: [prepareListGeneralActions](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/prepareListGeneralActions.md)<br>Next method: [checkCsrfTokenByGenericActionItem](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/checkCsrfTokenByGenericActionItem.md)<br>
 

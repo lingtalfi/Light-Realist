@@ -49,7 +49,7 @@ Returns string.
 
 Source Code
 ===========
-See the source code for method [LightRealistListGeneralActionHandlerInterface::getJsActionCode](https://github.com/lingtalfi/Light_Realist/blob/master/ListGeneralActionHandler/LightRealistListGeneralActionHandlerInterface.php#L27-L27)
+See the source code for method [LightRealistListGeneralActionHandlerInterface::getJsActionCode](https://github.com/lingtalfi/Light_Realist/blob/master/ListGeneralActionHandler/LightRealistListGeneralActionHandlerInterface.php#L21-L21)
 
 
 See Also
@@ -57,5 +57,5 @@ See Also
 
 The [LightRealistListGeneralActionHandlerInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListGeneralActionHandler/LightRealistListGeneralActionHandlerInterface.md) class.
 
-Previous method: [getHandledIds](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListGeneralActionHandler/LightRealistListGeneralActionHandlerInterface/getHandledIds.md)<br>Next method: [getModalCode](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListGeneralActionHandler/LightRealistListGeneralActionHandlerInterface/getModalCode.md)<br>
+Next method: [getModalCode](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListGeneralActionHandler/LightRealistListGeneralActionHandlerInterface/getModalCode.md)<br>
 

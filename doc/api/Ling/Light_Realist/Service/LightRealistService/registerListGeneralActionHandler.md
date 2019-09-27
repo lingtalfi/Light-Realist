@@ -16,12 +16,15 @@ Description
 ================
 
 
-public [LightRealistService::registerListGeneralActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/registerListGeneralActionHandler.md)([Ling\Light_Realist\ListGeneralActionHandler\LightRealistListGeneralActionHandlerInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListGeneralActionHandler/LightRealistListGeneralActionHandlerInterface.md) $handler) : void
+public [LightRealistService::registerListGeneralActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/registerListGeneralActionHandler.md)(string $pluginName, [Ling\Light_Realist\ListGeneralActionHandler\LightRealistListGeneralActionHandlerInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListGeneralActionHandler/LightRealistListGeneralActionHandlerInterface.md) $handler) : void
 
 
 
 
 Registers a list general action handler.
+List general action ids should be formatted like this:
+
+- list general action id: {pluginName}.{listGeneralActionName}
 
 
 
@@ -29,6 +32,10 @@ Registers a list general action handler.
 Parameters
 ================
 
+
+- pluginName
+
+    
 
 - handler
 
@@ -49,7 +56,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [LightRealistService::registerListGeneralActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L452-L458)
+See the source code for method [LightRealistService::registerListGeneralActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L459-L462)
 
 
 See Also
