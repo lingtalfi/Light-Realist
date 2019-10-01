@@ -93,6 +93,10 @@ $easy_route.methods_collection:
 History Log
 =============
 
+- 1.12.2 -- 2019-10-01
+
+    - update doc
+    
 - 1.12.1 -- 2019-10-01
 
     - update doc

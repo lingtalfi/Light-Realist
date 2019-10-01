@@ -12,7 +12,8 @@ interface LightRealistListGeneralActionHandlerInterface
 
 
     /**
-     * Decorates the given @page(generic action item) identified by the given action name.
+     * Decorates the given @page(generic action item) identified by the given action name (which will be used
+     * by a renderer to display that item in the gui).
      *
      * If the handler discards the item (typically because the user doesn't have the right
      * to execute it), then this method returns false.

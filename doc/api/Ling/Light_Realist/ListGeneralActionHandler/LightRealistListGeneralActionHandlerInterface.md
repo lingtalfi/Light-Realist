@@ -38,7 +38,7 @@ abstract class <span class="pl-k">LightRealistListGeneralActionHandlerInterface<
 Methods
 ==============
 
-- [LightRealistListGeneralActionHandlerInterface::prepare](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListGeneralActionHandler/LightRealistListGeneralActionHandlerInterface/prepare.md) &ndash; Decorates the given [generic action item](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/generic-action-item.md) identified by the given action name.
+- [LightRealistListGeneralActionHandlerInterface::prepare](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListGeneralActionHandler/LightRealistListGeneralActionHandlerInterface/prepare.md) &ndash; by a renderer to display that item in the gui).
 - [LightRealistListGeneralActionHandlerInterface::execute](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListGeneralActionHandler/LightRealistListGeneralActionHandlerInterface/execute.md) &ndash; Executes the list general action (called via ajax) identified by the given action name and returns the ajax response.
 
 
