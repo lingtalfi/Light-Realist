@@ -140,12 +140,12 @@ abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRende
 
 
         $listActionGroups = $rendering['list_action_groups'] ?? [];
-        $this->container->get('realist')->prepareListActionGroups($listActionGroups);
+        $this->container->get('realist')->prepareListActionGroups($listActionGroups, $requestId);
         $this->setListActionGroups($listActionGroups);
 
 
         $listGeneralActions = $rendering['list_general_actions'] ?? [];
-        $this->container->get('realist')->prepareListGeneralActions($listGeneralActions);
+        $this->container->get('realist')->prepareListGeneralActions($listGeneralActions, $requestId);
         $this->setListGeneralActions($listGeneralActions);
 
 

@@ -11,24 +11,30 @@ interface LightRealistListGeneralActionHandlerInterface
 {
 
 
+    /**
+     * Decorates the given @page(generic action item) identified by the given action name.
+     *
+     * If the handler discards the item (typically because the user doesn't have the right
+     * to execute it), then this method returns false.
+     *
+     *
+     * @param string $actionName
+     * @param array $genericActionItem
+     * @param string $requestId
+     * @return null|false
+     */
+    public function prepare(string $actionName, array &$genericActionItem, string $requestId);
+
 
     /**
-     * Returns the js action code for the list general action identified by the given id.
+     * Executes the list general action (called via ajax) identified by the given action name and returns the ajax response.
      *
-     * @param string $actionId
-     * @return string
+     * @param string $actionName
+     * @param array $params
+     * @return array
+     * @throws \Exception
      */
-    public function getJsActionCode(string $actionId): string;
-
-    /**
-     * Returns the modal html code for the list general action identified by the given id,
-     * or null if this action doesn't use a modal.
-     *
-     *
-     * @param string $actionId
-     * @return string|null
-     */
-    public function getModalCode(string $actionId): ?string;
+    public function execute(string $actionName, array $params): array;
 
 
 }

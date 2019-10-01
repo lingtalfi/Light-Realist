@@ -93,6 +93,10 @@ $easy_route.methods_collection:
 History Log
 =============
 
+- 1.12.0 -- 2019-10-01
+
+    - allow more compact notation for rendering.list_action_groups and rendering.list_general_actions
+    
 - 1.11.0 -- 2019-09-27
 
     - removed LightRealistListActionHandlerInterface->getHandledIds

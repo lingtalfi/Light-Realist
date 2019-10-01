@@ -7,7 +7,7 @@ LightRealistService::prepareListActionGroups
 
 
 
-LightRealistService::prepareListActionGroups — Prepares the given list action group array.
+LightRealistService::prepareListActionGroups — Parses the given list action items (aka [toolbar items](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/list-action-handler-conception-notes.md#the-toolbar-item)) and turns them into [generic action items](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/generic-action-item.md).
 
 
 
@@ -16,20 +16,13 @@ Description
 ================
 
 
-public [LightRealistService::prepareListActionGroups](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/prepareListActionGroups.md)(array &$groups) : void
+public [LightRealistService::prepareListActionGroups](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/prepareListActionGroups.md)(array &$items, string $requestId) : void
 
 
 
 
-Prepares the given list action group array.
-
-This method is mainly used to translate an action id string from
-the request declaration into actual javascript code, with the help of
-the ListActionHandler objects.
-
-It also removes the actions which the user doesn't have the permission for.
-
-The given groups array structure is an array of [toolbar items](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/list-action-handler-conception-notes.md#the-toolbar-item).
+Parses the given list action items (aka [toolbar items](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/list-action-handler-conception-notes.md#the-toolbar-item)) and turns them into [generic action items](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/generic-action-item.md).
+If a generic action item is discarded, it won't appear in the resulting list.
 
 
 
@@ -38,7 +31,11 @@ Parameters
 ================
 
 
-- groups
+- items
+
+    
+
+- requestId
 
     
 
@@ -62,7 +59,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [LightRealistService::prepareListActionGroups](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L571-L629)
+See the source code for method [LightRealistService::prepareListActionGroups](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L577-L596)
 
 
 See Also

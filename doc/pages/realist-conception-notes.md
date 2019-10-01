@@ -252,8 +252,9 @@ List general actions
 2019-09-25
 
 
-Same as list action groups, except that they are using a **ListGeneralActionHandler** object to handle them,
-and the items cannot be nested (i.e. no recursion is allowed).
+Same as list action groups, except that they are using a **ListGeneralActionHandler** object to handle them.
+The array structure used is the [generic action item](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/generic-action-item.md). 
+
 
 ### Button markup
  
@@ -351,52 +352,33 @@ default:
     rendering:
         list_general_actions:
             -
-                action_id: Light_Kit_Admin-generate
+                action_id: Light_Kit_Admin.realist-generate_random_rows
                 text: Generate
                 icon: fas fa-spray-can
-                csrf_token:
-                    name: Light_Kit_Admin-list_action-generate
-                    value: REALIST(Light_Realist, csrf_token, Light_Kit_Admin-list_action-generate)
-                params:
-                    url: REALIST(Light_Realist, route, lah_route-ajax_handler)
-                    ajax_handler_id: Light_Kit_Admin
-                    ajax_action_id: Light_Kit_Admin-generate_random_rows
-                    request_id: Light_Kit_Admin:lud_user
-                right: Light_Kit_Admin.admin
+                csrf_token: true
+            -
+                action_id: Light_Kit_Admin.realist-save_table
+                text: Save table content
+                icon: fas fa-download
+                csrf_token: true
 
         list_action_groups:
             -
-                action_id: Light_Realist-print
+                action_id: Light_Kit_Admin.realist-print
                 text: Print
                 icon: fas fa-print
-                csrf_token:
-                    name: Light_Realist-list_action-print
-                    value: REALIST(Light_Realist, csrf_token, Light_Realist-list_action-print)
-                params:
-                    url: REALIST(Light_Realist, route, lah_route-ajax_handler)
-                    ajax_handler_id: Light_Realist
-                    ajax_action_id: Light_Realist-print
-                    request_id: Light_Kit_Admin:lud_user
-                right: Light_Kit_Admin.admin
+                csrf_token: true
             -
-                action_id: Light_Realist-delete_rows
+                action_id: Light_Kit_Admin.realist-delete_rows
                 text: Delete
                 icon: far fa-trash-alt
-                csrf_token:
-                    name: Light_Realist-list_action-delete
-                    value: REALIST(Light_Realist, csrf_token, Light_Realist-list_action-delete)
-                params:
-                    url: REALIST(Light_Realist, route, lah_route-ajax_handler)
-                    ajax_handler_id: Light_Realist
-                    ajax_action_id: Light_Realist-delete
-                    request_id: Light_Kit_Admin:lud_user
-                right: Light_Kit_Admin.admin
+                csrf_token: true
             -
                 text: Share
                 icon: fas fa-share-square
                 items:
                     -
-                        action_id: Light_Realist-rows_to_csv
+                        action_id: Light_Kit_Admin.realist-rows_to_csv
                         icon: far fa-envelope
                         text: Csv
 
@@ -448,6 +430,7 @@ default:
                 checkbox: checkbox
             checkbox_column: []
             action_column: []
+
 
 
 

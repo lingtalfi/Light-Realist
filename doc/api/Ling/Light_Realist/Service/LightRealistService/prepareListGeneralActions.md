@@ -7,7 +7,7 @@ LightRealistService::prepareListGeneralActions
 
 
 
-LightRealistService::prepareListGeneralActions — Prepares the given action group array.
+LightRealistService::prepareListGeneralActions — Parses the given list general action items and turns them into [generic action items](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/generic-action-item.md).
 
 
 
@@ -16,20 +16,13 @@ Description
 ================
 
 
-public [LightRealistService::prepareListGeneralActions](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/prepareListGeneralActions.md)(array &$generalActions) : void
+public [LightRealistService::prepareListGeneralActions](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/prepareListGeneralActions.md)(array &$items, ?$requestId) : void
 
 
 
 
-Prepares the given action group array.
-
-This method is mainly used to translate an action id string from
-the request declaration into actual javascript code, with the help of
-the ListGeneralActionHandler objects.
-
-It also removes the actions which the user doesn't have the permission for.
-
-See the [list general actions](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/realist-conception-notes.md#list-general-actions) for more details.
+Parses the given list general action items and turns them into [generic action items](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/generic-action-item.md).
+If a generic action item is discarded, it won't appear in the resulting list.
 
 
 
@@ -38,7 +31,11 @@ Parameters
 ================
 
 
-- generalActions
+- items
+
+    
+
+- requestId
 
     
 
@@ -62,7 +59,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [LightRealistService::prepareListGeneralActions](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L646-L674)
+See the source code for method [LightRealistService::prepareListGeneralActions](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L608-L618)
 
 
 See Also

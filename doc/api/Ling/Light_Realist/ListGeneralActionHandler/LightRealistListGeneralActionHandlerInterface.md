@@ -4,7 +4,7 @@
 
 The LightRealistListGeneralActionHandlerInterface class
 ================
-2019-08-12 --> 2019-09-27
+2019-08-12 --> 2019-10-01
 
 
 
@@ -25,8 +25,8 @@ Class synopsis
 abstract class <span class="pl-k">LightRealistListGeneralActionHandlerInterface</span>  {
 
 - Methods
-    - abstract public [getJsActionCode](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListGeneralActionHandler/LightRealistListGeneralActionHandlerInterface/getJsActionCode.md)(string $actionId) : string
-    - abstract public [getModalCode](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListGeneralActionHandler/LightRealistListGeneralActionHandlerInterface/getModalCode.md)(string $actionId) : string | null
+    - abstract public [prepare](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListGeneralActionHandler/LightRealistListGeneralActionHandlerInterface/prepare.md)(string $actionName, array &$genericActionItem, string $requestId) : null | false
+    - abstract public [execute](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListGeneralActionHandler/LightRealistListGeneralActionHandlerInterface/execute.md)(string $actionName, array $params) : array
 
 }
 
@@ -38,8 +38,8 @@ abstract class <span class="pl-k">LightRealistListGeneralActionHandlerInterface<
 Methods
 ==============
 
-- [LightRealistListGeneralActionHandlerInterface::getJsActionCode](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListGeneralActionHandler/LightRealistListGeneralActionHandlerInterface/getJsActionCode.md) &ndash; Returns the js action code for the list general action identified by the given id.
-- [LightRealistListGeneralActionHandlerInterface::getModalCode](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListGeneralActionHandler/LightRealistListGeneralActionHandlerInterface/getModalCode.md) &ndash; or null if this action doesn't use a modal.
+- [LightRealistListGeneralActionHandlerInterface::prepare](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListGeneralActionHandler/LightRealistListGeneralActionHandlerInterface/prepare.md) &ndash; Decorates the given [generic action item](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/generic-action-item.md) identified by the given action name.
+- [LightRealistListGeneralActionHandlerInterface::execute](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListGeneralActionHandler/LightRealistListGeneralActionHandlerInterface/execute.md) &ndash; Executes the list general action (called via ajax) identified by the given action name and returns the ajax response.
 
 
 
@@ -54,4 +54,4 @@ See the source code of [Ling\Light_Realist\ListGeneralActionHandler\LightRealist
 
 SeeAlso
 ==============
-Previous class: [LightRealistAbstractListGeneralActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListGeneralActionHandler/LightRealistAbstractListGeneralActionHandler.md)<br>Next class: [BaseRealistRowsRenderer](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer.md)<br>
+Previous class: [LightRealistBaseListGeneralActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListGeneralActionHandler/LightRealistBaseListGeneralActionHandler.md)<br>Next class: [BaseRealistRowsRenderer](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer.md)<br>
