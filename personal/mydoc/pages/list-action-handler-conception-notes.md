@@ -25,7 +25,7 @@ A **list action handler** is composed of three parts:
 
 - the execute part:  this is optional and is only used if the "list action handler" needs the help of a php server.
         If that's the case, the execute part is the php code that does the job and return the appropriate response.
-        UPDATE 2019-09-25: now this is totally decoupled from the list action handler:
+        
         
         
 Rather than implementing this from scratch on your own, we have some tools to help you with the implementation.
@@ -73,14 +73,8 @@ The js action callable
 ------------
 
 This callable is triggered when the corresponding button is clicked.
-The **LightRealistListActionHandlerInterface** features the getJsActionCode method for that, which returns the js code to execute,
-or an empty string if the instance injected the js init code with another mean (i.e. with a tool like [html page copilot](https://github.com/lingtalfi/Light_HtmlPageCopilot) for instance).
+The **LightRealistListActionHandlerInterface** features the **decorate** method for that, which adds the js_code property to the list action item.
 
-Note: I personally prefer to not use the copilot for small js codes like that, and put them inline just below the html button,
-as it's easier to debug (we can just inspect the code and see the script below the button)
-
- 
-- getJsActionCode ( string id ): string
 
 
 ### But what js code exactly?
