@@ -46,7 +46,7 @@ Returns string.
 
 Source Code
 ===========
-See the source code for method [LightRealistBaseListGeneralActionHandler::getPluginName](https://github.com/lingtalfi/Light_Realist/blob/master/ListGeneralActionHandler/LightRealistBaseListGeneralActionHandler.php#L163-L169)
+See the source code for method [LightRealistBaseListGeneralActionHandler::getPluginName](https://github.com/lingtalfi/Light_Realist/blob/master/ListGeneralActionHandler/LightRealistBaseListGeneralActionHandler.php#L174-L180)
 
 
 See Also

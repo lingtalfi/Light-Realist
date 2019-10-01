@@ -46,7 +46,7 @@ Returns string.
 
 Source Code
 ===========
-See the source code for method [GenericActionItemHandlerTrait::getPluginName](https://github.com/lingtalfi/Light_Realist/blob/master/GenericItemActionHandler/GenericActionItemHandlerTrait.php#L163-L169)
+See the source code for method [GenericActionItemHandlerTrait::getPluginName](https://github.com/lingtalfi/Light_Realist/blob/master/GenericItemActionHandler/GenericActionItemHandlerTrait.php#L174-L180)
 
 
 See Also

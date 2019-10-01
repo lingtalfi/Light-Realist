@@ -54,7 +54,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [LightRealistBaseListActionHandler::getTableNameByRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/ListActionHandler/LightRealistBaseListActionHandler.php#L123-L131)
+See the source code for method [LightRealistBaseListActionHandler::getTableNameByRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/ListActionHandler/LightRealistBaseListActionHandler.php#L134-L142)
 
 
 See Also

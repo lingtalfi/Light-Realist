@@ -64,6 +64,14 @@ trait GenericActionItemHandlerTrait
      * the calling class source file.
      *
      *
+     * The available options are:
+     *
+     * - modalVariables: an array of variables to pass to the modal template (if you use a modal template only).
+     *              Inside the modal template, the variables are accessible via the $z variable (which represents this modalVariables array).
+     * - generate_ajax_params: bool=true, whether to automatically generate ajax parameters. See the code for more info.
+     *                      The ajax parameters basically will be transmitted to the js handler via the **params** argument of the f callable.
+     *
+     *
      * @param string $actionName
      * @param array $item
      * @param string $requestId
@@ -77,6 +85,7 @@ trait GenericActionItemHandlerTrait
 
         $pluginName = $this->getPluginName();
         $generateAjaxParams = $options['generate_ajax_params'] ?? true;
+        $modalVariables = $options['modalVariables'] ?? [];
 
         //--------------------------------------------
         // AJAX PARAMS
@@ -93,7 +102,6 @@ trait GenericActionItemHandlerTrait
         }
 
 
-
         //--------------------------------------------
         // JS
         //--------------------------------------------
@@ -108,7 +116,10 @@ trait GenericActionItemHandlerTrait
         //--------------------------------------------
         $modalFile = $dir . "/htmlModalFiles/$actionName.html.php";
         if (file_exists($modalFile)) {
-            $item['modal'] = file_get_contents($modalFile);
+            $z = $modalVariables;
+            ob_start();
+            include $modalFile;
+            $item['modal'] = ob_get_clean();
         }
     }
 

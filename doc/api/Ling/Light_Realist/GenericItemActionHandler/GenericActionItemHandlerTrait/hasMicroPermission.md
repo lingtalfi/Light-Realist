@@ -54,7 +54,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [GenericActionItemHandlerTrait::hasMicroPermission](https://github.com/lingtalfi/Light_Realist/blob/master/GenericItemActionHandler/GenericActionItemHandlerTrait.php#L140-L143)
+See the source code for method [GenericActionItemHandlerTrait::hasMicroPermission](https://github.com/lingtalfi/Light_Realist/blob/master/GenericItemActionHandler/GenericActionItemHandlerTrait.php#L151-L154)
 
 
 See Also

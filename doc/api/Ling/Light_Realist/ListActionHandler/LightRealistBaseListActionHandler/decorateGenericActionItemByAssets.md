@@ -25,6 +25,14 @@ Decorates the given [generic action item](https://github.com/lingtalfi/Light_Rea
 the calling class source file.
 
 
+The available options are:
+
+- modalVariables: an array of variables to pass to the modal template (if you use a modal template only).
+             Inside the modal template, the variables are accessible via the $z variable (which represents this modalVariables array).
+- generate_ajax_params: bool=true, whether to automatically generate ajax parameters. See the code for more info.
+                     The ajax parameters basically will be transmitted to the js handler via the **params** argument of the f callable.
+
+
 
 
 Parameters
@@ -71,7 +79,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [LightRealistBaseListActionHandler::decorateGenericActionItemByAssets](https://github.com/lingtalfi/Light_Realist/blob/master/ListActionHandler/LightRealistBaseListActionHandler.php#L74-L113)
+See the source code for method [LightRealistBaseListActionHandler::decorateGenericActionItemByAssets](https://github.com/lingtalfi/Light_Realist/blob/master/ListActionHandler/LightRealistBaseListActionHandler.php#L82-L124)
 
 
 See Also

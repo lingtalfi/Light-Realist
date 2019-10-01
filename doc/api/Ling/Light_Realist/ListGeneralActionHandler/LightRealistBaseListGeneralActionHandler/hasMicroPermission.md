@@ -54,7 +54,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [LightRealistBaseListGeneralActionHandler::hasMicroPermission](https://github.com/lingtalfi/Light_Realist/blob/master/ListGeneralActionHandler/LightRealistBaseListGeneralActionHandler.php#L140-L143)
+See the source code for method [LightRealistBaseListGeneralActionHandler::hasMicroPermission](https://github.com/lingtalfi/Light_Realist/blob/master/ListGeneralActionHandler/LightRealistBaseListGeneralActionHandler.php#L151-L154)
 
 
 See Also
