@@ -94,7 +94,7 @@ class <span class="pl-k">LightRealistService</span>  {
     - protected [getDynamicInjectionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/getDynamicInjectionHandler.md)(string $identifier) : [RealistDynamicInjectionHandlerInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/DynamicInjection/RealistDynamicInjectionHandlerInterface.md)
     - protected [checkCsrfToken](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/checkCsrfToken.md)(string $tokenName, array $params) : void
     - private [prepareGenericActionItem](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/prepareGenericActionItem.md)(array &$item, array $handlers, string $requestId) : bool
-    - private [convertCsrfTokenByItem](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/convertCsrfTokenByItem.md)(array &$item) : void
+    - private [convertCsrfTokenByItem](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/convertCsrfTokenByItem.md)(array &$item, string $requestId) : void
 
 }
 

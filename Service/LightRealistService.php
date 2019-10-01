@@ -687,14 +687,14 @@ class LightRealistService
             $listGeneralActions = BDotTool::getDotValue("rendering.list_general_actions", $ret, []);
             if ($listGeneralActions) {
                 foreach ($listGeneralActions as &$item) {
-                    $this->convertCsrfTokenByItem($item);
+                    $this->convertCsrfTokenByItem($item, $requestId);
                 }
                 BDotTool::setDotValue("rendering.list_general_actions", $listGeneralActions, $ret);
             }
             $listActions = BDotTool::getDotValue("rendering.list_action_groups", $ret, []);
             if ($listActions) {
-                ArrayTool::walkRowsRecursive($listActions, function (&$item) {
-                    $this->convertCsrfTokenByItem($item);
+                ArrayTool::walkRowsRecursive($listActions, function (&$item) use($requestId){
+                    $this->convertCsrfTokenByItem($item, $requestId);
                 }, "items", false);
                 BDotTool::setDotValue("rendering.list_action_groups", $listActions, $ret);
             }
@@ -874,15 +874,16 @@ class LightRealistService
      * Note: if ajax, then the value is not generated, and a fake value is used.
      *
      * @param array $item
+     * @param string $requestId
      * @throws \Exception
      */
-    private function convertCsrfTokenByItem(array &$item)
+    private function convertCsrfTokenByItem(array &$item, string $requestId)
     {
         if (array_key_exists("csrf_token", $item) && true === $item['csrf_token']) {
 
             $p = explode('.', $item['action_id'], 2);
             $pluginName = array_shift($p);
-            $tokenName = $pluginName . "-" . implode(".", $p);
+            $tokenName = $requestId . "-" . $pluginName . "-" . implode(".", $p);
             $tokenValue = "";
             // we create the csrf token value only from the main index.php script, not from ajax services
             if (false === LightTool::isAjax($this->container)) {
