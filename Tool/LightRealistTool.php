@@ -35,7 +35,7 @@ class LightRealistTool
                         $matchingItem = $item;
                     }
                 }
-            }, 'items');
+            }, 'items', false);
             if (null !== $matchingItem) {
                 return $matchingItem;
             }

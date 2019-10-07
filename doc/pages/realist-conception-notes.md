@@ -287,7 +287,7 @@ With:
 
 A full realist requestDeclaration example
 ====================
-2019-09-25
+2019-09-25 -> 2019-10-07
 
 
 Taken from the Light_Kit_Admin plugin (still under construction at the moment when I write those lines):
@@ -361,6 +361,11 @@ default:
                 text: Save table content
                 icon: fas fa-download
                 csrf_token: true
+            -
+                action_id: Light_Kit_Admin.realist-load_table
+                text: Load table content
+                icon: fas fa-upload
+                csrf_token: true
 
         list_action_groups:
             -
@@ -381,6 +386,7 @@ default:
                         action_id: Light_Kit_Admin.realist-rows_to_csv
                         icon: far fa-envelope
                         text: Csv
+                        csrf_token: true
 
 
         list_renderer:
@@ -430,7 +436,6 @@ default:
                 checkbox: checkbox
             checkbox_column: []
             action_column: []
-
 
 
 

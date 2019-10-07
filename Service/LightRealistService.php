@@ -589,6 +589,7 @@ class LightRealistService
                     $groupItems = $item['items'];
                     $this->prepareListActionGroups($groupItems, $requestId);
                     $item['items'] = $groupItems;
+                    $items[$k] = $item;
                 }
             }
 
@@ -732,6 +733,9 @@ class LightRealistService
 
 
     /**
+     *
+     * @deprecated
+     *
      * Checks whether there is a permission restriction for the given @page(generic action item),
      * and if so checks whether the user is granted that permission.
      * If not, this method throws an exception.
@@ -744,30 +748,30 @@ class LightRealistService
      * @param array $item
      * @throws \Exception
      */
-    public function checkPermissionByGenericActionItem(array $item)
-    {
-        if (array_key_exists("right", $item)) {
-            $right = $item['right'];
-
-            /**
-             * @var $user LightUserInterface
-             */
-            $user = $this->container->get("user_manager")->getUser();
-            if (false === $user->hasRight($right)) {
-                $this->error("Permission denied, missing the permission: $right.");
-            }
-        }
-        if (array_key_exists("micro_permission", $item)) {
-            $mp = $item['micro_permission'];
-
-            /**
-             * @var $user LightUserInterface
-             */
-            if (false === $this->container->get("micro_permission")->hasMicroPermission($mp)) {
-                $this->error("Permission denied, missing the micro-permission: $mp.");
-            }
-        }
-    }
+//    public function checkPermissionByGenericActionItem(array $item)
+//    {
+//        if (array_key_exists("right", $item)) {
+//            $right = $item['right'];
+//
+//            /**
+//             * @var $user LightUserInterface
+//             */
+//            $user = $this->container->get("user_manager")->getUser();
+//            if (false === $user->hasRight($right)) {
+//                $this->error("Permission denied, missing the permission: $right.");
+//            }
+//        }
+//        if (array_key_exists("micro_permission", $item)) {
+//            $mp = $item['micro_permission'];
+//
+//            /**
+//             * @var $user LightUserInterface
+//             */
+//            if (false === $this->container->get("micro_permission")->hasMicroPermission($mp)) {
+//                $this->error("Permission denied, missing the micro-permission: $mp.");
+//            }
+//        }
+//    }
 
 
 

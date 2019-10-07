@@ -93,6 +93,10 @@ $easy_route.methods_collection:
 History Log
 =============
 
+- 1.13.2 -- 2019-10-07
+
+    - fix list actions nested items not handled properly
+    
 - 1.13.1 -- 2019-10-01
 
     - fix potential csrf token name conflict with multiple realist instances on the same page
