@@ -68,8 +68,11 @@ trait GenericActionItemHandlerTrait
      *
      * - modalVariables: an array of variables to pass to the modal template (if you use a modal template only).
      *              Inside the modal template, the variables are accessible via the $z variable (which represents this modalVariables array).
-     * - generate_ajax_params: bool=true, whether to automatically generate ajax parameters. See the code for more info.
+     * - generateAjaxParams: bool=true, whether to automatically generate ajax parameters. See the code for more info.
      *                      The ajax parameters basically will be transmitted to the js handler via the **params** argument of the f callable.
+     * - jsActionName: the name of the action name to use to detect js files.
+     *                  I used this when I had different action names pointing to the same js handler (export_to_csv, export_to_html, export_to_pdf, ...,
+     *                  all pointing to a single export_to_file handler).
      *
      *
      * @param string $actionName
@@ -86,6 +89,7 @@ trait GenericActionItemHandlerTrait
         $pluginName = $this->getPluginName();
         $generateAjaxParams = $options['generate_ajax_params'] ?? true;
         $modalVariables = $options['modalVariables'] ?? [];
+        $jsActionName = $options['jsActionName'] ?? $actionName;
 
         //--------------------------------------------
         // AJAX PARAMS
@@ -105,7 +109,8 @@ trait GenericActionItemHandlerTrait
         //--------------------------------------------
         // JS
         //--------------------------------------------
-        $jsFile = $dir . "/jsActionFiles/$actionName.js";
+
+        $jsFile = $dir . "/jsActionFiles/$jsActionName.js";
         if (file_exists($jsFile)) {
             $item['js_code'] = file_get_contents($jsFile);
         }

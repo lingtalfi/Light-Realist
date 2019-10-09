@@ -93,6 +93,10 @@ $easy_route.methods_collection:
 History Log
 =============
 
+- 1.13.3 -- 2019-10-09
+
+    - add GenericActionItemHandlerTrait->decorateGenericActionItemByAssets jsActionName and generateAjaxParams options, removed generate_ajax_params option
+    
 - 1.13.2 -- 2019-10-07
 
     - fix list actions nested items not handled properly
