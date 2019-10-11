@@ -7,6 +7,8 @@ Duelist conception notes
 Combining where techniques
 ----------------
 
+(deprecated as of 2019-10-10, see the "Let gui drive" section later in this document)
+
 Combining the where clause can be a non-trivial task.
 
 And so we dedicate this whole section to help the implementor doing this task.
@@ -77,6 +79,7 @@ sql expression will be:
 Groups (where mode)  
 --------
 
+(deprecated as of 2019-10-10, see the "Let gui drive" section later in this document)
 
 This is a concrete use for tag groups.
 
@@ -276,9 +279,39 @@ fruits:
 
 
 
+Let the gui drive
+---------------------
+2019-10-10
+
+All the previous attempts to create a "where" statement were non trivial tasks.
+The main problem with the masks technique is that it's not suited for complex "where" statements
+involving more than 2 or 3 tags. 
+
+However, in the process of implementing an advanced search system, I just found out that in the context of the
+system I wanted to create, all "where" possibilities can be created using 5 tags:
+
+- generic_filter: $column $operator :operator_value
+- open_parenthesis: (
+- close_parenthesis: )
+- and: and
+- or: or
 
 
- 
+Now 5 tags is more than 2 or 3, and so the masks system is not good enough for this case, so I need to replace
+the masks system with something better.
+
+The simplest solution occurred to me as being to let the gui drive and provide the tags in the correct order.
+This solves all the problems.
+
+The cost to pay is that we let the user provide the order in which tags are provided.
+In other words, we trust that he will provide the tags in the correct order.
+
+In other words, an attacker can change that order and provoke the request to fail (by providing tags in 
+an order that doesn't make any sql sense). 
+
+I thought about that, and decided that it was worth it still: I believe it's not too big of a deal if the 
+attacker can trigger a sql request to fail (maybe I'm wrong?); as long as he cannot perform sql injection
+he doesn't have much power. 
 
 
 

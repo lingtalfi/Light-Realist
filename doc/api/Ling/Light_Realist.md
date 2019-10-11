@@ -1,6 +1,6 @@
 Ling/Light_Realist
 ================
-2019-08-12 --> 2019-10-09
+2019-08-12 --> 2019-10-11
 
 
 
@@ -70,6 +70,7 @@ Table of contents
     - [OpenAdminTableBaseRealistListRenderer::setListActionGroups](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setListActionGroups.md) &ndash; Sets the listActionGroups.
     - [OpenAdminTableBaseRealistListRenderer::setListGeneralActions](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setListGeneralActions.md) &ndash; Sets the listGeneralActions.
     - [OpenAdminTableBaseRealistListRenderer::setCsrfToken](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setCsrfToken.md) &ndash; Sets the csrfToken value.
+    - [OpenAdminTableBaseRealistListRenderer::setSqlColumns](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setSqlColumns.md) &ndash; Sets the sqlColumns.
     - [RealistListRendererInterface::render](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RealistListRendererInterface/render.md) &ndash; Prints the list.
     - [RealistListRendererInterface::renderListGeneralActions](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RealistListRendererInterface/renderListGeneralActions.md) &ndash; The renderListGeneralActions method
 - [RealistListRendererInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RealistListRendererInterface.md) &ndash; The RealistListRendererInterface interface.
@@ -101,6 +102,7 @@ Table of contents
     - [LightRealistService::prepareListGeneralActions](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/prepareListGeneralActions.md) &ndash; Parses the given list general action items and turns them into [generic action items](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/generic-action-item.md).
     - [LightRealistService::getConfigurationArrayByRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/getConfigurationArrayByRequestId.md) &ndash; Returns the configuration array corresponding to the given request id.
     - [LightRealistService::checkCsrfTokenByGenericActionItem](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/checkCsrfTokenByGenericActionItem.md) &ndash; Performs the csrf validation if necessary (i.e.
+    - [LightRealistService::getSqlColumnsByRequestDeclaration](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/getSqlColumnsByRequestDeclaration.md) &ndash; Returns the columns used in the sql query by parsing the given request declaration.
 - [LightRealistTool](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool.md) &ndash; The LightRealistTool class.
     - [LightRealistTool::getToolbarItemByActionId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool/getToolbarItemByActionId.md) &ndash; Returns the [toolbar item](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/list-action-handler-conception-notes.md#the-toolbar-item) identified by the given actionId.
     - [LightRealistTool::getListGeneralActionItemByActionId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool/getListGeneralActionItemByActionId.md) &ndash; Returns the [list general action item](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/realist-conception-notes.md#list-general-actions) identified by the given actionId.
@@ -111,11 +113,11 @@ Table of contents
 Dependencies
 ============
 - [Light_AjaxHandler](https://github.com/lingtalfi/Light_AjaxHandler)
-- [Light_User](https://github.com/lingtalfi/Light_User)
 - [Light](https://github.com/lingtalfi/Light)
 - [Light_Csrf](https://github.com/lingtalfi/Light_Csrf)
 - [Light_Kit_Admin](https://github.com/lingtalfi/Light_Kit_Admin)
 - [Bat](https://github.com/lingtalfi/Bat)
+- [ArrayToString](https://github.com/lingtalfi/ArrayToString)
 - [BabyYaml](https://github.com/lingtalfi/BabyYaml)
 - [Light_Database](https://github.com/lingtalfi/Light_Database)
 - [ParametrizedSqlQuery](https://github.com/lingtalfi/ParametrizedSqlQuery)

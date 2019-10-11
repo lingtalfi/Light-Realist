@@ -4,7 +4,7 @@
 
 The OpenAdminTableBaseRealistListRenderer class
 ================
-2019-08-12 --> 2019-10-09
+2019-08-12 --> 2019-10-11
 
 
 
@@ -37,6 +37,7 @@ abstract class <span class="pl-k">OpenAdminTableBaseRealistListRenderer</span> i
     - protected array [$listActionGroups](#property-listActionGroups) ;
     - protected array [$listGeneralActions](#property-listGeneralActions) ;
     - protected string [$containerCssId](#property-containerCssId) ;
+    - protected array [$sqlColumns](#property-sqlColumns) ;
 
 - Methods
     - public [__construct](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/__construct.md)() : void
@@ -51,6 +52,7 @@ abstract class <span class="pl-k">OpenAdminTableBaseRealistListRenderer</span> i
     - public [setListActionGroups](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setListActionGroups.md)(array $listActionGroups) : void
     - public [setListGeneralActions](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setListGeneralActions.md)(array $listGeneralActions) : void
     - public [setCsrfToken](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setCsrfToken.md)(string $csrfToken) : void
+    - public [setSqlColumns](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setSqlColumns.md)(array $sqlColumns) : void
     - protected [getDataType](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/getDataType.md)(string $columnName) : string
     - protected [isWidgetEnabled](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/isWidgetEnabled.md)(string $identifier) : bool
     - protected [getListActionGroupLeafItems](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/getListActionGroupLeafItems.md)() : array
@@ -141,6 +143,12 @@ Properties
     
     
 
+- <span id="property-sqlColumns"><b>sqlColumns</b></span>
+
+    This property holds the sqlColumns for this instance.
+    
+    
+
 
 
 Methods
@@ -158,6 +166,7 @@ Methods
 - [OpenAdminTableBaseRealistListRenderer::setListActionGroups](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setListActionGroups.md) &ndash; Sets the listActionGroups.
 - [OpenAdminTableBaseRealistListRenderer::setListGeneralActions](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setListGeneralActions.md) &ndash; Sets the listGeneralActions.
 - [OpenAdminTableBaseRealistListRenderer::setCsrfToken](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setCsrfToken.md) &ndash; Sets the csrfToken value.
+- [OpenAdminTableBaseRealistListRenderer::setSqlColumns](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setSqlColumns.md) &ndash; Sets the sqlColumns.
 - [OpenAdminTableBaseRealistListRenderer::getDataType](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/getDataType.md) &ndash; Returns the data type of the column.
 - [OpenAdminTableBaseRealistListRenderer::isWidgetEnabled](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/isWidgetEnabled.md) &ndash; Returns whether the widget identified by $identifier is enabled.
 - [OpenAdminTableBaseRealistListRenderer::getListActionGroupLeafItems](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/getListActionGroupLeafItems.md) &ndash; Returns the array of leaf items (i.e.

@@ -7,8 +7,6 @@ namespace Ling\Light_Realist\AjaxHandler;
 use Ling\Light_AjaxHandler\Handler\ContainerAwareLightAjaxHandler;
 use Ling\Light_Realist\Exception\LightRealistException;
 use Ling\Light_Realist\Service\LightRealistService;
-use Ling\Light_Realist\Tool\LightRealistTool;
-use Ling\Light_User\LightUserInterface;
 
 /**
  * The LightRealistAjaxHandler class.
@@ -16,7 +14,6 @@ use Ling\Light_User\LightUserInterface;
  */
 class LightRealistAjaxHandler extends ContainerAwareLightAjaxHandler
 {
-
 
 
     /**
@@ -118,8 +115,10 @@ class LightRealistAjaxHandler extends ContainerAwareLightAjaxHandler
         $ret = [];
         foreach ($tags as $tagItem) {
             $tagVariables = [];
-            foreach ($tagItem['variables'] as $variable) {
-                $tagVariables[$variable['name']] = $variable['value'];
+            if (array_key_exists("variables", $tagItem)) {
+                foreach ($tagItem['variables'] as $variable) {
+                    $tagVariables[$variable['name']] = $variable['value'];
+                }
             }
             $tagItem['variables'] = $tagVariables;
             $ret[] = $tagItem;

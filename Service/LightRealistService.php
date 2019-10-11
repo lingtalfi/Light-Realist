@@ -4,6 +4,7 @@
 namespace Ling\Light_Realist\Service;
 
 
+use Ling\ArrayToString\ArrayToStringTool;
 use Ling\BabyYaml\BabyYamlUtil;
 use Ling\Bat\ArrayTool;
 use Ling\Bat\BDotTool;
@@ -21,7 +22,6 @@ use Ling\Light_Realist\ListGeneralActionHandler\LightRealistListGeneralActionHan
 use Ling\Light_Realist\Rendering\RealistListRendererInterface;
 use Ling\Light_Realist\Rendering\RealistRowsRendererInterface;
 use Ling\Light_Realist\Tool\LightRealistTool;
-use Ling\Light_User\LightUserInterface;
 use Ling\ParametrizedSqlQuery\ParametrizedSqlQueryUtil;
 
 /**
@@ -252,9 +252,13 @@ class LightRealistService
             $rows = $db->fetchAll($stmt, $markers);
             $countRow = $db->fetch($countStmt, $markers);
         } catch (\Exception $e) {
+
+            $sMarkers = nl2br(ArrayToStringTool::toPhpArray($markers));
+
             // sometimes it's easier to have the stmt displayed too, when debugging
             $debugMsg = "<ul>
 <li><b>Query</b>: $stmt</li>
+<li><b>Markers</b>: $sMarkers</li>
 <li><b>Error</b>: {$e->getMessage()}</li>
 </ul>
 ";
@@ -694,7 +698,7 @@ class LightRealistService
             }
             $listActions = BDotTool::getDotValue("rendering.list_action_groups", $ret, []);
             if ($listActions) {
-                ArrayTool::walkRowsRecursive($listActions, function (&$item) use($requestId){
+                ArrayTool::walkRowsRecursive($listActions, function (&$item) use ($requestId) {
                     $this->convertCsrfTokenByItem($item, $requestId);
                 }, "items", false);
                 BDotTool::setDotValue("rendering.list_action_groups", $listActions, $ret);
@@ -734,6 +738,8 @@ class LightRealistService
 
     /**
      *
+     * @param array $item
+     * @throws \Exception
      * @deprecated
      *
      * Checks whether there is a permission restriction for the given @page(generic action item),
@@ -745,8 +751,6 @@ class LightRealistService
      *
      *
      *
-     * @param array $item
-     * @throws \Exception
      */
 //    public function checkPermissionByGenericActionItem(array $item)
 //    {
@@ -773,6 +777,21 @@ class LightRealistService
 //        }
 //    }
 
+
+    /**
+     * Returns the columns used in the sql query by parsing the given request declaration.
+     * Usually, this is just the base_fields array, but with some more dynamic requests,
+     * it might involve a little bit more computation.
+     *
+     *
+     * @param array $requestDeclaration
+     * @return array
+     */
+    public function getSqlColumnsByRequestDeclaration(array $requestDeclaration): array
+    {
+        $ret = $requestDeclaration['base_fields'] ?? [];
+        return $ret;
+    }
 
 
     //--------------------------------------------

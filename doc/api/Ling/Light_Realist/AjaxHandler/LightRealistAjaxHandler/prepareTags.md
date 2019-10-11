@@ -49,7 +49,7 @@ Returns array.
 
 Source Code
 ===========
-See the source code for method [LightRealistAjaxHandler::prepareTags](https://github.com/lingtalfi/Light_Realist/blob/master/AjaxHandler/LightRealistAjaxHandler.php#L116-L128)
+See the source code for method [LightRealistAjaxHandler::prepareTags](https://github.com/lingtalfi/Light_Realist/blob/master/AjaxHandler/LightRealistAjaxHandler.php#L113-L127)
 
 
 See Also

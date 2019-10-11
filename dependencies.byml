@@ -1,11 +1,11 @@
 dependencies: 
     Ling: 
         - Light_AjaxHandler
-        - Light_User
         - Light
         - Light_Csrf
         - Light_Kit_Admin
         - Bat
+        - ArrayToString
         - BabyYaml
         - Light_Database
         - ParametrizedSqlQuery

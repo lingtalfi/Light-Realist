@@ -93,6 +93,11 @@ $easy_route.methods_collection:
 History Log
 =============
 
+- 1.14.0 -- 2019-10-11
+
+    - added special or, and, open_parenthesis and close_parenthesis to open admin tags
+    - Revisit open admin table helper implementation
+    
 - 1.13.3 -- 2019-10-09
 
     - add GenericActionItemHandlerTrait->decorateGenericActionItemByAssets jsActionName and generateAjaxParams options, removed generate_ajax_params option

@@ -287,7 +287,7 @@ With:
 
 A full realist requestDeclaration example
 ====================
-2019-09-25 -> 2019-10-07
+2019-09-25 -> 2019-10-11
 
 
 Taken from the Light_Kit_Admin plugin (still under construction at the moment when I write those lines):
@@ -316,6 +316,12 @@ default:
             extra like :%expression%
         >
         generic_filter: $column $operator :operator_value
+
+        open_parenthesis: (
+        close_parenthesis: )
+        and: and
+        or: or
+
         generic_sub_filter: $column like :%operator_value%
         in_ids: id in ($ids)
 
@@ -327,25 +333,14 @@ default:
         wiring: []
         default_limit_page: 1
         default_limit_page_length: 20
-        where:
-            mode: groups
-            masks:
-                -
-                    participants:
-                        - generic_filter
-                        - generic_sub_filter
-                    mask: {generic_filter} AND {generic_sub_filter}
-                -
-                    participants:
-                        - general_search
-                        - generic_sub_filter
-                    mask: {general_search} AND {generic_sub_filter}
-
         tag_options:
             generic_filter:
                 operator_and_value:
                     source: operator
                     target: operator_value
+
+
+
     csrf_token:
         name: realist-request
         value: REALIST(Light_Realist, csrf_token, realist-request)
@@ -383,9 +378,34 @@ default:
                 icon: fas fa-share-square
                 items:
                     -
+                        action_id: Light_Kit_Admin.realist-rows_to_ods
+                        icon: far fa-file-alt
+                        text: OpenOffice ods
+                        csrf_token: true
+                    -
+                        action_id: Light_Kit_Admin.realist-rows_to_xlsx
+                        icon: far fa-file-excel
+                        text: Excel xlsx
+                        csrf_token: true
+                    -
+                        action_id: Light_Kit_Admin.realist-rows_to_xls
+                        icon: far fa-file-excel
+                        text: Excel xls
+                        csrf_token: true
+                    -
+                        action_id: Light_Kit_Admin.realist-rows_to_html
+                        icon: far fa-file-code
+                        text: Html
+                        csrf_token: true
+                    -
                         action_id: Light_Kit_Admin.realist-rows_to_csv
-                        icon: far fa-envelope
+                        icon: fas fa-file-csv
                         text: Csv
+                        csrf_token: true
+                    -
+                        action_id: Light_Kit_Admin.realist-rows_to_pdf
+                        icon: far fa-file-pdf
+                        text: Pdf
                         csrf_token: true
 
 
@@ -436,7 +456,6 @@ default:
                 checkbox: checkbox
             checkbox_column: []
             action_column: []
-
 
 
 

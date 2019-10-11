@@ -1,6 +1,6 @@
 Duelist
 ==============
-2019-08-23
+2019-08-23 -> 2019-10-10
 
 
 Table of Contents
@@ -16,9 +16,6 @@ Table of Contents
 * [Csrf token](#csrf-token)
  * [The operator_and_value routine](#the-operator_and_value-routine)
 * [Building the where expression](#building-the-where-expression)
-  * [Where groups](#where-groups)
-  * [The default where mode](#the-default-where-mode)
-  * [The groups where mode](#the-groups-where-mode)
 * [Ric](#ric)
 * [Dynamic injection](#dynamic-injection)
 
@@ -57,6 +54,7 @@ We can conceptually divide the request declaration settings in sections:
 
 The base sql query
 --------------
+-> 2019-10-10
 
 This part is the safest part of the request declaration.
 The user has almost no interaction with it.
@@ -92,6 +90,7 @@ The developer writes this section by using the following settings:
 
 The user injections
 --------------
+-> 2019-10-10
 
 The developer can also allow users to inject data to build a more dynamic sql request.
 The settings (i.e. sections) where the user has potential interaction are:
@@ -163,6 +162,7 @@ User injection in tag expressions is brought by special notation:
 
 
 ### Variables
+-> 2019-10-10
 
 A variable is a string starting with the dollar symbol ($).
 When a variable is written, it is expected that the user also provides a value for it, otherwise the request should be rejected, unless
@@ -182,6 +182,7 @@ If the check fails, the request is rejected.
 
 
 ### Inner markers
+-> 2019-10-10
 
 An **inner marker** is a string starting with the colon symbol (:), and has the following notation:
 
@@ -209,6 +210,7 @@ When an **inner marker** is written, it is expected that the user will bring the
 
 The limit setting
 ------------
+-> 2019-10-10
 
 The **limit** setting is special, because it's simpler than the other sql clauses.
 The limit setting is a simple array with two entries:
@@ -242,6 +244,7 @@ As long as **page_length** is not set, the page will be forced to 1.
 
 Options
 --------
+-> 2019-10-10
 
 The duelist conception so far is quite straightforward.
 However it might not handle all the problems we will be facing when writing gui lists.
@@ -265,15 +268,13 @@ The base **options** are:
             - **operators**: array. The available operators. By default, the one defined in the [open admin protocol](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/open-admin-table-protocol.md) are used.
             - **where_repeat_operator**: string=AND. The **where repeat operator**.
                         See the "where groups" section below for more details.        
-- **where**: array where related options (see the "Building the where expression" section below for more details).
-    - **mode**: string=default. The **where mode** (see the "Building the where expression" section below for more details).
-    - **repeat_operator**: string=AND. The repeat operator to use when mode=default (see the "Building the where expression" section below for more details).
-    -...(more variables, depending on the mode)
+
 
 
 
 Routines
 ----------
+-> 2019-10-10
 
 So as we said, options are here to resolve problems.
 But sometimes, we need more code to solve a problem.
@@ -291,6 +292,7 @@ The available routines are:
 
 Csrf token
 --------------
+-> 2019-10-10
 
 As duelist was meant to be invoked from an ajax service, it's naturally vulnerable to csrf attacks.
 The csrf_token option allows us to secure the ajax service.
@@ -328,6 +330,7 @@ Usually, the name "realist-request" is used for a token used to protect a realis
 
 
 ### The operator_and_value routine
+-> 2019-10-10
 
 This routine transforms some special inner markers in a **tagExpression**.
 
@@ -379,129 +382,21 @@ because it will be added automatically by the routine if necessary).
  
 Building the where expression
 =======================
+-> 2019-10-10
 
 The where expression is sometimes the result of combining multiple tags together.
-When this happens, we need to decide how to combine them, using the AND or OR keywords.
+While the developer is responsible for creating the tags, the gui is responsible for providing the tags in
+the right order, producing a valid sql query.
 
-Since there are a lot of ways we could combine those tags, we provide different modes (called **where modes**)
-for the developer to choose from.
-
-
-The **where mode** defines how tags are combined together to form the final where expression.
-
-The **where mode** is defined using the **where.mode* option.
-
-It can be one of the following values:
-
-- default
-- groups 
-
-
-
-Before we dive into the different modes details, here are a few concepts that might be useful:
-
-- where groups
-
-
-
-
-Where groups
--------------
-
-If we slice a **where expression** by using the OR and/or AND operators, we end up with some "logical components".
- 
-A **where group** basically represents such a "logical component".  
-
-The user sending the tags can send one tag, or multiple tags.
-When multiple tags are sent, the same tag can sometimes be sent multiple times with different parameters (aka variables).
-
-This is usually the case when the tags is generic, for instance:
-
-- my_generic_where_tag: $column $operator :%operator_value%
-
-
-A **where group** is a virtual group created for each tag that the user provides in the where section (of the **request declaration**).
-In case the user provides the same tag multiple times, all those tags will combine themselves to form only one **where group** with the same name.
-
-So for instance if the user provides the following where tags (with different variables):
-
-- **generic_filter**
-- **generic_filter**
-- **generic_filter**
-- **generic_sub_filter**
-
-Then we would have two different **where groups**:
-
-- **generic_filter** (composed of three elements)
-- **generic_sub_filter** (composed of one element)
-
-
-
-Items inside the same **where group** combine with each other using logical operator: either OR or AND.
-
-We call that operator the **where repeat operator**.
-The **where repeat operator** can be defined using the **tag_options.$tagName.where_repeat_operator** option.
-It defaults to "AND".
-
-
-
-
-
-The default where mode
---------------------
-
-By default, when we combine multiple **where groups** by simply adding a chosen **repeat operator** between them. 
-
-This **repeat operator** is defined using the **where.repeat_operator** option, and defaults to AND.
-
-
-
-The groups where mode
--------------------
-
-In this mode, we decide how groups are combined using a **mask**.
-
-A mask looks like either one of those:
-
-- {whereGroupOne} OR {whereGroupTwo}
-- {whereGroupOne} AND ( {tagGroupTwo} OR  {tagGroupThree} )
-
-So as you can see
-
-- it's very flexible (i.e. we can recreate any where expression)
-- we enclose the **where group** names within the curly brackets
-- note: each **where group** is enclosed within extra parenthesis automatically
-
-
-The result of a mask is inserted in a **WHERE 0 OR ()** scheme, for instance:
-
-- WHERE 0 OR ( {whereGroupOne} OR {whereGroupTwo} )
-
-
-To setup a mask, we list all its participant tags in an array.
-
-This is done via the **where.masks** option.
-
-Here is an example of what the where option looks like when setup for using the **groups** where mode:
-
-```yaml
-where:
-    mode: groups
-    masks:
-        -
-            participants:
-                - tagOne
-                - tagTwo
-            mask: {tagOne} OR {tagTwo}
-        - ...
-                
-```
+Note: an attacker might corrupt the order in which tags are provided, thus resulting the execution
+of an invalid sql query. However, I considered this case and thought it wasn't a big deal (the attacker
+can't perform sql injection), is it?
 
 
 
 Ric
 ==========
-2019-09-03
+2019-09-03 
 
 
 See the official [ric definition](https://github.com/lingtalfi/NotationFan/blob/master/ric.md).
@@ -511,7 +406,7 @@ See the official [ric definition](https://github.com/lingtalfi/NotationFan/blob/
 
 Dynamic injection
 =============
-2019-09-19
+2019-09-19 
 
 
 Dynamic injection is basically the duelist way of allowing dynamic variables into the (otherwise static) configuration array.
