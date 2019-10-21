@@ -16,7 +16,7 @@ Description
 ================
 
 
-public [OpenAdminTableBaseRealistListRenderer::setCollapsibleColumnIndexes](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setCollapsibleColumnIndexes.md)(?$collapsibleColumnIndexes) : void
+public [OpenAdminTableBaseRealistListRenderer::setCollapsibleColumnIndexes](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setCollapsibleColumnIndexes.md)($collapsibleColumnIndexes) : void
 
 
 

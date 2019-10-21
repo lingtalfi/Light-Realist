@@ -16,7 +16,7 @@ Description
 ================
 
 
-public [LightRealistService::prepareListGeneralActions](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/prepareListGeneralActions.md)(array &$items, ?$requestId) : void
+public [LightRealistService::prepareListGeneralActions](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/prepareListGeneralActions.md)(array &$items, $requestId) : void
 
 
 

@@ -88,10 +88,18 @@ $easy_route.methods_collection:
 
 
 
+Related
+==========
+
+- [Light_Realform](https://github.com/lingtalfi/Light_Realform): a tool to create any form
 
 
 History Log
 =============
+
+- 1.14.1 -- 2019-10-21
+
+    - added related section in README.md
 
 - 1.14.0 -- 2019-10-11
 

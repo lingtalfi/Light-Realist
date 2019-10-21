@@ -4,7 +4,7 @@
 
 The OpenAdminTableBaseRealistListRenderer class
 ================
-2019-08-12 --> 2019-10-11
+2019-08-12 --> 2019-10-21
 
 
 
@@ -48,7 +48,7 @@ abstract class <span class="pl-k">OpenAdminTableBaseRealistListRenderer</span> i
     - public [setWidgetStatuses](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setWidgetStatuses.md)(array $widgetStatuses) : void
     - public [setRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setRequestId.md)(string $requestId) : void
     - public [setContainer](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setContainer.md)([Ling\Light\ServiceContainer\LightServiceContainerInterface](https://github.com/lingtalfi/Light/blob/master/doc/api/Ling/Light/ServiceContainer/LightServiceContainerInterface.md) $container) : void
-    - public [setCollapsibleColumnIndexes](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setCollapsibleColumnIndexes.md)(?$collapsibleColumnIndexes) : void
+    - public [setCollapsibleColumnIndexes](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setCollapsibleColumnIndexes.md)($collapsibleColumnIndexes) : void
     - public [setListActionGroups](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setListActionGroups.md)(array $listActionGroups) : void
     - public [setListGeneralActions](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setListGeneralActions.md)(array $listGeneralActions) : void
     - public [setCsrfToken](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setCsrfToken.md)(string $csrfToken) : void
