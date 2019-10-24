@@ -92,11 +92,16 @@ Related
 ==========
 
 - [Light_Realform](https://github.com/lingtalfi/Light_Realform): a tool to create any form
+- [Light_RealGenerator](https://github.com/lingtalfi/Light_RealGenerator): a tool to generate configuration files for realist and realform
 
 
 History Log
 =============
 
+- 1.14.2 -- 2019-10-24
+
+    - add link in README.md
+    
 - 1.14.1 -- 2019-10-21
 
     - added related section in README.md
