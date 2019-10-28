@@ -228,7 +228,7 @@ abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRende
      */
     public function renderTitle()
     {
-        return $this->title;
+        echo $this->title;
     }
 
 
