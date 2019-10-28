@@ -46,7 +46,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [OpenAdminTableBaseRealistListRenderer::__construct](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/OpenAdminTableBaseRealistListRenderer.php#L126-L145)
+See the source code for method [OpenAdminTableBaseRealistListRenderer::__construct](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/OpenAdminTableBaseRealistListRenderer.php#L132-L152)
 
 
 See Also

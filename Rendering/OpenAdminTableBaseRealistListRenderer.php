@@ -119,6 +119,12 @@ abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRende
      */
     protected $relatedLinks;
 
+    /**
+     * This property holds the title for this instance.
+     * @var string|null
+     */
+    protected $title;
+
 
     /**
      * Builds the OpenAdminTableBaseRealistListRenderer instance.
@@ -141,6 +147,7 @@ abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRende
         $this->containerCssId = null;
         $this->sqlColumns = [];
         $this->relatedLinks = [];
+        $this->title = null;
 
     }
 
@@ -202,6 +209,10 @@ abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRende
             $this->setRelatedLinks($relatedLinks);
         }
 
+        if (array_key_exists("title", $rendering)) {
+            $this->setTitle($rendering['title']);
+        }
+
     }
 
     /**
@@ -211,6 +222,16 @@ abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRende
     {
         $this->containerCssId = $cssId;
     }
+
+    /**
+     * @implementation
+     */
+    public function renderTitle()
+    {
+        return $this->title;
+    }
+
+
 
 
 
@@ -331,6 +352,17 @@ abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRende
     {
         $this->relatedLinks = $relatedLinks;
     }
+
+    /**
+     * Sets the title.
+     *
+     * @param string $title
+     */
+    public function setTitle(string $title)
+    {
+        $this->title = $title;
+    }
+
 
 
 

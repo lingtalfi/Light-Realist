@@ -39,11 +39,13 @@ abstract class <span class="pl-k">OpenAdminTableBaseRealistListRenderer</span> i
     - protected string [$containerCssId](#property-containerCssId) ;
     - protected array [$sqlColumns](#property-sqlColumns) ;
     - protected array [$relatedLinks](#property-relatedLinks) ;
+    - protected string|null [$title](#property-title) ;
 
 - Methods
     - public [__construct](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/__construct.md)() : void
     - public [prepareByRequestDeclaration](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/prepareByRequestDeclaration.md)(string $requestId, array $requestDeclaration, [Ling\Light\ServiceContainer\LightServiceContainerInterface](https://github.com/lingtalfi/Light/blob/master/doc/api/Ling/Light/ServiceContainer/LightServiceContainerInterface.md) $container) : void
     - public [setContainerCssId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setContainerCssId.md)(string $cssId) : mixed
+    - public [renderTitle](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/renderTitle.md)() : void
     - public [setDataTypes](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setDataTypes.md)(array $array) : void
     - public [setLabels](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setLabels.md)(array $labels) : void
     - public [setWidgetStatuses](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setWidgetStatuses.md)(array $widgetStatuses) : void
@@ -55,6 +57,7 @@ abstract class <span class="pl-k">OpenAdminTableBaseRealistListRenderer</span> i
     - public [setCsrfToken](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setCsrfToken.md)(string $csrfToken) : void
     - public [setSqlColumns](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setSqlColumns.md)(array $sqlColumns) : void
     - public [setRelatedLinks](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setRelatedLinks.md)(array $relatedLinks) : void
+    - public [setTitle](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setTitle.md)(string $title) : void
     - protected [getDataType](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/getDataType.md)(string $columnName) : string
     - protected [isWidgetEnabled](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/isWidgetEnabled.md)(string $identifier) : bool
     - protected [getListActionGroupLeafItems](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/getListActionGroupLeafItems.md)() : array
@@ -161,6 +164,12 @@ Properties
     
     
 
+- <span id="property-title"><b>title</b></span>
+
+    This property holds the title for this instance.
+    
+    
+
 
 
 Methods
@@ -169,6 +178,7 @@ Methods
 - [OpenAdminTableBaseRealistListRenderer::__construct](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/__construct.md) &ndash; Builds the OpenAdminTableBaseRealistListRenderer instance.
 - [OpenAdminTableBaseRealistListRenderer::prepareByRequestDeclaration](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/prepareByRequestDeclaration.md) &ndash; Prepares the list renderer with the given request declaration.
 - [OpenAdminTableBaseRealistListRenderer::setContainerCssId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setContainerCssId.md) &ndash; Sets the container css id.
+- [OpenAdminTableBaseRealistListRenderer::renderTitle](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/renderTitle.md) &ndash; Prints the list title.
 - [OpenAdminTableBaseRealistListRenderer::setDataTypes](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setDataTypes.md) &ndash; Sets the data types.
 - [OpenAdminTableBaseRealistListRenderer::setLabels](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setLabels.md) &ndash; Sets the labels.
 - [OpenAdminTableBaseRealistListRenderer::setWidgetStatuses](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setWidgetStatuses.md) &ndash; Sets the widget statuses.
@@ -180,11 +190,12 @@ Methods
 - [OpenAdminTableBaseRealistListRenderer::setCsrfToken](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setCsrfToken.md) &ndash; Sets the csrfToken value.
 - [OpenAdminTableBaseRealistListRenderer::setSqlColumns](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setSqlColumns.md) &ndash; Sets the sqlColumns.
 - [OpenAdminTableBaseRealistListRenderer::setRelatedLinks](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setRelatedLinks.md) &ndash; Sets the relatedLinks.
+- [OpenAdminTableBaseRealistListRenderer::setTitle](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/setTitle.md) &ndash; Sets the title.
 - [OpenAdminTableBaseRealistListRenderer::getDataType](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/getDataType.md) &ndash; Returns the data type of the column.
 - [OpenAdminTableBaseRealistListRenderer::isWidgetEnabled](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/isWidgetEnabled.md) &ndash; Returns whether the widget identified by $identifier is enabled.
 - [OpenAdminTableBaseRealistListRenderer::getListActionGroupLeafItems](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer/getListActionGroupLeafItems.md) &ndash; Returns the array of leaf items (i.e.
-- [RealistListRendererInterface::render](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RealistListRendererInterface/render.md) &ndash; Prints the list.
-- [RealistListRendererInterface::renderListGeneralActions](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RealistListRendererInterface/renderListGeneralActions.md) &ndash; 
+- [RealistListRendererInterface::render](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RealistListRendererInterface/render.md) &ndash; Prints the html list.
+- [RealistListRendererInterface::renderListGeneralActions](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RealistListRendererInterface/renderListGeneralActions.md) &ndash; Prints the list general actions.
 
 
 

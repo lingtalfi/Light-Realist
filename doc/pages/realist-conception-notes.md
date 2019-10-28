@@ -217,6 +217,21 @@ related_links:
 ```
 
 
+
+Title
+---------
+2019-10-28
+
+
+A list can have a title.
+We can specify the title using the "title" entry.
+
+
+
+
+
+
+
 A full realist requestDeclaration example
 ====================
 2019-09-25 -> 2019-10-28
@@ -277,6 +292,7 @@ default:
         name: realist-request
         value: REALIST(Light_Realist, csrf_token, realist-request)
     rendering:
+        title: User list
         list_general_actions:
             -
                 action_id: Light_Kit_Admin.realist-generate_random_rows
@@ -391,7 +407,7 @@ default:
         related_links:
             -
                 text: Add new user
-                url: REALIST(Light_Realist, route, lka_route-user_add)
+                url: REALIST(Light_Realist, route, lka_route-user_profile, {type: form})
                 icon: fas fa-plus-circle
 
 

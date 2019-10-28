@@ -49,7 +49,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [OpenAdminTableBaseRealistListRenderer::setSqlColumns](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/OpenAdminTableBaseRealistListRenderer.php#L320-L323)
+See the source code for method [OpenAdminTableBaseRealistListRenderer::setSqlColumns](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/OpenAdminTableBaseRealistListRenderer.php#L341-L344)
 
 
 See Also

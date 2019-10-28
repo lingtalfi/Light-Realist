@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.16.0 -- 2019-10-28
+
+    - add RealistListRendererInterface->renderTitle
+    
 - 1.15.0 -- 2019-10-28
 
     - add related_links section
