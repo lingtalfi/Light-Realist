@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.15.0 -- 2019-10-28
+
+    - add related_links section
+
 - 1.14.2 -- 2019-10-24
 
     - add link in README.md

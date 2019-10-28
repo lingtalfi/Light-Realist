@@ -109,6 +109,16 @@ abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRende
      */
     protected $sqlColumns;
 
+    /**
+     * This property holds the relatedLinks for this instance.
+     * Each link is an array:
+     * - text: the label of the link
+     * - url: the url of the link
+     * - ?icon: the css class of the icon if any
+     * @var array
+     */
+    protected $relatedLinks;
+
 
     /**
      * Builds the OpenAdminTableBaseRealistListRenderer instance.
@@ -130,6 +140,7 @@ abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRende
         $this->listGeneralActions = [];
         $this->containerCssId = null;
         $this->sqlColumns = [];
+        $this->relatedLinks = [];
 
     }
 
@@ -154,7 +165,6 @@ abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRende
 
 
         $this->setSqlColumns($realist->getSqlColumnsByRequestDeclaration($requestDeclaration));
-
 
 
         $listActionGroups = $rendering['list_action_groups'] ?? [];
@@ -186,6 +196,12 @@ abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRende
             $csrfTokenValue = $csrfToken['value'] ?? "not_defined";
             $this->setCsrfToken($csrfTokenValue);
         }
+
+        $relatedLinks = $rendering['related_links'] ?? [];
+        if ($relatedLinks) {
+            $this->setRelatedLinks($relatedLinks);
+        }
+
     }
 
     /**
@@ -305,6 +321,17 @@ abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRende
     {
         $this->sqlColumns = $sqlColumns;
     }
+
+    /**
+     * Sets the relatedLinks.
+     *
+     * @param array $relatedLinks
+     */
+    public function setRelatedLinks(array $relatedLinks)
+    {
+        $this->relatedLinks = $relatedLinks;
+    }
+
 
 
 

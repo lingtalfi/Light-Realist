@@ -50,99 +50,8 @@ Rendering
 
 The **rendering** setting basically let us control (at least partially) the gui side of the list.
 
-It looks like this (all properties are optional):
+See an example later in this document.
 
-
-```yaml
-rendering:
-
-    # this section configures the list renderer. See the list renderer section below for more info.
-    list_renderer:
-        identifier: string
-    
-    # the list general actions. See the "List general actions" sections for more details 
-    list_general_actions:
-        -
-            action_id: Light_Kit_Admin-generate
-            text: Generate
-            icon: fas fa-print
-          csrf_token:
-                name: Light_Kit_Admin-list_action-generate
-                value: REALIST(Light_Realist, csrf_token, Light_Kit_Admin-list_action-generate)
-            params:
-                url: REALIST(Light_Realist, route, lah_route-ajax_handler)
-                ajax_handler_id: Light_Kit_Admin
-                ajax_action_id: Light_Kit_Admin-generate_random_rows
-                request_id: Light_Kit_Admin:lud_user
-            right: Light_Kit_Admin.admin
-        
-    # The list action groups, see the list action groups section below for more details
-    list_action_groups:
-        -
-            action_id: Light_Realist-delete_rows
-            text: Delete
-            icon: far fa-trash-alt
-        -
-            text: Share
-            icon: fas fa-share-square
-            items:
-                -
-                    action_id: Light_Realist-rows_to_csv
-                    icon: far fa-envelope
-                    text: Csv
-
-
-    
-    # the column labels is a piece of information that can be used by any renderer. 
-    column_labels: array of column => label
-
-    open_admin_table: # control parameters related to the open admin table (see the open admin table protocol for
-                      # more information: https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/open-admin-table-protocol.md)
-        use_global_search: bool=true. Whether to use the global search widget (aka general_search). 
-        use_advanced_search: bool=true. Whether to use the advanced search widget.
-        use_number_of_rows: bool=true. Whether to use the number of rows widget.  
-        use_checkbox: bool=true. Whether to use the checkbox widget.
-        use_neck_filters: bool=true. Whether to use the neck filters widget.
-        use_debug_window: bool=false. Whether to use the debug window widget.
-
-  
-    # If you use the responsive table helper tool, you can configure some of its properties
-    # directly from the realist configuration (if your concrete renderer can handle it).
-    # https://github.com/lingtalfi/JResponsiveTableHelper
-    # In fact, since this tool is so useful, we've included it in the Light_Realist distribution,
-    # so that it's already there when you import the Light_Realist planet.
-    responsive_table_helper:
-        collapsible_column_indexes: [] # it could be also a string, see the documentation for more details.
-                
-
-    rows_renderer: # defines how the rows will be rendered (more info in the rows renderer section later in this document)
-        identifier: string=default. This is an alias for class.
-                You can use this instead of the class property.               
-        class: string. The RowsRendererInterface class to use (or alternately use the identifier property). This is optional, and the application might provide a default value.
-                In which case this would just be used to override the renderer when needed.
-        types:
-            $columnName: string|array. It it's a string, it's the type. It can also be a dynamic column (like "action" for instance) 
-                If it's an array, it must contain the following properties:
-                - type: string. The type of the column.
-                - ...(the options to use, depending on the type)
-            - ...(add your custom types here)
-    
-        checkbox_column: # The special "checkbox" dynamic column settings. See the "Rows renderer" section below.
-                         # It basically prepends a checkbox column to each returned row.  
-                         # Remove this key entirely (or comment it) to not use this system  
-            name: string=checkbox. The column name in the row. 
-            label: string=#. The label to use in the gui.
-
-        action_column: # The special "action" dynamic column settings. See the "Rows renderer" section below.
-                       # It basically appends an "action" column to each returned row. 
-                         # Remove this key entirely (or comment it) to not use this system 
-            name: string=action. The column name in the row.
-            label: string=Actions. The label to use in the gui.
-
-        
-         
-```
- 
  
  
  
@@ -282,15 +191,38 @@ With:
 
 
       
+      
+      
+Related links
+--------------
+2019-10-28    
 
+
+The related links section contains a list of related links.
+
+Each link is an array: 
+- text: the label of the link
+- url: the url of the link
+- ?icon: the css class of the icon if any
+
+Because realist uses [duelist](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/duelist.md) under the hood, you can use the dynamic injection notation from duelist
+to specify your url as routes, as in the example below:
+  
+```yaml
+related_links:
+    -
+        text: Add new user
+        url: REALIST(Light_Realist, route, lka_route-user_add)
+        icon: fas fa-plus-circle
+```
 
 
 A full realist requestDeclaration example
 ====================
-2019-09-25 -> 2019-10-11
+2019-09-25 -> 2019-10-28
 
 
-Taken from the Light_Kit_Admin plugin (still under construction at the moment when I write those lines):
+Taken from the [Light_Kit_Admin](https://github.com/lingtalfi/Light_Kit_Admin) plugin:
 
 
 ```yaml
@@ -456,6 +388,13 @@ default:
                 checkbox: checkbox
             checkbox_column: []
             action_column: []
+        related_links:
+            -
+                text: Add new user
+                url: REALIST(Light_Realist, route, lka_route-user_add)
+                icon: fas fa-plus-circle
+
+
 
 
 
