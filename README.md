@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.17.0 -- 2019-10-30
+
+    - update LightRealistService->executeRequestById, now checks for micro-permission  
+    
 - 1.16.1 -- 2019-10-28
 
     - fix OpenAdminTableBaseRealistListRenderer->renderTitle returning the title instead of printing it

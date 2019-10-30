@@ -36,6 +36,7 @@ A **request declaration** is an array of so-called settings.
 In addition to the duelist idea, realist provides the following settings:  
 
 - **rendering**: used to control the gui side (see more details in the **Rendering** section below) 
+- ...(miscellaneous) 
 
 
 
@@ -228,13 +229,41 @@ We can specify the title using the "title" entry.
 
 
 
+Miscellaneous
+============
+2019-10-30
+
+
+In this section, I present to you the "other" settings, that are not part of the duelist specification and not part of the rendering section.
+
+- csrf_token: array containing a "name" and a "value" keys. Represent a csrf token to generate and check against.
+            See the full requestDeclaration example later in this document for more details.
+            
+- plugin: string, the name of the plugin handling this realist request declaration.
+        So far, it's used only as a prefix for micro-permission (see the use_micro_permission setting below)
+- use_micro_permission: bool=true, whether to use the micro permission checking.
+        We use the [micro permission notation recommendation for database](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/pages/recommended-micropermission-notation.md#database-interaction).
+        Since realist just provides access to the data, we check against the following micro-permission:
+        
+        - {pluginName}.tables.{table}.read
+        
+        With:
+            - pluginName: the plugin string defined in the plugin setting (described just above)
+            - table: the name of the table defined in the table setting (part of the duelist spec)
+        
+        
+        
+                
+            
+
+
 
 
 
 
 A full realist requestDeclaration example
 ====================
-2019-09-25 -> 2019-10-28
+2019-09-25 -> 2019-10-30
 
 
 Taken from the [Light_Kit_Admin](https://github.com/lingtalfi/Light_Kit_Admin) plugin:
@@ -288,6 +317,8 @@ default:
 
 
 
+    plugin: Light_Kit_Admin
+    use_micro_permission: true
     csrf_token:
         name: realist-request
         value: REALIST(Light_Realist, csrf_token, realist-request)
