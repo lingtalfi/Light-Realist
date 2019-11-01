@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.17.1 -- 2019-11-01
+
+    - fix plugin erroneously depending from Light_Kit_Admin
+    
 - 1.17.0 -- 2019-10-30
 
     - update LightRealistService->executeRequestById, now checks for micro-permission  
