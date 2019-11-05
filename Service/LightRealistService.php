@@ -564,6 +564,7 @@ class LightRealistService
     public function getListRendererByRequestId(string $requestId): RealistListRendererInterface
     {
         $requestDeclaration = $this->getConfigurationArrayByRequestId($requestId);
+
         $rendering = $requestDeclaration['rendering'] ?? [];
         $listRendererConf = $rendering['list_renderer'] ?? [];
         $listRendererId = $listRendererConf['identifier'] ?? null;

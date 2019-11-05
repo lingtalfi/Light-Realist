@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.17.2 -- 2019-11-05
+
+    - fix console.log remaining in the open-admin-table-helper.js file
+    
 - 1.17.1 -- 2019-11-01
 
     - fix plugin erroneously depending from Light_Kit_Admin

@@ -536,11 +536,11 @@ if ("undefined" === typeof window.OpenAdminTableHelper) {
                 // APPLYING RULES AND ADDING TAGS
                 //----------------------------------------
 
-                console.log("globalSearchData", globalSearchData);
-                console.log("advancedSearchData", advancedSearchData);
-                console.log("headColumnsSortData", headColumnsSortData);
-                console.log("neckFiltersData", neckFiltersData);
-                console.log("paginationData", paginationData);
+                // console.log("globalSearchData", globalSearchData);
+                // console.log("advancedSearchData", advancedSearchData);
+                // console.log("headColumnsSortData", headColumnsSortData);
+                // console.log("neckFiltersData", neckFiltersData);
+                // console.log("paginationData", paginationData);
 
                 if (false !== globalSearchData) {
                     advancedSearchData = false;
