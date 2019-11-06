@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.17.3 -- 2019-11-06
+
+    - add documentation precision in realist conception notes
+    
 - 1.17.2 -- 2019-11-05
 
     - fix console.log remaining in the open-admin-table-helper.js file

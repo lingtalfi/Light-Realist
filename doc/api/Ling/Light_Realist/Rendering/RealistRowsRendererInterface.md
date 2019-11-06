@@ -4,7 +4,7 @@
 
 The RealistRowsRendererInterface class
 ================
-2019-08-12 --> 2019-11-05
+2019-08-12 --> 2019-11-06
 
 
 

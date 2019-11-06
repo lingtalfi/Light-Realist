@@ -266,7 +266,9 @@ A full realist requestDeclaration example
 2019-09-25 -> 2019-10-30
 
 
-Taken from the [Light_Kit_Admin](https://github.com/lingtalfi/Light_Kit_Admin) plugin:
+Below is an example inspired from the [Light_Kit_Admin](https://github.com/lingtalfi/Light_Kit_Admin) plugin.
+
+The comments in it are part of the documentation.
 
 
 ```yaml
@@ -413,6 +415,11 @@ default:
                 avatar_url: string
                 extra: string
                 actions: action
+
+        # An array of the column labels.
+        # Don't set the checkbox column label here (rather use the rendering.rows_renderer.checkbox_column key), 
+        # that's because the checkbox is generally handled by the renderer, which should have a dedicated checkbox widget, 
+        # and if we declared the checkbox label here, it could create some conflict leading to unexpected results.  
         column_labels:
             id: "#"
             identifier: Identifier

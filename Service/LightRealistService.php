@@ -217,6 +217,7 @@ class LightRealistService
     {
         $requestDeclaration = $this->getConfigurationArrayByRequestId($requestId);
 
+
         $pluginName = $requestDeclaration['plugin'];
         $table = $requestDeclaration['table'];
 
