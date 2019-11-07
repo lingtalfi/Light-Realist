@@ -2,7 +2,7 @@ dependencies:
     Ling: 
         - Light_AjaxHandler
         - Light
-        - Light_Csrf
+        - Light_CsrfSimple
         - Bat
         - ArrayToString
         - BabyYaml

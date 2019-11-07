@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.18.0 -- 2019-11-07
+
+    - switch from Light_Csrf to Light_CsrfSimple
+    
 - 1.17.3 -- 2019-11-06
 
     - add documentation precision in realist conception notes

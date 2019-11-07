@@ -6,7 +6,7 @@ namespace Ling\Light_Realist\Tool;
 use Ling\Bat\ArrayTool;
 use Ling\Bat\BDotTool;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
-use Ling\Light_Csrf\Service\LightCsrfService;
+use Ling\Light_CsrfSimple\Service\LightCsrfSimpleService;
 use Ling\Light_Realist\Exception\LightRealistException;
 
 /**
@@ -67,32 +67,20 @@ class LightRealistTool
 
     /**
      *
-     * Checks whether the given token is valid.
-     * The token is given as an array:
+     * Checks whether the given token is valid and throws an exception if it's not the case.
      *
-     * - name: the token name
-     * - value: the token value (not used in this method, but that's the unofficial notation of a token in realist)
-     *
-     *
-     * @param array $token
-     * @param string $tokenValue
+     * @param string $token
      * @param LightServiceContainerInterface $container
      * @throws \Exception
      */
-    public static function checkAjaxToken(array $token, string $tokenValue, LightServiceContainerInterface $container)
+    public static function checkAjaxToken(string $token, LightServiceContainerInterface $container)
     {
-        if (array_key_exists("name", $token)) {
-            $tokenName = $token['name'];
-            /**
-             * @var $csrfService LightCsrfService
-             */
-            $csrfService = $container->get('csrf');
-            if (false === $csrfService->isValid($tokenName, $tokenValue, true)) {
-                throw new LightRealistException("Invalid token with name $tokenName and value $tokenValue.");
-            }
-
-        } else {
-            throw new LightRealistException("name not found in the given token.");
+        /**
+         * @var $csrfSimple LightCsrfSimpleService
+         */
+        $csrfSimple = $container->get('csrf_simple');
+        if (false === $csrfSimple->isValid($token)) {
+            throw new LightRealistException("Invalid token with value $token.");
         }
     }
 

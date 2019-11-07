@@ -1,6 +1,6 @@
 Ling/Light_Realist
 ================
-2019-08-12 --> 2019-11-06
+2019-08-12 --> 2019-11-07
 
 
 
@@ -110,7 +110,7 @@ Table of contents
 - [LightRealistTool](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool.md) &ndash; The LightRealistTool class.
     - [LightRealistTool::getToolbarItemByActionId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool/getToolbarItemByActionId.md) &ndash; Returns the [toolbar item](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/list-action-handler-conception-notes.md#the-toolbar-item) identified by the given actionId.
     - [LightRealistTool::getListGeneralActionItemByActionId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool/getListGeneralActionItemByActionId.md) &ndash; Returns the [list general action item](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/realist-conception-notes.md#list-general-actions) identified by the given actionId.
-    - [LightRealistTool::checkAjaxToken](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool/checkAjaxToken.md) &ndash; Checks whether the given token is valid.
+    - [LightRealistTool::checkAjaxToken](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool/checkAjaxToken.md) &ndash; Checks whether the given token is valid and throws an exception if it's not the case.
     - [LightRealistTool::ricsToIntegersOnlyInString](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool/ricsToIntegersOnlyInString.md) &ndash; Returns a comma separated list of integers, based on the given rics.
 
 
@@ -118,7 +118,7 @@ Dependencies
 ============
 - [Light_AjaxHandler](https://github.com/lingtalfi/Light_AjaxHandler)
 - [Light](https://github.com/lingtalfi/Light)
-- [Light_Csrf](https://github.com/lingtalfi/Light_Csrf)
+- [Light_CsrfSimple](https://github.com/lingtalfi/Light_CsrfSimple)
 - [Bat](https://github.com/lingtalfi/Bat)
 - [ArrayToString](https://github.com/lingtalfi/ArrayToString)
 - [BabyYaml](https://github.com/lingtalfi/BabyYaml)

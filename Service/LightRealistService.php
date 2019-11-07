@@ -11,8 +11,7 @@ use Ling\Bat\BDotTool;
 use Ling\Bat\SmartCodeTool;
 use Ling\Light\ServiceContainer\LightServiceContainerAwareInterface;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
-use Ling\Light\Tool\LightTool;
-use Ling\Light_Csrf\Service\LightCsrfService;
+use Ling\Light_CsrfSimple\Service\LightCsrfSimpleService;
 use Ling\Light_Database\LightDatabasePdoWrapper;
 use Ling\Light_Realist\ActionHandler\LightRealistActionHandlerInterface;
 use Ling\Light_Realist\DynamicInjection\RealistDynamicInjectionHandlerInterface;
@@ -229,8 +228,8 @@ class LightRealistService
         $csrfToken = $requestDeclaration['csrf_token'] ?? null;
         if (false === $csrfTokenPass) {
             if (null !== $csrfToken) {
-                $csrfTokenName = $csrfToken['name'] ?? "realist-request";
-                $this->checkCsrfToken($csrfTokenName, $params);
+                $csrfTokenValue = $params['csrf_token'] ?? '';
+                $this->checkCsrfToken($csrfTokenValue);
             }
         }
 
@@ -744,8 +743,7 @@ class LightRealistService
     {
         if (array_key_exists("csrf_token", $item)) {
             if (array_key_exists("csrf_token", $params)) {
-                $tokenValue = $params['csrf_token'];
-                LightRealistTool::checkAjaxToken($item['csrf_token'], $tokenValue, $this->container);
+                LightRealistTool::checkAjaxToken($params['csrf_token'], $this->container);
             } else {
                 $this->error("The csrf_token entry was not provided with the post params.");
             }
@@ -851,23 +849,19 @@ class LightRealistService
     /**
      * Checks whether the csrf token is valid, throws an exception if that's not the case.
      *
-     * @param string $tokenName
-     * @param array $params
+     * @param string $token
      * @throws \Exception
      */
-    protected function checkCsrfToken(string $tokenName, array $params)
+    protected function checkCsrfToken(string $token)
     {
-        if (array_key_exists("csrf_token", $params)) {
-            /**
-             * @var $csrf LightCsrfService
-             */
-            $csrf = $this->container->get("csrf");
-            if (true === $csrf->isValid($tokenName, $params['csrf_token'], true)) {
-                return;
-            }
-            $this->error("Invalid csrf token value provided for token $tokenName.");
+        /**
+         * @var $csrfSimple LightCsrfSimpleService
+         */
+        $csrfSimple = $this->container->get("csrf_simple");
+        if (true === $csrfSimple->isValid($token)) {
+            return;
         }
-        $this->error("The \"csrf_token\" key was not provided with the payload.");
+        $this->error("Invalid csrf token value provided.");
     }
 
 
@@ -909,7 +903,7 @@ class LightRealistService
 
     /**
      * Parses the given item, and converts csrf_token = true
-     * entries to an actual csrf_token = [ name: theTokenName, value: theTokenValue ] array.
+     * entries to an actual csrf_token value.
      *
      * Note: if ajax, then the value is not generated, and a fake value is used.
      *
@@ -920,23 +914,11 @@ class LightRealistService
     private function convertCsrfTokenByItem(array &$item, string $requestId)
     {
         if (array_key_exists("csrf_token", $item) && true === $item['csrf_token']) {
-
-            $p = explode('.', $item['action_id'], 2);
-            $pluginName = array_shift($p);
-            $tokenName = $requestId . "-" . $pluginName . "-" . implode(".", $p);
-            $tokenValue = "";
-            // we create the csrf token value only from the main index.php script, not from ajax services
-            if (false === LightTool::isAjax($this->container)) {
-                /**
-                 * @var $csrf LightCsrfService
-                 */
-                $csrf = $tokenValue = $this->container->get('csrf');
-                $tokenValue = $csrf->createToken($tokenName);
-            }
-            $item['csrf_token'] = [
-                "name" => $tokenName,
-                "value" => $tokenValue,
-            ];
+            /**
+             * @var $csrfSimple LightCsrfSimpleService
+             */
+            $csrfSimple = $this->container->get('csrf_simple');
+            $item['csrf_token'] = $csrfSimple->getToken();
         }
     }
 }
