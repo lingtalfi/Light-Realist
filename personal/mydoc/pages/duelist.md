@@ -71,7 +71,8 @@ The developer writes this section by using the following settings:
 - ric: the row identifier columns array. 
             Unless you have specific needs, we suggest using the strict ric.
             See the ric section for more details.
-- base_fields: the list of columns used in the sql request (expressions with aliases are allowed)
+- base_fields: the list of columns used in the sql request.
+            Expressions with aliases are allowed if they use the AS keyword (case doesn't matter).
 - ?base_joins: array|string. Each item being a join expression.
         Example: 
             - inner join user u on i.user_id=u.id 

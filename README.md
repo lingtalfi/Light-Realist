@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.18.2 -- 2019-11-11
+
+    - add precision to duelist documentation page
+
 - 1.18.1 -- 2019-11-11
 
     - fix OpenAdminTableBaseRealistListRenderer->prepareByRequestDeclaration not updated with Light_CsrfSimple

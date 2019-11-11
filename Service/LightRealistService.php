@@ -229,7 +229,8 @@ class LightRealistService
             $csrfTokenValue = $params['csrf_token'] ?? '';
             $this->checkCsrfToken($csrfTokenValue);
         }
-        //        $csrfTokenPass = $params['csrf_token_pass'] ?? false;
+
+//        $csrfTokenPass = $params['csrf_token_pass'] ?? false;
 //        if (false === $csrfTokenPass) {
 //            if (null !== $csrfToken) {
 //                $csrfTokenValue = $params['csrf_token'] ?? '';
