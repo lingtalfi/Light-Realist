@@ -22,6 +22,7 @@ use Ling\Light_Realist\ListGeneralActionHandler\LightRealistListGeneralActionHan
 use Ling\Light_Realist\Rendering\RealistListRendererInterface;
 use Ling\Light_Realist\Rendering\RealistRowsRendererInterface;
 use Ling\Light_Realist\Tool\LightRealistTool;
+use Ling\ParametrizedSqlQuery\Helper\ParametrizedSqlQueryHelper;
 use Ling\ParametrizedSqlQuery\ParametrizedSqlQueryUtil;
 
 /**
@@ -798,9 +799,8 @@ class LightRealistService
 
     /**
      * Returns the columns used in the sql query by parsing the given request declaration.
-     * Usually, this is just the base_fields array, but with some more dynamic requests,
-     * it might involve a little bit more computation.
-     *
+     * It's an array of alias => column_expression, usually based on the base_fields property.
+     * See the @page(duelist) page for more info.
      *
      * @param array $requestDeclaration
      * @return array
@@ -808,7 +808,7 @@ class LightRealistService
     public function getSqlColumnsByRequestDeclaration(array $requestDeclaration): array
     {
         $ret = $requestDeclaration['base_fields'] ?? [];
-        return $ret;
+        return ParametrizedSqlQueryHelper::getColumnName2ColumnExpression($ret);
     }
 
 

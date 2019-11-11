@@ -190,6 +190,37 @@ Also, there are some reserved variable names, which basically trigger automatica
 If the check fails, the request is rejected.
 
 
+
+#### Special variables treatment
+
+In addition to that, some variables have an extra special treatment.
+
+##### $column
+
+The $column variable is replaced by a value based on the ones defined in the **base_fields** property:
+        - if the corresponding base field doesn't use an alias, the $column variable is replaced by the column name
+        - if the corresponding base field uses an alias, the $column variable is replaced by the column expression before the alias
+        
+So for instance if the base_fields contains those two entries:
+
+- concat(user_id, '. ', u.pseudo) as user_id
+- the_date
+
+Then if a $column variable is passed and equals "the_date", it will be left unchanged (or replaced with the_date). 
+But if that $column variable is equal to "user_id", it will be replaced with concat(user_id, '. ', u.pseudo).
+
+This gives us more (notation) power when creating (relatively more involved) where expressions. 
+ 
+
+
+
+
+
+
+
+
+
+
 ### Inner markers
 -> 2019-10-10
 

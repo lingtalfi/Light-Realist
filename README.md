@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.19.0 -- 2019-11-11
+
+    - update $column variable, now can be replaced with colExpression from an alias column expression
+    
 - 1.18.2 -- 2019-11-11
 
     - add precision to duelist documentation page
