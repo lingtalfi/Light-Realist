@@ -1,6 +1,6 @@
 Ling/Light_Realist
 ================
-2019-08-12 --> 2019-11-07
+2019-08-12 --> 2019-11-11
 
 
 
@@ -34,6 +34,8 @@ Table of contents
 - [GenericActionItemHandlerTrait](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/GenericItemActionHandler/GenericActionItemHandlerTrait.md) &ndash; The GenericActionItemHandlerTrait class
     - [GenericActionItemHandlerTrait::__construct](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/GenericItemActionHandler/GenericActionItemHandlerTrait/__construct.md) &ndash; Builds the LightRealistBaseListActionHandler instance.
     - [GenericActionItemHandlerTrait::setContainer](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/GenericItemActionHandler/GenericActionItemHandlerTrait/setContainer.md) &ndash; Sets the container.
+- [DuelistHelper](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Helper/DuelistHelper.md) &ndash; The DuelistHelper class.
+    - [DuelistHelper::getRawTableName](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Helper/DuelistHelper/getRawTableName.md) &ndash; Returns the raw table name from the [duelist](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/duelist.md) table property.
 - [LightRealistBaseListActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListActionHandler/LightRealistBaseListActionHandler.md) &ndash; The LightRealistBaseListActionHandler class.
     - [LightRealistBaseListActionHandler::__construct](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListActionHandler/LightRealistBaseListActionHandler/__construct.md) &ndash; Builds the LightRealistBaseListActionHandler instance.
     - [LightRealistBaseListActionHandler::setContainer](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListActionHandler/LightRealistBaseListActionHandler/setContainer.md) &ndash; Sets the container.

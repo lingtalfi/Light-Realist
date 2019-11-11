@@ -16,6 +16,7 @@ use Ling\Light_Database\LightDatabasePdoWrapper;
 use Ling\Light_Realist\ActionHandler\LightRealistActionHandlerInterface;
 use Ling\Light_Realist\DynamicInjection\RealistDynamicInjectionHandlerInterface;
 use Ling\Light_Realist\Exception\LightRealistException;
+use Ling\Light_Realist\Helper\DuelistHelper;
 use Ling\Light_Realist\ListActionHandler\LightRealistListActionHandlerInterface;
 use Ling\Light_Realist\ListGeneralActionHandler\LightRealistListGeneralActionHandlerInterface;
 use Ling\Light_Realist\Rendering\RealistListRendererInterface;
@@ -214,24 +215,27 @@ class LightRealistService
      */
     public function executeRequestById(string $requestId, array $params = []): array
     {
+
         $requestDeclaration = $this->getConfigurationArrayByRequestId($requestId);
 
-
         $pluginName = $requestDeclaration['plugin'];
-        $table = $requestDeclaration['table'];
-
+        $table = DuelistHelper::getRawTableName($requestDeclaration['table']);
 
         //--------------------------------------------
         // CHECKING CSRF TOKEN
         //--------------------------------------------
-        $csrfTokenPass = $params['csrf_token_pass'] ?? false;
-        $csrfToken = $requestDeclaration['csrf_token'] ?? null;
-        if (false === $csrfTokenPass) {
-            if (null !== $csrfToken) {
-                $csrfTokenValue = $params['csrf_token'] ?? '';
-                $this->checkCsrfToken($csrfTokenValue);
-            }
+        $csrfToken = $requestDeclaration['csrf_token'] ?? true;
+        if (true === $csrfToken) {
+            $csrfTokenValue = $params['csrf_token'] ?? '';
+            $this->checkCsrfToken($csrfTokenValue);
         }
+        //        $csrfTokenPass = $params['csrf_token_pass'] ?? false;
+//        if (false === $csrfTokenPass) {
+//            if (null !== $csrfToken) {
+//                $csrfTokenValue = $params['csrf_token'] ?? '';
+//                $this->checkCsrfToken($csrfTokenValue);
+//            }
+//        }
 
 
         $tags = $params['tags'] ?? [];
@@ -564,7 +568,6 @@ class LightRealistService
     public function getListRendererByRequestId(string $requestId): RealistListRendererInterface
     {
         $requestDeclaration = $this->getConfigurationArrayByRequestId($requestId);
-
         $rendering = $requestDeclaration['rendering'] ?? [];
         $listRendererConf = $rendering['list_renderer'] ?? [];
         $listRendererId = $listRendererConf['identifier'] ?? null;
@@ -574,7 +577,6 @@ class LightRealistService
         if (false === array_key_exists($listRendererId, $this->listRenderers)) {
             $this->error("List renderer not found with identifier $listRendererId (requestId=$requestId).");
         }
-
 
         $listRenderer = $this->listRenderers[$listRendererId];
 

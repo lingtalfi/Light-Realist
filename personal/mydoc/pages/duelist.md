@@ -61,8 +61,16 @@ The user has almost no interaction with it.
 
 The developer writes this section by using the following settings:
 
-- table: the name of the table to interact with
-- ric: the row identifier columns array. See the ric section for more details.
+- table: the name of the table to interact with. 
+            It can be followed by an alias (with exactly one space between the table and the alias).
+            For instance, those are valid table values:
+            - my_table 
+            - my_table m
+            - my_table my_alias
+            
+- ric: the row identifier columns array. 
+            Unless you have specific needs, we suggest using the strict ric.
+            See the ric section for more details.
 - base_fields: the list of columns used in the sql request (expressions with aliases are allowed)
 - ?base_joins: array|string. Each item being a join expression.
         Example: 

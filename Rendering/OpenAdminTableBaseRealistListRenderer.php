@@ -6,6 +6,7 @@ namespace Ling\Light_Realist\Rendering;
 
 use Ling\Bat\ArrayTool;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
+use Ling\Light_CsrfSimple\Service\LightCsrfSimpleService;
 use Ling\Light_Realist\Service\LightRealistService;
 
 /**
@@ -175,8 +176,6 @@ abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRende
 
         $listActionGroups = $rendering['list_action_groups'] ?? [];
         $realist->prepareListActionGroups($listActionGroups, $requestId);
-
-
         $this->setListActionGroups($listActionGroups);
 
 
@@ -200,9 +199,12 @@ abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRende
 
 
         $csrfToken = $requestDeclaration['csrf_token'] ?? null;
-        if (is_array($csrfToken)) {
-            $csrfTokenValue = $csrfToken['value'] ?? "not_defined";
-            $this->setCsrfToken($csrfTokenValue);
+        if (true === $csrfToken) {
+            /**
+             * @var $csrfSimple LightCsrfSimpleService
+             */
+            $csrfSimple = $container->get('csrf_simple');
+            $this->setCsrfToken($csrfSimple->getToken());
         }
 
         $relatedLinks = $rendering['related_links'] ?? [];
@@ -213,7 +215,6 @@ abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRende
         if (array_key_exists("title", $rendering)) {
             $this->setTitle($rendering['title']);
         }
-
     }
 
     /**

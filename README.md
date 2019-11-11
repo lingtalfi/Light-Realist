@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.18.1 -- 2019-11-11
+
+    - fix OpenAdminTableBaseRealistListRenderer->prepareByRequestDeclaration not updated with Light_CsrfSimple
+    
 - 1.18.0 -- 2019-11-07
 
     - switch from Light_Csrf to Light_CsrfSimple

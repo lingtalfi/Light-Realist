@@ -4,7 +4,7 @@
 
 The LightRealistBaseListActionHandler class
 ================
-2019-08-12 --> 2019-11-07
+2019-08-12 --> 2019-11-11
 
 
 
@@ -97,4 +97,4 @@ See the source code of [Ling\Light_Realist\ListActionHandler\LightRealistBaseLis
 
 SeeAlso
 ==============
-Previous class: [GenericActionItemHandlerTrait](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/GenericItemActionHandler/GenericActionItemHandlerTrait.md)<br>Next class: [LightRealistListActionHandlerInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListActionHandler/LightRealistListActionHandlerInterface.md)<br>
+Previous class: [DuelistHelper](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Helper/DuelistHelper.md)<br>Next class: [LightRealistListActionHandlerInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListActionHandler/LightRealistListActionHandlerInterface.md)<br>
