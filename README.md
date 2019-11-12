@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.20.0 -- 2019-11-12
+
+    - update RealistRowsRendererInterface->addDynamicColumn, removed label argument
+    
 - 1.19.0 -- 2019-11-11
 
     - update $column variable, now can be replaced with colExpression from an alias column expression

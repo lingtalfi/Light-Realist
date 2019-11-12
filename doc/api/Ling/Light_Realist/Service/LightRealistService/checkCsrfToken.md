@@ -54,7 +54,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [LightRealistService::checkCsrfToken](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L858-L868)
+See the source code for method [LightRealistService::checkCsrfToken](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L856-L866)
 
 
 See Also

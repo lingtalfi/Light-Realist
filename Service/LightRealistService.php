@@ -330,8 +330,7 @@ class LightRealistService
             if (array_key_exists('checkbox_column', $rowsRenderer)) {
                 $conf = $rowsRenderer['checkbox_column'];
                 $name = $conf['name'] ?? 'checkbox';
-                $label = $conf['label'] ?? '#';
-                $rowsRendererInstance->addDynamicColumn($name, $label, 'pre');
+                $rowsRendererInstance->addDynamicColumn($name, 'pre');
             }
 
 
@@ -339,8 +338,7 @@ class LightRealistService
             if (array_key_exists('action_column', $rowsRenderer)) {
                 $conf = $rowsRenderer['action_column'];
                 $name = $conf['name'] ?? 'action';
-                $label = $conf['label'] ?? 'Actions';
-                $rowsRendererInstance->addDynamicColumn($name, $label, 'post');
+                $rowsRendererInstance->addDynamicColumn($name, 'post');
             }
 
             $rowsHtml = $rowsRendererInstance->render($rows);

@@ -83,12 +83,12 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
     /**
      * @implementation
      */
-    public function addDynamicColumn(string $columnName, string $label, $position = 'post')
+    public function addDynamicColumn(string $columnName, $position = 'post')
     {
         if (false === array_key_exists($position, $this->dynamicColumns)) {
             $this->dynamicColumns[$position] = [];
         }
-        $this->dynamicColumns[$position][$columnName] = $label;
+        $this->dynamicColumns[$position][] = $columnName;
     }
 
 
@@ -106,7 +106,7 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
             $s .= '<tr>';
 
             // dynamic pre columns
-            foreach ($preCols as $col => $label) {
+            foreach ($preCols as $col) {
                 $s .= '<td>';
                 $type = $this->types[$col] ?? ["text", []];
                 $s .= $this->renderColumnContent('', $type[0], $type[1], $row);
@@ -122,7 +122,7 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
             }
 
             // dynamic post columns
-            foreach ($postCols as $col => $label) {
+            foreach ($postCols as $col) {
                 $s .= '<td>';
                 $type = $this->types[$col] ?? ["text", []];
                 $s .= $this->renderColumnContent('', $type[0], $type[1], $row);

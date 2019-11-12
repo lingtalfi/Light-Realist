@@ -16,7 +16,7 @@ Description
 ================
 
 
-public [BaseRealistRowsRenderer::addDynamicColumn](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/addDynamicColumn.md)(string $columnName, string $label, ?$position = post) : void
+public [BaseRealistRowsRenderer::addDynamicColumn](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/addDynamicColumn.md)(string $columnName, ?$position = post) : void
 
 
 
@@ -35,10 +35,6 @@ Parameters
 
 
 - columnName
-
-    
-
-- label
 
     
 

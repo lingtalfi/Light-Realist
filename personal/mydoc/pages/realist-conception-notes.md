@@ -79,7 +79,7 @@ We basically provide an interface for rendering rows: **RealistRowsRendererInter
 
 This interface has the following methods:
 
-- addDynamicColumn ( string colName, string label, mixed position=post ):void
+- addDynamicColumn ( string colName, mixed position=post ):void
 - setColumnType ( string colName, string type, array options=[] ):void
 - setRic ( array ric ):void
 - render  ( array rows ):string
@@ -109,20 +109,26 @@ Two common dynamic columns for admin lists are "checkbox" and "action".
 
 # Checkbox and Action special columns
 
-And so realist being a practical tool, we've added them as options directly into the **rendering.rows_renderer** setting.
 
-Note: the default (column) names for "checkbox" and "action" special columns are "checkbox" and "action", which might
-interfere with your own columns in the sql query. When this happens, we recommend that you use sql aliases to rename
-your columns rather than changing the name of the dynamic column in the **request declaration**.
+In the **rows_renderer** settings, we have two special properties:
 
-That's because in the background, the **BaseRealistRowsRenderer** object provides a special action for the "checkbox" type.
-So if you change the "checkbox" name, the **BaseRealistRowsRenderer** object won't be triggering the checkbox rendering
-automatically.
+- checkbox_column
+- action_column
+
+Both share similar characteristics:
+
+- they are an array containing the following entries:
+    - name: the name of the dynamic column
+- if they are defined, they indicate that the dynamic column should be used, otherwise if they are not defined,
+        they indicate that the dynamic column shouldn't be used.    
 
 
-Also note that if you are using the **open_admin_table** setting, you have to manually ensure that the 
-**rendering.open_admin_table.use_checkbox** option and the **rendering.rows_renderer.checkbox_column** are synced together,
-otherwise you might experience weird things...  
+The default name for the checkbox dynamic column is checkbox.
+The default name for the action dynamic column is action.
+
+Note: the default name is used as long as you don't define the the checkbox_column.name or action_column.name specifically. 
+
+
 
 
 # About ric implementation
@@ -417,9 +423,8 @@ default:
                 actions: action
 
         # An array of the column labels.
-        # Don't set the checkbox column label here (rather use the rendering.rows_renderer.checkbox_column key), 
-        # that's because the checkbox is generally handled by the renderer, which should have a dedicated checkbox widget, 
-        # and if we declared the checkbox label here, it could create some conflict leading to unexpected results.  
+        # Notice that we set the label for the action column, but not the checkbox column.  
+        # That's at least how the Bootstrap4AdminTable renderer works (your mileage might vary).  
         column_labels:
             id: "#"
             identifier: Identifier
@@ -440,8 +445,12 @@ default:
                     route: lka_route-user_profile
 
                 checkbox: checkbox
+            # This key must be present if you use the checkbox dynamic column. 
             checkbox_column: []
+#                name: checkbox
+            # This key must be present if you use the action dynamic column.
             action_column: []
+#                name: action
         related_links:
             -
                 text: Add new user

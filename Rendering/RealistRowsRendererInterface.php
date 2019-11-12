@@ -40,11 +40,10 @@ interface RealistRowsRendererInterface
      *
      *
      * @param string $columnName
-     * @param string $label
      * @param string $position
      * @return void
      */
-    public function addDynamicColumn(string $columnName, string $label, $position = 'post');
+    public function addDynamicColumn(string $columnName, $position = 'post');
 
     /**
      * Returns the html representing the given rows
