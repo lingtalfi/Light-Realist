@@ -52,4 +52,4 @@ See the source code of [Ling\Light_Realist\Helper\DuelistHelper](https://github.
 
 SeeAlso
 ==============
-Previous class: [GenericActionItemHandlerTrait](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/GenericItemActionHandler/GenericActionItemHandlerTrait.md)<br>Next class: [LightRealistBaseListActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListActionHandler/LightRealistBaseListActionHandler.md)<br>
+Previous class: [GenericActionItemHandlerTrait](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/GenericItemActionHandler/GenericActionItemHandlerTrait.md)<br>Next class: [RealistHelper](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Helper/RealistHelper.md)<br>

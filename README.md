@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.22.0 -- 2019-11-12
+
+    - add RealistHelper
+    
 - 1.21.0 -- 2019-11-12
 
     - implemented hiddenColumns concept

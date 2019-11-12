@@ -97,4 +97,4 @@ See the source code of [Ling\Light_Realist\ListActionHandler\LightRealistBaseLis
 
 SeeAlso
 ==============
-Previous class: [DuelistHelper](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Helper/DuelistHelper.md)<br>Next class: [LightRealistListActionHandlerInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListActionHandler/LightRealistListActionHandlerInterface.md)<br>
+Previous class: [RealistHelper](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Helper/RealistHelper.md)<br>Next class: [LightRealistListActionHandlerInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListActionHandler/LightRealistListActionHandlerInterface.md)<br>

@@ -17,6 +17,7 @@ use Ling\Light_Realist\ActionHandler\LightRealistActionHandlerInterface;
 use Ling\Light_Realist\DynamicInjection\RealistDynamicInjectionHandlerInterface;
 use Ling\Light_Realist\Exception\LightRealistException;
 use Ling\Light_Realist\Helper\DuelistHelper;
+use Ling\Light_Realist\Helper\RealistHelper;
 use Ling\Light_Realist\ListActionHandler\LightRealistListActionHandlerInterface;
 use Ling\Light_Realist\ListGeneralActionHandler\LightRealistListGeneralActionHandlerInterface;
 use Ling\Light_Realist\Rendering\RealistListRendererInterface;
@@ -335,10 +336,9 @@ class LightRealistService
 
 
             // adding special action column
-            if (array_key_exists('action_column', $rowsRenderer)) {
-                $conf = $rowsRenderer['action_column'];
-                $name = $conf['name'] ?? 'action';
-                $rowsRendererInstance->addDynamicColumn($name, 'post');
+            $actionColName = RealistHelper::getActionColumnNameByRequestDeclaration($requestDeclaration);
+            if (false !== $actionColName) {
+                $rowsRendererInstance->addDynamicColumn($actionColName, 'post');
             }
 
 
