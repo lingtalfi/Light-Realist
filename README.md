@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.22.1 -- 2019-11-12
+
+    - update realist conception notes
+    
 - 1.22.0 -- 2019-11-12
 
     - add RealistHelper

@@ -271,11 +271,13 @@ Miscellaneous
 
 In this section, I present to you the "other" settings, that are not part of the duelist specification and not part of the rendering section.
 
-- csrf_token: array containing a "name" and a "value" keys. Represent a csrf token to generate and check against.
-            See the full requestDeclaration example later in this document for more details.
+- csrf_token: bool=true. Whether to protect the list against csrf attacks, using the [Light_CsrfSimple](https://github.com/lingtalfi/Light_CsrfSimple) service.
             
 - plugin: string, the name of the plugin handling this realist request declaration.
-        So far, it's used only as a prefix for micro-permission (see the use_micro_permission setting below)
+        So far, it's used only as a prefix for micro-permission (see the use_micro_permission setting below).
+        It might also be used by third party plugins as the handler of micro-permissions in general (for instance can the user delete rows in this table?),
+        but that depends on the plugin.
+        
 - use_micro_permission: bool=true, whether to use the micro permission checking.
         We use the [micro permission notation recommendation for database](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/pages/recommended-micropermission-notation.md#database-interaction).
         Since realist just provides access to the data, we check against the following micro-permission:
