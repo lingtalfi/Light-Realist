@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.23.0 -- 2019-11-12
+
+    - update LightRealistService->getSqlColumnsByRequestDeclaration
+    
 - 1.22.1 -- 2019-11-12
 
     - update realist conception notes
