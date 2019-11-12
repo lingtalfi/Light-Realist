@@ -49,7 +49,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [OpenAdminTableBaseRealistListRenderer::setCsrfToken](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/OpenAdminTableBaseRealistListRenderer.php#L333-L336)
+See the source code for method [OpenAdminTableBaseRealistListRenderer::setCsrfToken](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/OpenAdminTableBaseRealistListRenderer.php#L357-L360)
 
 
 See Also

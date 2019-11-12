@@ -32,13 +32,21 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
 
     /**
      * This property holds the dynamicColumns for this instance.
-     * It's an array of position => columnItems.
-     * With columnItems being an array of columnName => label.
+     * It's an array of position => columnNames.
+     * With columnNames being an array of column names.
      *
      *
      * @var array
      */
     protected $dynamicColumns;
+
+    /**
+     * This property holds the hiddenColumns for this instance.
+     * It's an array of column names.
+     * @var array
+     */
+    protected $hiddenColumns;
+
 
     /**
      * This property holds the ric for this instance.
@@ -57,6 +65,7 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
     {
         $this->types = [];
         $this->dynamicColumns = [];
+        $this->hiddenColumns = [];
         $this->ric = [];
         $this->container = null;
     }
@@ -95,6 +104,15 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
     /**
      * @implementation
      */
+    public function setHiddenColumns(array $hiddenColumns)
+    {
+        $this->hiddenColumns = $hiddenColumns;
+    }
+
+
+    /**
+     * @implementation
+     */
     public function render(array $rows): string
     {
         $s = '';
@@ -115,10 +133,12 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
 
             // data columns
             foreach ($row as $col => $val) {
-                $type = $this->types[$col] ?? ["text", []];
-                $s .= '<td>';
-                $s .= $this->renderColumnContent($val, $type[0], $type[1], $row);
-                $s .= '</td>';
+                if (false === in_array($col, $this->hiddenColumns, true)) {
+                    $type = $this->types[$col] ?? ["text", []];
+                    $s .= '<td>';
+                    $s .= $this->renderColumnContent($val, $type[0], $type[1], $row);
+                    $s .= '</td>';
+                }
             }
 
             // dynamic post columns

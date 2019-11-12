@@ -57,7 +57,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [RealistRowsRendererInterface::addDynamicColumn](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/RealistRowsRendererInterface.php#L46-L46)
+See the source code for method [RealistRowsRendererInterface::addDynamicColumn](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/RealistRowsRendererInterface.php#L54-L54)
 
 
 See Also
@@ -65,5 +65,5 @@ See Also
 
 The [RealistRowsRendererInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RealistRowsRendererInterface.md) class.
 
-Previous method: [setRic](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RealistRowsRendererInterface/setRic.md)<br>Next method: [render](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RealistRowsRendererInterface/render.md)<br>
+Previous method: [setHiddenColumns](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RealistRowsRendererInterface/setHiddenColumns.md)<br>Next method: [render](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RealistRowsRendererInterface/render.md)<br>
 

@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.21.0 -- 2019-11-12
+
+    - implemented hiddenColumns concept
+    
 - 1.20.0 -- 2019-11-12
 
     - update RealistRowsRendererInterface->addDynamicColumn, removed label argument

@@ -38,6 +38,13 @@ abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRende
     protected $labels;
 
     /**
+     * This property holds the hiddenColumns for this instance.
+     * The hidden columns are not displayed (but their data is still accessible).
+     * @var array
+     */
+    protected $hiddenColumns;
+
+    /**
      * This property holds an array of booleans representing whether or not to use the renderer widgets.
      * It's an array of widget identifier => bool.
      *
@@ -134,6 +141,7 @@ abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRende
     {
         $this->dataTypes = [];
         $this->labels = [];
+        $this->hiddenColumns = [];
         $this->useWidgets = [
             "checkbox" => true,
             "table" => true,
@@ -168,8 +176,13 @@ abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRende
 
         $rendering = $requestDeclaration['rendering'] ?? [];
         $labels = $rendering['column_labels'] ?? [];
+        $hiddenColumns = $rendering['hidden_columns'] ?? [];
+
+
 
         $this->setLabels($labels);
+        $this->setHiddenColumns($hiddenColumns);
+
 
 
         $this->setSqlColumns($realist->getSqlColumnsByRequestDeclaration($requestDeclaration));
@@ -261,6 +274,17 @@ abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRende
     {
         $this->labels = $labels;
     }
+
+    /**
+     * Sets the hiddenColumns.
+     *
+     * @param array $hiddenColumns
+     */
+    public function setHiddenColumns(array $hiddenColumns)
+    {
+        $this->hiddenColumns = $hiddenColumns;
+    }
+
 
 
     /**

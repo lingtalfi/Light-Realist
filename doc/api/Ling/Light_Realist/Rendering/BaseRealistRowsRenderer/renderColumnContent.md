@@ -61,7 +61,7 @@ Returns string.
 
 Source Code
 ===========
-See the source code for method [BaseRealistRowsRenderer::renderColumnContent](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/BaseRealistRowsRenderer.php#L160-L202)
+See the source code for method [BaseRealistRowsRenderer::renderColumnContent](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/BaseRealistRowsRenderer.php#L180-L222)
 
 
 See Also

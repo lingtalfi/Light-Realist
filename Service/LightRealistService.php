@@ -341,6 +341,13 @@ class LightRealistService
                 $rowsRendererInstance->addDynamicColumn($name, 'post');
             }
 
+
+            // hidden columns
+            if (array_key_exists("hidden_columns", $rendering)) {
+                $rowsRendererInstance->setHiddenColumns($rendering["hidden_columns"]);
+            }
+
+
             $rowsHtml = $rowsRendererInstance->render($rows);
 
         } else {

@@ -49,7 +49,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [OpenAdminTableBaseRealistListRenderer::setCollapsibleColumnIndexes](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/OpenAdminTableBaseRealistListRenderer.php#L302-L305)
+See the source code for method [OpenAdminTableBaseRealistListRenderer::setCollapsibleColumnIndexes](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/OpenAdminTableBaseRealistListRenderer.php#L326-L329)
 
 
 See Also

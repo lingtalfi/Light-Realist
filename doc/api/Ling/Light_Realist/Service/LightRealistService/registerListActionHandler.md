@@ -56,7 +56,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [LightRealistService::registerListActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L470-L476)
+See the source code for method [LightRealistService::registerListActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L477-L483)
 
 
 See Also

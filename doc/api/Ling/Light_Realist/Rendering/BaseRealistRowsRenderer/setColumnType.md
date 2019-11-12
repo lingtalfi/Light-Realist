@@ -57,7 +57,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [BaseRealistRowsRenderer::setColumnType](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/BaseRealistRowsRenderer.php#L77-L80)
+See the source code for method [BaseRealistRowsRenderer::setColumnType](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/BaseRealistRowsRenderer.php#L86-L89)
 
 
 See Also

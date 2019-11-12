@@ -29,6 +29,14 @@ interface RealistRowsRendererInterface
      */
     public function setRic(array $ric);
 
+    /**
+     * Sets the hidden columns.
+     *
+     * @param array $hiddenColumns
+     * @return mixed
+     */
+    public function setHiddenColumns(array $hiddenColumns);
+
 
     /**
      * Adds a dynamic column at the given position.

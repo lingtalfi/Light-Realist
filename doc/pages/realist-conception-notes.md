@@ -138,6 +138,35 @@ your ric related actions, but you can use any tool really.
  
  
  
+Hidden columns
+--------- 
+2019-11-12
+
+Hidden columns are columns hidden from the view, but which data is still available.
+
+
+### Why did I implement hidden columns ?
+
+I needed them when I wanted to create enhanced columns (aka crossed columns).
+
+For instance, instead of displaying just the user_id (which was to my opinion not very useful for the administrator),
+I wanted to display the user id AND the user pseudo or email.
+
+So I replaced the basic user_id column with the enhanced user_id_plus column.
+
+The problem in those admin tables, is that then when you need to do some actions on a row selection (for instance
+if you want to print a set of selected rows, or delete them, or even add a link based on the ric), you need the ric information
+of the row. 
+So if the user_id is part of the ric (and it was in my case), replacing the user_id with the user_id_plus column caused the ric
+to be lost. 
+
+So my workaround to this problem was to hide the user_id column from the view rather than replacing it.
+Yet the user_id information is still in the row, and so the ric being available in the html of the checkbox (at least
+with my Bootstrap4AdminTable renderer), it was quite easy to hide columns, and still have the ric information available
+for the rest of the gui.  
+
+
+ 
  
  
 Cheatsheet for the developer
@@ -432,6 +461,13 @@ default:
             avatar_url: Avatar url
             extra: Extra
             actions: Actions
+
+        # An array of column names.
+        hidden_columns:
+            - user_id
+            - permission_group_id
+
+
         rows_renderer:
             identifier: Light_Kit_Admin
 #                class: Ling\Light_Kit_Admin\Realist\Rendering\LightKitAdminRealistRowsRenderer
