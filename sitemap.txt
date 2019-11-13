@@ -167,6 +167,7 @@ https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realis
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/conception-notes-2019-08-12.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/conception-notes-2019-08-13.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/conception-notes.md
+https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/crossed-column.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/duelist-conception-notes.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/duelist.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/generic-action-item.md

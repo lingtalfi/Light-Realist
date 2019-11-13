@@ -333,7 +333,7 @@ In this section, I present to you the "other" settings, that are not part of the
 
 A full realist requestDeclaration example
 ====================
-2019-09-25 -> 2019-10-30
+2019-09-25 -> 2019-11-13
 
 
 Below is an example inspired from the [Light_Kit_Admin](https://github.com/lingtalfi/Light_Kit_Admin) plugin.
@@ -506,14 +506,29 @@ default:
         rows_renderer:
             identifier: Light_Kit_Admin
 #                class: Ling\Light_Kit_Admin\Realist\Rendering\LightKitAdminRealistRowsRenderer
+
+            # The rows renderer types (aka column transformers). 
+            # See the dedicated section above in this document for more info.        
             types:
                 avatar_url:
                     type: image
                     width: 100
-                action:
-                    type: lka_generic_ric_form_link
+                action: 
+                    type: Light_Realist.hub_link
                     text: Edit
-                    route: lka_route-user_profile
+                    url_params_add_ric: true
+                    url_params:
+                        controller: Generated/LudUserHasPermissionGroupController
+                        m: f
+                user_id_plus:
+                    type: Light_Realist.hub_link
+                    text: null
+                    url_params_add_keys:
+                        id: user_id
+                    url_params:
+                        controller: Generated/LudUserController
+                        plugin: Light_Kit_Admin
+                        m: f
 
                 checkbox: checkbox
             # This key must be present if you use the checkbox dynamic column. 

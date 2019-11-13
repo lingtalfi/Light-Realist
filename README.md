@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.24.1 -- 2019-11-13
+
+    - add cross column concept
+    
 - 1.24.0 -- 2019-11-13
 
     - add Light_Realist.hub_link rows_renderer type
