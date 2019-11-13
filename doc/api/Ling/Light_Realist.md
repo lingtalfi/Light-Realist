@@ -1,6 +1,6 @@
 Ling/Light_Realist
 ================
-2019-08-12 --> 2019-11-12
+2019-08-12 --> 2019-11-13
 
 
 
@@ -127,6 +127,8 @@ Dependencies
 - [Light](https://github.com/lingtalfi/Light)
 - [Light_CsrfSimple](https://github.com/lingtalfi/Light_CsrfSimple)
 - [Bat](https://github.com/lingtalfi/Bat)
+- [Light_ControllerHub](https://github.com/lingtalfi/Light_ControllerHub)
+- [Light_Kit_Admin](https://github.com/lingtalfi/Light_Kit_Admin)
 - [ArrayToString](https://github.com/lingtalfi/ArrayToString)
 - [BabyYaml](https://github.com/lingtalfi/BabyYaml)
 - [Light_Database](https://github.com/lingtalfi/Light_Database)

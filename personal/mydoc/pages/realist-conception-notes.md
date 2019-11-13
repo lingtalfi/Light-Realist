@@ -93,6 +93,39 @@ Each column can have a type, which basically dictates how to render that particu
 Most of the columns have regular text content, but sometimes we can have image that we would like
 to render as img tags, or arrays that we would like to display as a list, or other things...
 
+
+
+### Types, the column transformers
+
+Types (aka column transformers) allow us to transform the content of individual columns.
+We can use type to transform an image url into an actual html img tag, or create links, or trim a too long content, etc.
+
+Types are defined in the **rendering.rows_renderer.types** section, which is an array of type => typeConf.
+
+With type being the name of the **type** (defaults to the value "text"), and **typeConf** being an array with the following structure:
+
+- type: the type identifier, it helps identifying the plugin who will generate the transformation, and also indicate
+        the type of transformation to execute. 
+        We recommend that the type identifier has the following notation:
+            - {pluginName}.{transformType}
+        With:
+            - {pluginName}: the plugin name            
+            - {transformType}: an arbitrary string used by the plugin to know which type of transformation to apply            
+- ...(other parameters, which might be used depending on the type of transformation)
+
+
+In realist, our base renderer provides a few built-in types, including:
+
+- Light_Realist.image, to transform an url into an html image tag            
+- Light_Realist.hub_link, to create a link using the [controllerHub](transformType) service           
+- Light_Realist.checkbox, to create an [Open Admin Table One](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/open-admin-table-helper-implementation-notes.md) compliant checkbox (containing the ric info)
+
+See more in the code source of [the BaseRealistRowRenderer object](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/BaseRealistRowsRenderer.php).         
+
+
+
+
+
 ### Dynamic columns
 
 Sometimes, we need to decorate the rows.

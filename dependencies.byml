@@ -4,6 +4,8 @@ dependencies:
         - Light
         - Light_CsrfSimple
         - Bat
+        - Light_ControllerHub
+        - Light_Kit_Admin
         - ArrayToString
         - BabyYaml
         - Light_Database

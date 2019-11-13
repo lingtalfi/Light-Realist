@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.24.0 -- 2019-11-13
+
+    - add Light_Realist.hub_link rows_renderer type
+    
 - 1.23.0 -- 2019-11-12
 
     - update LightRealistService->getSqlColumnsByRequestDeclaration

@@ -7,6 +7,8 @@ namespace Ling\Light_Realist\Rendering;
 use Ling\Light\ReverseRouter\LightReverseRouterInterface;
 use Ling\Light\ServiceContainer\LightServiceContainerAwareInterface;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
+use Ling\Light_ControllerHub\Service\LightControllerHubService;
+use Ling\Light_Kit_Admin\Exception\LightKitAdminException;
 
 /**
  * The BaseRealistRowsRenderer interface.
@@ -56,6 +58,15 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
      * @var array
      */
     protected $ric;
+
+
+
+    /**
+     * This property holds the controllerHubRoute for this instance.
+     * @var string
+     */
+    private $_controllerHubRoute;
+
 
 
     /**
@@ -171,16 +182,18 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
      * Returns the html content of a column which value is given.
      *
      *
-     * @param $value
+     * @param string $value
      * @param string $type
      * @param array $options
      * @param array $row
      * @return string
+     * @throws \Exception
+     *
      */
-    protected function renderColumnContent($value, string $type, array $options, array $row): string
+    protected function renderColumnContent(string $value, string $type, array $options, array $row): string
     {
         switch ($type) {
-            case "image":
+            case "Light_Realist.image":
                 $sAttr = '';
                 $width = $options['width'] ?? null;
                 if (null !== $width) {
@@ -192,7 +205,7 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
                 }
                 $value = '<img src="' . htmlspecialchars($value) . '" alt="image" ' . $sAttr . '  />';
                 break;
-            case "checkbox":
+            case "Light_Realist.checkbox":
                 $sAttr = '';
                 if (array_key_exists("name", $options)) {
                     $sAttr .= ' name="' . htmlspecialchars($options['name']) . '"';
@@ -214,6 +227,30 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
                 }
 
                 $value = '<input class="rath-emitter oath-row-select-checkbox" type="checkbox" ' . $sAttr . ' />';
+                break;
+            case "Light_Realist.hub_link":
+                $useRic = $options['url_params_add_ric'] ?? false;
+                $extraKeys = $options['url_params_add_keys'] ?? [];
+                $extraUrlParams = [];
+                if (true === $useRic) {
+                    $extraUrlParams = $this->extractRic($row);
+                }
+
+                foreach ($extraKeys as $k => $rowKey) {
+                    if (array_key_exists($rowKey, $row)) {
+                        $extraUrlParams[$k] = $row[$rowKey];
+                    } else {
+                        throw new LightKitAdminException("Undefined key $rowKey in the given row.");
+                    }
+                }
+
+                $urlParams = array_merge($options['url_params'], $extraUrlParams);
+                $url = $this->getUrlByRoute($this->getControllerHubRoute(), $urlParams);
+                $text = $options['text'];
+                if (empty($text)) {
+                    $text = $value;
+                }
+                return '<a href="' . htmlspecialchars($url) . '">' . $text . '</a>';
                 break;
             default:
                 break;
@@ -262,5 +299,29 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
             // else let the dev figure it out (since it's rendering, I don't want to crash the design)
         }
         return $ret;
+    }
+
+    //--------------------------------------------
+    //
+    //--------------------------------------------
+    //--------------------------------------------
+    //
+    //--------------------------------------------
+    /**
+     * Returns the name of the route to the @page(controller hub service).
+     *
+     * @return string
+     * @throws \Exception
+     */
+    private function getControllerHubRoute(): string
+    {
+        if (null === $this->_controllerHubRoute) {
+            /**
+             * @var $hubs LightControllerHubService
+             */
+            $hubs = $this->container->get("controller_hub");
+            $this->_controllerHubRoute = $hubs->getRouteName();
+        }
+        return $this->_controllerHubRoute;
     }
 }
