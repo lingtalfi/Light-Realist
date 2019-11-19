@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.26.0 -- 2019-11-19
+
+    - add BaseRealistRowsRenderer->getAjaxHandlerServiceUrl 
+    
 - 1.25.2 -- 2019-11-19
 
     - update BaseRealistRowsRenderer->getControllerHubRoute now becomes protected (instead of private) 

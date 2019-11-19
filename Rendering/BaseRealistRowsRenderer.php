@@ -4,9 +4,9 @@
 namespace Ling\Light_Realist\Rendering;
 
 
-
 use Ling\Light\ServiceContainer\LightServiceContainerAwareInterface;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
+use Ling\Light_AjaxHandler\Service\LightAjaxHandlerService;
 use Ling\Light_ControllerHub\Service\LightControllerHubService;
 use Ling\Light_Kit_Admin\Exception\LightKitAdminException;
 use Ling\Light_ReverseRouter\Service\LightReverseRouterService;
@@ -61,13 +61,17 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
     protected $ric;
 
 
-
     /**
      * This property holds the controllerHubRoute for this instance.
      * @var string
      */
     private $_controllerHubRoute;
 
+    /**
+     * This property holds the _ajaxHandlerServiceUrl for this instance.
+     * @var string
+     */
+    private $_ajaxHandlerServiceUrl;
 
 
     /**
@@ -80,6 +84,8 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
         $this->hiddenColumns = [];
         $this->ric = [];
         $this->container = null;
+        $this->_controllerHubRoute = null;
+        $this->_ajaxHandlerServiceUrl = null;
     }
 
 
@@ -318,5 +324,24 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
             $this->_controllerHubRoute = $hubs->getRouteName();
         }
         return $this->_controllerHubRoute;
+    }
+
+
+    /**
+     * Returns the url of the @page(ajax handler service).
+     *
+     * @return string
+     * @throws \Exception
+     */
+    protected function getAjaxHandlerServiceUrl(): string
+    {
+        if (null === $this->_ajaxHandlerServiceUrl) {
+            /**
+             * @var $ahs LightAjaxHandlerService
+             */
+            $ahs = $this->container->get("ajax_handler");
+            $this->_ajaxHandlerServiceUrl = $ahs->getServiceUrl();
+        }
+        return $this->_ajaxHandlerServiceUrl;
     }
 }

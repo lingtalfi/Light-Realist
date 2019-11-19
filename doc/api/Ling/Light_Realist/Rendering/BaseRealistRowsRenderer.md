@@ -31,6 +31,7 @@ class <span class="pl-k">BaseRealistRowsRenderer</span> implements [RealistRowsR
     - protected array [$hiddenColumns](#property-hiddenColumns) ;
     - protected array [$ric](#property-ric) ;
     - private string [$_controllerHubRoute](#property-_controllerHubRoute) ;
+    - private string [$_ajaxHandlerServiceUrl](#property-_ajaxHandlerServiceUrl) ;
 
 - Methods
     - public [__construct](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/__construct.md)() : void
@@ -44,6 +45,7 @@ class <span class="pl-k">BaseRealistRowsRenderer</span> implements [RealistRowsR
     - protected [getUrlByRoute](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/getUrlByRoute.md)(string $route, ?array $urlParameters = [], ?bool $useAbsolute = null) : string
     - protected [extractRic](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/extractRic.md)(array $row) : array
     - protected [getControllerHubRoute](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/getControllerHubRoute.md)() : string
+    - protected [getAjaxHandlerServiceUrl](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/getAjaxHandlerServiceUrl.md)() : string
 
 }
 
@@ -95,6 +97,12 @@ Properties
     
     
 
+- <span id="property-_ajaxHandlerServiceUrl"><b>_ajaxHandlerServiceUrl</b></span>
+
+    This property holds the _ajaxHandlerServiceUrl for this instance.
+    
+    
+
 
 
 Methods
@@ -111,6 +119,7 @@ Methods
 - [BaseRealistRowsRenderer::getUrlByRoute](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/getUrlByRoute.md) &ndash; Returns the url corresponding to the given route, using the reverse_router service.
 - [BaseRealistRowsRenderer::extractRic](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/extractRic.md) &ndash; 
 - [BaseRealistRowsRenderer::getControllerHubRoute](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/getControllerHubRoute.md) &ndash; Returns the name of the route to the [controller hub service](https://github.com/lingtalfi/Light_ControllerHub).
+- [BaseRealistRowsRenderer::getAjaxHandlerServiceUrl](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/getAjaxHandlerServiceUrl.md) &ndash; Returns the url of the [ajax handler service](https://github.com/lingtalfi/Light_AjaxHandler).
 
 
 
