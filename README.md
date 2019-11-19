@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.27.0 -- 2019-11-19
+
+    - add BaseRealistRowsRenderer->getCsrfSimpleTokenValue 
+    
 - 1.26.0 -- 2019-11-19
 
     - add BaseRealistRowsRenderer->getAjaxHandlerServiceUrl 
