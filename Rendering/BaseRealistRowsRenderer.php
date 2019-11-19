@@ -302,19 +302,13 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
         return $ret;
     }
 
-    //--------------------------------------------
-    //
-    //--------------------------------------------
-    //--------------------------------------------
-    //
-    //--------------------------------------------
     /**
      * Returns the name of the route to the @page(controller hub service).
      *
      * @return string
      * @throws \Exception
      */
-    private function getControllerHubRoute(): string
+    protected function getControllerHubRoute(): string
     {
         if (null === $this->_controllerHubRoute) {
             /**
