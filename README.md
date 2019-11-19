@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.25.1 -- 2019-11-19
+
+    - update plugin to accommodate renamed Light_ReverseRouter service (forgot one instance) 
+    
 - 1.25.0 -- 2019-11-19
 
     - update plugin to accommodate renamed Light_ReverseRouter service 

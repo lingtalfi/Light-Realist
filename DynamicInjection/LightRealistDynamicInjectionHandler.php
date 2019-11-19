@@ -4,9 +4,9 @@
 namespace Ling\Light_Realist\DynamicInjection;
 
 
-use Ling\Light\ReverseRouter\LightReverseRouterInterface;
 use Ling\Light_CsrfSimple\Service\LightCsrfSimpleService;
 use Ling\Light_Realist\Exception\LightRealistException;
+use Ling\Light_ReverseRouter\Service\LightReverseRouterService;
 
 /**
  * The LightRealistDynamicInjectionHandler class.
@@ -53,7 +53,7 @@ class LightRealistDynamicInjectionHandler extends ContainerAwareRealistDynamicIn
                 break;
             case "route":
                 /**
-                 * @var $router LightReverseRouterInterface
+                 * @var $router LightReverseRouterService
                  */
                 $router = $this->container->get("reverse_router");
                 $route = array_shift($arguments);

@@ -3,10 +3,10 @@ dependencies:
         - Light_AjaxHandler
         - Light
         - Light_CsrfSimple
+        - Light_ReverseRouter
         - Bat
         - Light_ControllerHub
         - Light_Kit_Admin
-        - Light_ReverseRouter
         - ArrayToString
         - BabyYaml
         - Light_Database
