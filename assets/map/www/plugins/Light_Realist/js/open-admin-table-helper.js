@@ -610,7 +610,6 @@ if ("undefined" === typeof window.OpenAdminTableHelper) {
                     this.pushTags(tags, paginationData);
                 }
 
-
                 this.postTags(tags);
 
 

@@ -4,11 +4,12 @@
 namespace Ling\Light_Realist\Rendering;
 
 
-use Ling\Light\ReverseRouter\LightReverseRouterInterface;
+
 use Ling\Light\ServiceContainer\LightServiceContainerAwareInterface;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
 use Ling\Light_ControllerHub\Service\LightControllerHubService;
 use Ling\Light_Kit_Admin\Exception\LightKitAdminException;
+use Ling\Light_ReverseRouter\Service\LightReverseRouterService;
 
 /**
  * The BaseRealistRowsRenderer interface.
@@ -264,7 +265,7 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
     /**
      * Returns the url corresponding to the given route, using the reverse_router service.
      *
-     * For parameters, it's a proxy to the @page(LightReverseRouterInterface) (i.e. see their doc for more details).
+     * For parameters, it's a proxy to the @page(LightReverseRouterService) (i.e. see their doc for more details).
      *
      *
      * @param string $route
@@ -276,7 +277,7 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
     protected function getUrlByRoute(string $route, array $urlParameters = [], bool $useAbsolute = null): string
     {
         /**
-         * @var $rr LightReverseRouterInterface
+         * @var $rr LightReverseRouterService
          */
         $rr = $this->container->get("reverse_router");
         return $rr->getUrl($route, $urlParameters, $useAbsolute);

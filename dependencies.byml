@@ -6,6 +6,7 @@ dependencies:
         - Bat
         - Light_ControllerHub
         - Light_Kit_Admin
+        - Light_ReverseRouter
         - ArrayToString
         - BabyYaml
         - Light_Database
