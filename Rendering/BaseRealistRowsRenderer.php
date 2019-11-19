@@ -74,6 +74,12 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
      */
     private $_ajaxHandlerServiceUrl;
 
+    /**
+     * This property holds the _csrfSimpleToken for this instance.
+     * @var string
+     */
+    private $_csrfSimpleToken;
+
 
     /**
      * Builds the BaseDuelistRowsRenderer instance.
@@ -87,6 +93,7 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
         $this->container = null;
         $this->_controllerHubRoute = null;
         $this->_ajaxHandlerServiceUrl = null;
+        $this->_csrfSimpleToken = null;
     }
 
 
@@ -355,10 +362,14 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
      */
     protected function getCsrfSimpleTokenValue(): string
     {
+        if (null !== $this->_csrfSimpleToken) {
+            return $this->_csrfSimpleToken;
+        }
         /**
          * @var $c LightCsrfSimpleService
          */
         $c = $this->container->get("csrf_simple");
-        return $c->getToken();
+        $this->_csrfSimpleToken = $c->getToken();
+        return $this->_csrfSimpleToken;
     }
 }

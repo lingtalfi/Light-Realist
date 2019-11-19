@@ -32,6 +32,7 @@ class <span class="pl-k">BaseRealistRowsRenderer</span> implements [RealistRowsR
     - protected array [$ric](#property-ric) ;
     - private string [$_controllerHubRoute](#property-_controllerHubRoute) ;
     - private string [$_ajaxHandlerServiceUrl](#property-_ajaxHandlerServiceUrl) ;
+    - private string [$_csrfSimpleToken](#property-_csrfSimpleToken) ;
 
 - Methods
     - public [__construct](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/__construct.md)() : void
@@ -101,6 +102,12 @@ Properties
 - <span id="property-_ajaxHandlerServiceUrl"><b>_ajaxHandlerServiceUrl</b></span>
 
     This property holds the _ajaxHandlerServiceUrl for this instance.
+    
+    
+
+- <span id="property-_csrfSimpleToken"><b>_csrfSimpleToken</b></span>
+
+    This property holds the _csrfSimpleToken for this instance.
     
     
 

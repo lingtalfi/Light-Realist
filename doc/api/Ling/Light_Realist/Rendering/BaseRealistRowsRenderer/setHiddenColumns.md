@@ -49,7 +49,7 @@ Returns mixed.
 
 Source Code
 ===========
-See the source code for method [BaseRealistRowsRenderer::setHiddenColumns](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/BaseRealistRowsRenderer.php#L126-L129)
+See the source code for method [BaseRealistRowsRenderer::setHiddenColumns](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/BaseRealistRowsRenderer.php#L133-L136)
 
 
 See Also

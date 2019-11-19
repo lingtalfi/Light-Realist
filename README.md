@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.27.1 -- 2019-11-19
+
+    - update BaseRealistRowsRenderer->getCsrfSimpleTokenValue add simple cache
+    
 - 1.27.0 -- 2019-11-19
 
     - add BaseRealistRowsRenderer->getCsrfSimpleTokenValue 
