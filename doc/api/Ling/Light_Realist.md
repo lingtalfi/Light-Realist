@@ -1,6 +1,6 @@
 Ling/Light_Realist
 ================
-2019-08-12 --> 2019-11-19
+2019-08-12 --> 2019-11-20
 
 
 
@@ -60,6 +60,7 @@ Table of contents
     - [BaseRealistRowsRenderer::setColumnType](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/setColumnType.md) &ndash; Binds a type to the given column name.
     - [BaseRealistRowsRenderer::addDynamicColumn](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/addDynamicColumn.md) &ndash; Adds a dynamic column at the given position.
     - [BaseRealistRowsRenderer::setHiddenColumns](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/setHiddenColumns.md) &ndash; Sets the hidden columns.
+    - [BaseRealistRowsRenderer::setRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/setRequestId.md) &ndash; Sets the request id for the current instance.
     - [BaseRealistRowsRenderer::render](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/render.md) &ndash; The render method
     - [BaseRealistRowsRenderer::setRic](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/setRic.md) &ndash; Sets the ric.
 - [OpenAdminTableBaseRealistListRenderer](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/OpenAdminTableBaseRealistListRenderer.md) &ndash; The OpenAdminTableBaseRealistListRenderer class.
@@ -94,6 +95,8 @@ Table of contents
     - [RealistRowsRendererInterface::setHiddenColumns](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RealistRowsRendererInterface/setHiddenColumns.md) &ndash; Sets the hidden columns.
     - [RealistRowsRendererInterface::addDynamicColumn](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RealistRowsRendererInterface/addDynamicColumn.md) &ndash; Adds a dynamic column at the given position.
     - [RealistRowsRendererInterface::render](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RealistRowsRendererInterface/render.md) &ndash; The render method
+- [RequestIdAwareRendererInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RequestIdAwareRendererInterface.md) &ndash; The RequestIdAwareRendererInterface interface.
+    - [RequestIdAwareRendererInterface::setRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RequestIdAwareRendererInterface/setRequestId.md) &ndash; Sets the request id for the current instance.
 - [LightRealistService](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService.md) &ndash; The LightRealistService class.
     - [LightRealistService::__construct](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/__construct.md) &ndash; Builds the LightRealistService instance.
     - [LightRealistService::executeRequestById](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/executeRequestById.md) &ndash; - nb_rows: int, the number of returned rows (i.e.

@@ -49,7 +49,7 @@ Returns mixed.
 
 Source Code
 ===========
-See the source code for method [BaseRealistRowsRenderer::setHiddenColumns](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/BaseRealistRowsRenderer.php#L133-L136)
+See the source code for method [BaseRealistRowsRenderer::setHiddenColumns](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/BaseRealistRowsRenderer.php#L140-L143)
 
 
 See Also
@@ -57,5 +57,5 @@ See Also
 
 The [BaseRealistRowsRenderer](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer.md) class.
 
-Previous method: [addDynamicColumn](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/addDynamicColumn.md)<br>Next method: [render](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/render.md)<br>
+Previous method: [addDynamicColumn](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/addDynamicColumn.md)<br>Next method: [setRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/setRequestId.md)<br>
 

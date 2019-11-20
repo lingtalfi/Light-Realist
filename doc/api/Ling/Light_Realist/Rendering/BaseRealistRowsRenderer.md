@@ -4,7 +4,7 @@
 
 The BaseRealistRowsRenderer class
 ================
-2019-08-12 --> 2019-11-19
+2019-08-12 --> 2019-11-20
 
 
 
@@ -22,7 +22,7 @@ Class synopsis
 ==============
 
 
-class <span class="pl-k">BaseRealistRowsRenderer</span> implements [RealistRowsRendererInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RealistRowsRendererInterface.md), [LightServiceContainerAwareInterface](https://github.com/lingtalfi/Light/blob/master/doc/api/Ling/Light/ServiceContainer/LightServiceContainerAwareInterface.md) {
+class <span class="pl-k">BaseRealistRowsRenderer</span> implements [RealistRowsRendererInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RealistRowsRendererInterface.md), [LightServiceContainerAwareInterface](https://github.com/lingtalfi/Light/blob/master/doc/api/Ling/Light/ServiceContainer/LightServiceContainerAwareInterface.md), [RequestIdAwareRendererInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RequestIdAwareRendererInterface.md) {
 
 - Properties
     - protected array [$types](#property-types) ;
@@ -30,6 +30,7 @@ class <span class="pl-k">BaseRealistRowsRenderer</span> implements [RealistRowsR
     - protected array [$dynamicColumns](#property-dynamicColumns) ;
     - protected array [$hiddenColumns](#property-hiddenColumns) ;
     - protected array [$ric](#property-ric) ;
+    - protected string [$requestId](#property-requestId) ;
     - private string [$_controllerHubRoute](#property-_controllerHubRoute) ;
     - private string [$_ajaxHandlerServiceUrl](#property-_ajaxHandlerServiceUrl) ;
     - private string [$_csrfSimpleToken](#property-_csrfSimpleToken) ;
@@ -40,6 +41,7 @@ class <span class="pl-k">BaseRealistRowsRenderer</span> implements [RealistRowsR
     - public [setColumnType](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/setColumnType.md)(string $columnName, string $type, ?array $options = []) : void
     - public [addDynamicColumn](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/addDynamicColumn.md)(string $columnName, ?$position = post) : void
     - public [setHiddenColumns](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/setHiddenColumns.md)(array $hiddenColumns) : mixed
+    - public [setRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/setRequestId.md)(string $requestId) : mixed
     - public [render](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/render.md)(array $rows) : string
     - public [setRic](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/setRic.md)(array $ric) : mixed
     - protected [renderColumnContent](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/renderColumnContent.md)(string $value, string $type, array $options, array $row) : string
@@ -93,6 +95,12 @@ Properties
     
     
 
+- <span id="property-requestId"><b>requestId</b></span>
+
+    This property holds the requestId for this instance.
+    
+    
+
 - <span id="property-_controllerHubRoute"><b>_controllerHubRoute</b></span>
 
     This property holds the controllerHubRoute for this instance.
@@ -121,6 +129,7 @@ Methods
 - [BaseRealistRowsRenderer::setColumnType](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/setColumnType.md) &ndash; Binds a type to the given column name.
 - [BaseRealistRowsRenderer::addDynamicColumn](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/addDynamicColumn.md) &ndash; Adds a dynamic column at the given position.
 - [BaseRealistRowsRenderer::setHiddenColumns](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/setHiddenColumns.md) &ndash; Sets the hidden columns.
+- [BaseRealistRowsRenderer::setRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/setRequestId.md) &ndash; Sets the request id for the current instance.
 - [BaseRealistRowsRenderer::render](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/render.md) &ndash; 
 - [BaseRealistRowsRenderer::setRic](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/setRic.md) &ndash; Sets the ric.
 - [BaseRealistRowsRenderer::renderColumnContent](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer/renderColumnContent.md) &ndash; Returns the html content of a column which value is given.

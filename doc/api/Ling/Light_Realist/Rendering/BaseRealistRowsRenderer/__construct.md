@@ -46,7 +46,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [BaseRealistRowsRenderer::__construct](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/BaseRealistRowsRenderer.php#L87-L97)
+See the source code for method [BaseRealistRowsRenderer::__construct](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/BaseRealistRowsRenderer.php#L93-L104)
 
 
 See Also

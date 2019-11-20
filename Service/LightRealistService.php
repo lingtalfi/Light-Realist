@@ -22,6 +22,7 @@ use Ling\Light_Realist\ListActionHandler\LightRealistListActionHandlerInterface;
 use Ling\Light_Realist\ListGeneralActionHandler\LightRealistListGeneralActionHandlerInterface;
 use Ling\Light_Realist\Rendering\RealistListRendererInterface;
 use Ling\Light_Realist\Rendering\RealistRowsRendererInterface;
+use Ling\Light_Realist\Rendering\RequestIdAwareRendererInterface;
 use Ling\Light_Realist\Tool\LightRealistTool;
 use Ling\ParametrizedSqlQuery\Helper\ParametrizedSqlQueryHelper;
 use Ling\ParametrizedSqlQuery\ParametrizedSqlQueryUtil;
@@ -310,6 +311,10 @@ class LightRealistService
 
             if ($rowsRendererInstance instanceof LightServiceContainerAwareInterface) {
                 $rowsRendererInstance->setContainer($this->container);
+            }
+
+            if ($rowsRendererInstance instanceof RequestIdAwareRendererInterface) {
+                $rowsRendererInstance->setRequestId($requestId);
             }
 
             $ric = $requestDeclaration['ric'] ?? [];

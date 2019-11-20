@@ -4,7 +4,7 @@
 
 The LightRealistDynamicInjectionHandler class
 ================
-2019-08-12 --> 2019-11-19
+2019-08-12 --> 2019-11-20
 
 
 

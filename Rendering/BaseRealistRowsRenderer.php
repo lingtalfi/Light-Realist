@@ -16,7 +16,7 @@ use Ling\Light_ReverseRouter\Service\LightReverseRouterService;
  * The BaseRealistRowsRenderer interface.
  *
  */
-class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServiceContainerAwareInterface
+class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServiceContainerAwareInterface, RequestIdAwareRendererInterface
 {
 
 
@@ -61,6 +61,12 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
      */
     protected $ric;
 
+    /**
+     * This property holds the requestId for this instance.
+     * @var string
+     */
+    protected $requestId;
+
 
     /**
      * This property holds the controllerHubRoute for this instance.
@@ -91,6 +97,7 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
         $this->hiddenColumns = [];
         $this->ric = [];
         $this->container = null;
+        $this->requestId = null;
         $this->_controllerHubRoute = null;
         $this->_ajaxHandlerServiceUrl = null;
         $this->_csrfSimpleToken = null;
@@ -133,6 +140,14 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
     public function setHiddenColumns(array $hiddenColumns)
     {
         $this->hiddenColumns = $hiddenColumns;
+    }
+
+    /**
+     * @implementation
+     */
+    public function setRequestId(string $requestId)
+    {
+        $this->requestId = $requestId;
     }
 
 
@@ -266,6 +281,20 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
                     $text = $value;
                 }
                 return '<a href="' . htmlspecialchars($url) . '">' . $text . '</a>';
+                break;
+            case "Light_Realist.mixer":
+                $separator = $options['separator'] ?? ' ';
+                $items = $options['items'] ?? [];
+                $s = '';
+                $c = 0;
+                foreach ($items as $item) {
+                    if (0 !== $c) {
+                        $s .= $separator;
+                    }
+                    $s .= $this->renderColumnContent($value, $item['type'], $item, $row);
+                    $c++;
+                }
+                return $s;
                 break;
             default:
                 break;

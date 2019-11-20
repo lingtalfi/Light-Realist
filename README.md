@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.28.0 -- 2019-11-20
+
+    - update BaseRealistRowsRenderer->renderColumnContent add Light_Realist.mixer list action
+    
 - 1.27.1 -- 2019-11-19
 
     - update BaseRealistRowsRenderer->getCsrfSimpleTokenValue add simple cache

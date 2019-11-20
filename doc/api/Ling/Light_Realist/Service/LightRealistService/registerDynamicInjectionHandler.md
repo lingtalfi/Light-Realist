@@ -53,7 +53,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [LightRealistService::registerDynamicInjectionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L509-L512)
+See the source code for method [LightRealistService::registerDynamicInjectionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L514-L517)
 
 
 See Also

@@ -49,7 +49,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [BaseRealistRowsRenderer::setContainer](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/BaseRealistRowsRenderer.php#L103-L106)
+See the source code for method [BaseRealistRowsRenderer::setContainer](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/BaseRealistRowsRenderer.php#L110-L113)
 
 
 See Also
