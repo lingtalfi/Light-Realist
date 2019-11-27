@@ -11,6 +11,7 @@ use Ling\Bat\BDotTool;
 use Ling\Bat\SmartCodeTool;
 use Ling\Light\ServiceContainer\LightServiceContainerAwareInterface;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
+use Ling\Light_CsrfSession\Service\LightCsrfSessionService;
 use Ling\Light_CsrfSimple\Service\LightCsrfSimpleService;
 use Ling\Light_Database\LightDatabasePdoWrapper;
 use Ling\Light_Realist\ActionHandler\LightRealistActionHandlerInterface;
@@ -870,10 +871,10 @@ class LightRealistService
     protected function checkCsrfToken(string $token)
     {
         /**
-         * @var $csrfSimple LightCsrfSimpleService
+         * @var $csrfService LightCsrfSessionService
          */
-        $csrfSimple = $this->container->get("csrf_simple");
-        if (true === $csrfSimple->isValid($token)) {
+        $csrfService = $this->container->get("csrf_session");
+        if (true === $csrfService->isValid($token)) {
             return;
         }
         $this->error("Invalid csrf token value provided.");
@@ -930,10 +931,10 @@ class LightRealistService
     {
         if (array_key_exists("csrf_token", $item) && true === $item['csrf_token']) {
             /**
-             * @var $csrfSimple LightCsrfSimpleService
+             * @var $csrfService LightCsrfSessionService
              */
-            $csrfSimple = $this->container->get('csrf_simple');
-            $item['csrf_token'] = $csrfSimple->getToken();
+            $csrfService = $this->container->get('csrf_session');
+            $item['csrf_token'] = $csrfService->getToken();
         }
     }
 }

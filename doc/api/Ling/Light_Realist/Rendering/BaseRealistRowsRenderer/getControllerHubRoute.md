@@ -51,7 +51,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [BaseRealistRowsRenderer::getControllerHubRoute](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/BaseRealistRowsRenderer.php#L354-L364)
+See the source code for method [BaseRealistRowsRenderer::getControllerHubRoute](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/BaseRealistRowsRenderer.php#L355-L365)
 
 
 See Also

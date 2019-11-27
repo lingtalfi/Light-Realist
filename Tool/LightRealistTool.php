@@ -6,7 +6,7 @@ namespace Ling\Light_Realist\Tool;
 use Ling\Bat\ArrayTool;
 use Ling\Bat\BDotTool;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
-use Ling\Light_CsrfSimple\Service\LightCsrfSimpleService;
+use Ling\Light_CsrfSession\Service\LightCsrfSessionService;
 use Ling\Light_Realist\Exception\LightRealistException;
 
 /**
@@ -76,10 +76,10 @@ class LightRealistTool
     public static function checkAjaxToken(string $token, LightServiceContainerInterface $container)
     {
         /**
-         * @var $csrfSimple LightCsrfSimpleService
+         * @var $csrfService LightCsrfSessionService
          */
-        $csrfSimple = $container->get('csrf_simple');
-        if (false === $csrfSimple->isValid($token)) {
+        $csrfService = $container->get('csrf_session');
+        if (false === $csrfService->isValid($token)) {
             throw new LightRealistException("Invalid token with value $token.");
         }
     }

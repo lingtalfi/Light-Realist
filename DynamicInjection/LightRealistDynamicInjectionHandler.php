@@ -4,7 +4,7 @@
 namespace Ling\Light_Realist\DynamicInjection;
 
 
-use Ling\Light_CsrfSimple\Service\LightCsrfSimpleService;
+use Ling\Light_CsrfSession\Service\LightCsrfSessionService;
 use Ling\Light_Realist\Exception\LightRealistException;
 use Ling\Light_ReverseRouter\Service\LightReverseRouterService;
 
@@ -26,10 +26,10 @@ class LightRealistDynamicInjectionHandler extends ContainerAwareRealistDynamicIn
 
 
                 /**
-                 * @var $csrfSimple LightCsrfSimpleService
+                 * @var $csrfService LightCsrfSessionService
                  */
-                $csrfSimple = $this->container->get('csrf_simple');
-                return $csrfSimple->getToken();
+                $csrfService = $this->container->get('csrf_session');
+                return $csrfService->getToken();
 
 
                 //--------------------------------------------

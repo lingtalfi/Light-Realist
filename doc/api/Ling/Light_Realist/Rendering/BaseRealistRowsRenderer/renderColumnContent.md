@@ -66,7 +66,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [BaseRealistRowsRenderer::renderColumnContent](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/BaseRealistRowsRenderer.php#L223-L303)
+See the source code for method [BaseRealistRowsRenderer::renderColumnContent](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/BaseRealistRowsRenderer.php#L224-L304)
 
 
 See Also

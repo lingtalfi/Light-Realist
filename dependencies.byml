@@ -2,10 +2,11 @@ dependencies:
     Ling: 
         - Light_AjaxHandler
         - Light
-        - Light_CsrfSimple
+        - Light_CsrfSession
         - Light_ReverseRouter
         - Bat
         - Light_ControllerHub
+        - Light_CsrfSimple
         - Light_Kit_Admin
         - ArrayToString
         - BabyYaml

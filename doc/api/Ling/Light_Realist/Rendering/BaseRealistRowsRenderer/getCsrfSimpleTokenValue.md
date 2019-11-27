@@ -22,7 +22,7 @@ protected [BaseRealistRowsRenderer::getCsrfSimpleTokenValue](https://github.com/
 
 
 Returns the csrf simple token value.
-See the [Light_CsrfSimple plugin](https://github.com/lingtalfi/Light_CsrfSimple) for more info.
+See the [Light_CsrfSession plugin](https://github.com/lingtalfi/Light_CsrfSession) for more info.
 
 
 
@@ -52,7 +52,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [BaseRealistRowsRenderer::getCsrfSimpleTokenValue](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/BaseRealistRowsRenderer.php#L392-L403)
+See the source code for method [BaseRealistRowsRenderer::getCsrfSimpleTokenValue](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/BaseRealistRowsRenderer.php#L393-L404)
 
 
 See Also

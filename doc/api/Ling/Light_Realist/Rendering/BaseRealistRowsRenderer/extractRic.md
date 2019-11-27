@@ -49,7 +49,7 @@ Returns array.
 
 Source Code
 ===========
-See the source code for method [BaseRealistRowsRenderer::extractRic](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/BaseRealistRowsRenderer.php#L336-L346)
+See the source code for method [BaseRealistRowsRenderer::extractRic](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/BaseRealistRowsRenderer.php#L337-L347)
 
 
 See Also

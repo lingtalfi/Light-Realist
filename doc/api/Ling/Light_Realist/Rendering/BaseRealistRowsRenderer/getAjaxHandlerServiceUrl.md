@@ -51,7 +51,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [BaseRealistRowsRenderer::getAjaxHandlerServiceUrl](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/BaseRealistRowsRenderer.php#L373-L383)
+See the source code for method [BaseRealistRowsRenderer::getAjaxHandlerServiceUrl](https://github.com/lingtalfi/Light_Realist/blob/master/Rendering/BaseRealistRowsRenderer.php#L374-L384)
 
 
 See Also

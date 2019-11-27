@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.29.0 -- 2019-11-27
+
+    - use of csrf_session service replaces csrf_simple
+
 - 1.28.0 -- 2019-11-20
 
     - update BaseRealistRowsRenderer->renderColumnContent add Light_Realist.mixer list action

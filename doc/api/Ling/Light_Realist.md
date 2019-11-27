@@ -1,6 +1,6 @@
 Ling/Light_Realist
 ================
-2019-08-12 --> 2019-11-20
+2019-08-12 --> 2019-11-27
 
 
 
@@ -128,10 +128,11 @@ Dependencies
 ============
 - [Light_AjaxHandler](https://github.com/lingtalfi/Light_AjaxHandler)
 - [Light](https://github.com/lingtalfi/Light)
-- [Light_CsrfSimple](https://github.com/lingtalfi/Light_CsrfSimple)
+- [Light_CsrfSession](https://github.com/lingtalfi/Light_CsrfSession)
 - [Light_ReverseRouter](https://github.com/lingtalfi/Light_ReverseRouter)
 - [Bat](https://github.com/lingtalfi/Bat)
 - [Light_ControllerHub](https://github.com/lingtalfi/Light_ControllerHub)
+- [Light_CsrfSimple](https://github.com/lingtalfi/Light_CsrfSimple)
 - [Light_Kit_Admin](https://github.com/lingtalfi/Light_Kit_Admin)
 - [ArrayToString](https://github.com/lingtalfi/ArrayToString)
 - [BabyYaml](https://github.com/lingtalfi/BabyYaml)

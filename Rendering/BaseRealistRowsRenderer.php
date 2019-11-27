@@ -8,6 +8,7 @@ use Ling\Light\ServiceContainer\LightServiceContainerAwareInterface;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
 use Ling\Light_AjaxHandler\Service\LightAjaxHandlerService;
 use Ling\Light_ControllerHub\Service\LightControllerHubService;
+use Ling\Light_CsrfSession\Service\LightCsrfSessionService;
 use Ling\Light_CsrfSimple\Service\LightCsrfSimpleService;
 use Ling\Light_Kit_Admin\Exception\LightKitAdminException;
 use Ling\Light_ReverseRouter\Service\LightReverseRouterService;
@@ -385,7 +386,7 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
 
     /**
      * Returns the csrf simple token value.
-     * See the @page(Light_CsrfSimple plugin) for more info.
+     * See the @page(Light_CsrfSession plugin) for more info.
      * @return string
      * @throws \Exception
      */
@@ -395,9 +396,9 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
             return $this->_csrfSimpleToken;
         }
         /**
-         * @var $c LightCsrfSimpleService
+         * @var $c LightCsrfSessionService
          */
-        $c = $this->container->get("csrf_simple");
+        $c = $this->container->get("csrf_session");
         $this->_csrfSimpleToken = $c->getToken();
         return $this->_csrfSimpleToken;
     }

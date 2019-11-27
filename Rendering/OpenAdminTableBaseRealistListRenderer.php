@@ -214,10 +214,10 @@ abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRende
         $csrfToken = $requestDeclaration['csrf_token'] ?? null;
         if (true === $csrfToken) {
             /**
-             * @var $csrfSimple LightCsrfSimpleService
+             * @var $csrfService LightCsrfSimpleService
              */
-            $csrfSimple = $container->get('csrf_simple');
-            $this->setCsrfToken($csrfSimple->getToken());
+            $csrfService = $container->get('csrf_session');
+            $this->setCsrfToken($csrfService->getToken());
         }
 
         $relatedLinks = $rendering['related_links'] ?? [];
