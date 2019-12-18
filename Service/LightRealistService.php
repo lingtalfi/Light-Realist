@@ -221,8 +221,6 @@ class LightRealistService
     {
 
         $requestDeclaration = $this->getConfigurationArrayByRequestId($requestId);
-
-        $pluginName = $requestDeclaration['plugin'];
         $table = DuelistHelper::getRawTableName($requestDeclaration['table']);
 
         //--------------------------------------------
@@ -251,7 +249,7 @@ class LightRealistService
         //--------------------------------------------
         $useMicroPermission = $requestDeclaration['use_micro_permission'] ?? true;
         if (true === $useMicroPermission) {
-            $microPermission = "$pluginName.tables.$table.read";
+            $microPermission = "tables.$table.read";
             if (false === $this->container->get("micro_permission")->hasMicroPermission($microPermission)) {
                 throw new LightRealistException("Access denied: you don't have the micro-permission: $microPermission.");
             }

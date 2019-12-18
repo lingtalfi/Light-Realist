@@ -1,6 +1,6 @@
-Light Realist
+Light_Realist
 ===========
-2019-08-09
+2019-08-09 -> 2019-12-18
 
 
 
@@ -30,7 +30,7 @@ Or just download it and place it where you want otherwise.
 
 Summary
 ===========
-- [Realist api](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist.md) (generated with [DocTools](https://github.com/lingtalfi/DocTools))
+- [Light_Realist api](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist.md) (generated with [DocTools](https://github.com/lingtalfi/DocTools))
 - [Conception notes](https://github.com/lingtalfi/Light-Realist/tree/master/doc/pages)
 - [Services](#services)
 
@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.30.0 -- 2019-12-18
+
+    - update to accommodate Light_MicroPermission 2.0
+    
 - 1.29.0 -- 2019-11-27
 
     - use of csrf_session service replaces csrf_simple
