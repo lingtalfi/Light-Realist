@@ -6,6 +6,7 @@ namespace Ling\Light_Realist\GenericItemActionHandler;
 
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
 use Ling\Light\Tool\LightTool;
+use Ling\Light_MicroPermission\Service\LightMicroPermissionService;
 use Ling\Light_Realist\Exception\LightRealistException;
 use Ling\Light_Realist\Helper\DuelistHelper;
 use Ling\Light_Realist\Service\LightRealistService;
@@ -156,7 +157,11 @@ trait GenericActionItemHandlerTrait
      */
     protected function hasMicroPermission(string $microPermission): bool
     {
-        return $this->container->get("micro_permission")->hasMicroPermission($microPermission);
+        /**
+         * @var $microService LightMicroPermissionService
+         */
+        $microService = $this->container->get("micro_permission");
+        return $microService->hasMicroPermission($microPermission);
     }
 
     /**

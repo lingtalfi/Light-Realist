@@ -82,7 +82,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [GenericActionItemHandlerTrait::decorateGenericActionItemByAssets](https://github.com/lingtalfi/Light_Realist/blob/master/GenericItemActionHandler/GenericActionItemHandlerTrait.php#L86-L130)
+See the source code for method [GenericActionItemHandlerTrait::decorateGenericActionItemByAssets](https://github.com/lingtalfi/Light_Realist/blob/master/GenericItemActionHandler/GenericActionItemHandlerTrait.php#L87-L131)
 
 
 See Also

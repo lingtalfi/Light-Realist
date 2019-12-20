@@ -1,6 +1,6 @@
 Ling/Light_Realist
 ================
-2019-08-12 --> 2019-12-18
+2019-08-12 --> 2019-12-20
 
 
 
@@ -130,6 +130,7 @@ Dependencies
 - [Light](https://github.com/lingtalfi/Light)
 - [Light_CsrfSession](https://github.com/lingtalfi/Light_CsrfSession)
 - [Light_ReverseRouter](https://github.com/lingtalfi/Light_ReverseRouter)
+- [Light_MicroPermission](https://github.com/lingtalfi/Light_MicroPermission)
 - [Bat](https://github.com/lingtalfi/Bat)
 - [Light_ControllerHub](https://github.com/lingtalfi/Light_ControllerHub)
 - [Light_CsrfSimple](https://github.com/lingtalfi/Light_CsrfSimple)

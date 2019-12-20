@@ -4,6 +4,7 @@ dependencies:
         - Light
         - Light_CsrfSession
         - Light_ReverseRouter
+        - Light_MicroPermission
         - Bat
         - Light_ControllerHub
         - Light_CsrfSimple

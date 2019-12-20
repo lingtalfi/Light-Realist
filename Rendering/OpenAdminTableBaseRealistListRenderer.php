@@ -188,8 +188,11 @@ abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRende
         $this->setSqlColumns($realist->getSqlColumnsByRequestDeclaration($requestDeclaration));
 
         $listActionGroups = $rendering['list_action_groups'] ?? [];
+
         $realist->prepareListActionGroups($listActionGroups, $requestId);
         $this->setListActionGroups($listActionGroups);
+
+
 
 
         $listGeneralActions = $rendering['list_general_actions'] ?? [];

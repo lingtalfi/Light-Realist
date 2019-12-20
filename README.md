@@ -1,6 +1,6 @@
 Light_Realist
 ===========
-2019-08-09 -> 2019-12-18
+2019-08-09 -> 2019-12-20
 
 
 
@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.30.1 -- 2019-12-20
+
+    - add explicit dependency to Light_MicroPermission service 
+    
 - 1.30.0 -- 2019-12-18
 
     - update to accommodate Light_MicroPermission 2.0
