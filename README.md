@@ -1,6 +1,6 @@
 Light_Realist
 ===========
-2019-08-09 -> 2019-12-20
+2019-08-09 -> 2020-02-28
 
 
 
@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.30.2 -- 2019-20-28
+
+    - fix LightRealistService->getSqlColumnsByRequestDeclaration not taking into account possible aliases
+    
 - 1.30.1 -- 2019-12-20
 
     - add explicit dependency to Light_MicroPermission service 

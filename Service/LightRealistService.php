@@ -12,7 +12,6 @@ use Ling\Bat\SmartCodeTool;
 use Ling\Light\ServiceContainer\LightServiceContainerAwareInterface;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
 use Ling\Light_CsrfSession\Service\LightCsrfSessionService;
-use Ling\Light_CsrfSimple\Service\LightCsrfSimpleService;
 use Ling\Light_Database\LightDatabasePdoWrapper;
 use Ling\Light_Realist\ActionHandler\LightRealistActionHandlerInterface;
 use Ling\Light_Realist\DynamicInjection\RealistDynamicInjectionHandlerInterface;
@@ -579,6 +578,7 @@ class LightRealistService
     public function getListRendererByRequestId(string $requestId): RealistListRendererInterface
     {
         $requestDeclaration = $this->getConfigurationArrayByRequestId($requestId);
+
         $rendering = $requestDeclaration['rendering'] ?? [];
         $listRendererConf = $rendering['list_renderer'] ?? [];
         $listRendererId = $listRendererConf['identifier'] ?? null;
