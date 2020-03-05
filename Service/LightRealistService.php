@@ -24,6 +24,7 @@ use Ling\Light_Realist\Rendering\RealistListRendererInterface;
 use Ling\Light_Realist\Rendering\RealistRowsRendererInterface;
 use Ling\Light_Realist\Rendering\RequestIdAwareRendererInterface;
 use Ling\Light_Realist\Tool\LightRealistTool;
+use Ling\Light_UserRowRestriction\Service\LightUserRowRestrictionService;
 use Ling\ParametrizedSqlQuery\Helper\ParametrizedSqlQueryHelper;
 use Ling\ParametrizedSqlQuery\ParametrizedSqlQueryUtil;
 
@@ -244,7 +245,17 @@ class LightRealistService
 
 
         //--------------------------------------------
-        // CHECKING MICRO PERMISSION
+        // ROW RESTRICTION
+        //--------------------------------------------
+        $rowRestrictionMode = $requestDeclaration['row_restriction_mode'] ?? null;
+        if ("strict" === $rowRestrictionMode) {
+            LightUserRowRestrictionService::$mode = LightUserRowRestrictionService::MODE_STRICT;
+        } elseif ("permissive" === $rowRestrictionMode) {
+            LightUserRowRestrictionService::$mode = LightUserRowRestrictionService::MODE_PERMISSIVE;
+        }
+
+        //--------------------------------------------
+        // CHECKING MICRO PERMISSION...deprecated???
         //--------------------------------------------
         $useMicroPermission = $requestDeclaration['use_micro_permission'] ?? true;
         if (true === $useMicroPermission) {

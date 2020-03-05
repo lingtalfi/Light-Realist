@@ -61,7 +61,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [LightRealistService::convertCsrfTokenByItem](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L928-L937)
+See the source code for method [LightRealistService::convertCsrfTokenByItem](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L939-L948)
 
 
 See Also

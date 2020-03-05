@@ -1,6 +1,6 @@
 Ling/Light_Realist
 ================
-2019-08-12 --> 2020-02-28
+2019-08-12 --> 2020-03-05
 
 
 
@@ -138,6 +138,7 @@ Dependencies
 - [ArrayToString](https://github.com/lingtalfi/ArrayToString)
 - [BabyYaml](https://github.com/lingtalfi/BabyYaml)
 - [Light_Database](https://github.com/lingtalfi/Light_Database)
+- [Light_UserRowRestriction](https://github.com/lingtalfi/Light_UserRowRestriction)
 - [ParametrizedSqlQuery](https://github.com/lingtalfi/ParametrizedSqlQuery)
 - [JAcpHep](https://github.com/lingtalfi/JAcpHep)
 - [JResponsiveTableHelper](https://github.com/lingtalfi/JResponsiveTableHelper)

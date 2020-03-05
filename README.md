@@ -1,6 +1,6 @@
 Light_Realist
 ===========
-2019-08-09 -> 2020-02-28
+2019-08-09 -> 2020-03-05
 
 
 
@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.31.0 -- 2020-03-05
+
+    - update, now takes into account the row restriction system
+    
 - 1.30.2 -- 2019-20-28
 
     - fix LightRealistService->getSqlColumnsByRequestDeclaration not taking into account possible aliases
