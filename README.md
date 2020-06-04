@@ -1,6 +1,6 @@
 Light_Realist
 ===========
-2019-08-09 -> 2020-03-06
+2019-08-09 -> 2020-06-04
 
 
 
@@ -66,6 +66,10 @@ realist:
             container: @container()
         setBaseDir:
             dir: ${app_dir}
+        registerDynamicInjectionHandler:
+            identifier: Light_Realist
+            handler:
+                instance: Ling\Light_Realist\DynamicInjection\LightRealistDynamicInjectionHandler
 
 realist_action_handler:
     instance: Ling\Light_Realist\Service\LightRealistService
@@ -76,14 +80,20 @@ realist_action_handler:
             dir: ${app_dir}
 
 
+
+
 # --------------------------------------
 # hooks
 # --------------------------------------
-$easy_route.methods_collection:
+$ajax_handler.methods_collection:
     -
-        method: registerBundleFile
+        method: registerHandler
         args:
-            file: config/data/Light_Realist/Light_EasyRoute/realist_routes.byml
+            id: Light_Realist
+            handler:
+                instance: Ling\Light_Realist\AjaxHandler\LightRealistAjaxHandler
+
+
 ```
 
 
@@ -97,6 +107,10 @@ Related
 
 History Log
 =============
+
+- 1.33.0 -- 2020-06-04
+
+    - update for Light_AjaxHandler v2
 
 - 1.32.0 -- 2020-03-06
 
