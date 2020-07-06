@@ -1,6 +1,6 @@
 Light_Realist
 ===========
-2019-08-09 -> 2020-06-04
+2019-08-09 -> 2020-06-07
 
 
 
@@ -108,6 +108,10 @@ Related
 History Log
 =============
 
+- 1.34.0 -- 2020-06-07
+
+    - change action and checkbox dynamic column names to _action and _checkbox
+    
 - 1.33.0 -- 2020-06-04
 
     - update for Light_AjaxHandler v2
