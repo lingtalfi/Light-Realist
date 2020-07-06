@@ -1,6 +1,6 @@
 Light_Realist
 ===========
-2019-08-09 -> 2020-06-07
+2019-08-09 -> 2020-07-06
 
 
 
@@ -108,7 +108,11 @@ Related
 History Log
 =============
 
-- 1.34.0 -- 2020-06-07
+- 1.34.1 -- 2020-07-06
+
+    - typo in commit date
+    
+- 1.34.0 -- 2020-07-06
 
     - change action and checkbox dynamic column names to _action and _checkbox
     
