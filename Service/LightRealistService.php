@@ -14,6 +14,7 @@ use Ling\Light\ServiceContainer\LightServiceContainerInterface;
 use Ling\Light_CsrfSession\Service\LightCsrfSessionService;
 use Ling\Light_Database\LightDatabasePdoWrapper;
 use Ling\Light_Realist\ActionHandler\LightRealistActionHandlerInterface;
+use Ling\Light_Realist\CustomManager\LightRealistCustomManager;
 use Ling\Light_Realist\DynamicInjection\RealistDynamicInjectionHandlerInterface;
 use Ling\Light_Realist\Exception\LightRealistException;
 use Ling\Light_Realist\Helper\DuelistHelper;
@@ -178,12 +179,15 @@ class LightRealistService
      *
      *
      * - nb_total_rows: int, the total number of rows without "where" filtering
-     * - nb_rows: int, the number of returned rows (i.e. WITH the "where" filtering)
+     * - current_page_first: int, the index of the first item of the current page
+     * - current_page_last: int, the index of the last item of the current page
+     * - nb_pages: int, the number of pages
+     * - nb_items_per_page: int, the number of items per page
+     * - page: int, the current page number
      * - rows: array, the raw rows returned by the sql query
      * - rows_html: string, the html of the rows, as shaped by the realist configuration
      * - sql_query: string, the executed sql query (intend: debug)
      * - markers: array, the markers used along with the executed sql query (intend: debug)
-     *
      *
      *
      *
@@ -206,6 +210,11 @@ class LightRealistService
      *          already trust that the user is who she claimed she is).
      *
      *
+     * Available options are:
+     * - customManager: null|LightRealistCustomManager, if set, is used to get the rows_renderer object.
+     *      This has precedence over anything defined in the configuration.
+     *
+     *
      * If the sql query is not valid, an exception will be thrown.
      *
      *
@@ -213,12 +222,14 @@ class LightRealistService
      *
      * @param string $requestId
      * @param array $params
+     * @param array $options
      * @return array
      * @throws \Exception
      */
-    public function executeRequestById(string $requestId, array $params = []): array
+    public function executeRequestById(string $requestId, array $params = [], array $options = []): array
     {
 
+        $customManager = $options['customManager'] ?? null;
         $requestDeclaration = $this->getConfigurationArrayByRequestId($requestId);
         $table = DuelistHelper::getRawTableName($requestDeclaration['table']);
         $useRowRestriction = $requestDeclaration['use_row_restriction'] ?? false;
@@ -309,14 +320,18 @@ class LightRealistService
         $rowsRenderer = $rendering['rows_renderer'] ?? [];
         $rowsRendererInstance = null;
 
-        if (array_key_exists('class', $rowsRenderer)) {
-            $rowsRendererInstance = new $rowsRenderer['class'];
+        if ($customManager instanceof LightRealistCustomManager) {
+            $rowsRendererInstance = $customManager->getRowsRenderer();
         } else {
-            if (array_key_exists("identifier", $rowsRenderer)) {
-                $identifier = $rowsRenderer['identifier'];
-                $rowsRendererInstance = $this->realistRowsRenderers[$identifier] ?? null;
+            if (array_key_exists('class', $rowsRenderer)) {
+                $rowsRendererInstance = new $rowsRenderer['class'];
             } else {
-                $this->error("Bad configuration error. For the \"rendering.rows_renderer\" setting, either the \"class\" or the \"identifier\" must be set.");
+                if (array_key_exists("identifier", $rowsRenderer)) {
+                    $identifier = $rowsRenderer['identifier'];
+                    $rowsRendererInstance = $this->realistRowsRenderers[$identifier] ?? null;
+                } else {
+                    $this->error("Bad configuration error. For the \"rendering.rows_renderer\" setting, either the \"class\" or the \"identifier\" must be set.");
+                }
             }
         }
 

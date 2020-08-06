@@ -54,7 +54,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [LightRealistService::getListRendererByRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L594-L616)
+See the source code for method [LightRealistService::getListRendererByRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L609-L631)
 
 
 See Also

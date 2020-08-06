@@ -67,4 +67,4 @@ See the source code of [Ling\Light_Realist\AjaxHandler\LightRealistAjaxHandler](
 
 SeeAlso
 ==============
-Previous class: [AjaxCustomHandlerInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/AjaxCustomHandler/AjaxCustomHandlerInterface.md)<br>Next class: [ContainerAwareRealistDynamicInjectionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/DynamicInjection/ContainerAwareRealistDynamicInjectionHandler.md)<br>
+Previous class: [AjaxCustomHandlerInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/AjaxCustomHandler/AjaxCustomHandlerInterface.md)<br>Next class: [LightRealistCustomManager](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/CustomManager/LightRealistCustomManager.md)<br>
