@@ -66,9 +66,11 @@ class LightRealistAjaxHandler extends ContainerAwareLightAjaxHandler
                              * @var $service LightRealistCustomServiceInterface
                              */
                             $service = $this->container->get($serviceName);
-                            $handler = $service->getCustomAjaxHandler($requestId);
-                            if (false !== $handler) {
-                                $response = $handler->executeRequestById($requestId, $params);
+                            if ($service instanceof LightRealistCustomServiceInterface) {
+                                $handler = $service->getCustomAjaxHandler($requestId);
+                                if (false !== $handler) {
+                                    $response = $handler->executeRequestById($requestId, $params);
+                                }
                             }
                         }
                     }

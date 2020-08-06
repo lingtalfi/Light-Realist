@@ -108,6 +108,10 @@ Related
 History Log
 =============
 
+- 1.36.1 -- 2020-08-06
+
+    - fix LightRealistAjaxHandler->handle code oversight
+    
 - 1.36.0 -- 2020-08-06
 
     - add LightRealistCustomManager class
