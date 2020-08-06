@@ -4,9 +4,11 @@
 namespace Ling\Light_Realist\AjaxHandler;
 
 
+use Ling\Light\Helper\LightNamesAndPathHelper;
 use Ling\Light\Http\HttpRequestInterface;
 use Ling\Light_AjaxHandler\Handler\ContainerAwareLightAjaxHandler;
 use Ling\Light_Realist\Exception\LightRealistException;
+use Ling\Light_Realist\Service\LightRealistCustomServiceInterface;
 use Ling\Light_Realist\Service\LightRealistService;
 
 /**
@@ -40,6 +42,8 @@ class LightRealistAjaxHandler extends ContainerAwareLightAjaxHandler
                 if (array_key_exists("request_id", $params)) {
 
                     $requestId = $params['request_id'];
+
+
                     $tags = $params['tags'] ?? [];
                     $csrfTokenValue = $params['csrf_token'] ?? null;
 
@@ -50,25 +54,47 @@ class LightRealistAjaxHandler extends ContainerAwareLightAjaxHandler
                     ];
 
 
-                    /**
-                     * @var $service LightRealistService
-                     */
-                    $service = $this->getContainer()->get("realist");
-                    $res = $service->executeRequestById($requestId, $params);
+                    // custom class override?
+                    $response = null;
+                    $p = explode(':', $requestId, 2);
+                    if (2 === count($p)) {
+                        $planet = array_shift($p);
+                        $serviceName = LightNamesAndPathHelper::getServiceName($planet);
 
-                    $response = [
-                        "type" => "success",
-                        "rows" => $res['rows_html'],
-                        'nb_total_rows' => $res['nb_total_rows'],
-                        'current_page_first' => $res['current_page_first'],
-                        'current_page_last' => $res['current_page_last'],
-                        'nb_pages' => $res['nb_pages'],
-                        'nb_items_per_page' => $res['nb_items_per_page'],
-                        'page' => $res['page'],
-                        'sql_query' => $res['sql_query'],
-                        'markers' => $res['markers'],
-                    ];
+                        if (true === $this->container->has($serviceName)) {
+                            /**
+                             * @var $service LightRealistCustomServiceInterface
+                             */
+                            $service = $this->container->get($serviceName);
+                            $handler = $service->getCustomAjaxHandler($requestId);
+                            if (false !== $handler) {
+                                $response = $handler->executeRequestById($requestId, $params);
+                            }
+                        }
+                    }
 
+
+                    if (null === $response) {
+                        /**
+                         * @var $service LightRealistService
+                         */
+                        $service = $this->getContainer()->get("realist");
+                        $res = $service->executeRequestById($requestId, $params);
+
+                        $response = [
+                            "type" => "success",
+                            "rows" => $res['rows_html'],
+                            'nb_total_rows' => $res['nb_total_rows'],
+                            'current_page_first' => $res['current_page_first'],
+                            'current_page_last' => $res['current_page_last'],
+                            'nb_pages' => $res['nb_pages'],
+                            'nb_items_per_page' => $res['nb_items_per_page'],
+                            'page' => $res['page'],
+                            'sql_query' => $res['sql_query'],
+                            'markers' => $res['markers'],
+                        ];
+
+                    }
 
                 } elseif (array_key_exists('action_id', $params)) {
                     az(__FILE__, "reorganize this?");

@@ -1,6 +1,6 @@
 Light_Realist
 ===========
-2019-08-09 -> 2020-07-21
+2019-08-09 -> 2020-08-06
 
 
 
@@ -31,7 +31,7 @@ Or just download it and place it where you want otherwise.
 Summary
 ===========
 - [Light_Realist api](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist.md) (generated with [DocTools](https://github.com/lingtalfi/DocTools))
-- [Conception notes](https://github.com/lingtalfi/Light-Realist/tree/master/doc/pages)
+- [Documentation](https://github.com/lingtalfi/Light-Realist/tree/master/doc/pages/documentation.md)
 - [Services](#services)
 
 
@@ -108,6 +108,10 @@ Related
 History Log
 =============
 
+- 1.35.0 -- 2020-08-06
+
+    - add LightRealistCustomServiceInterface
+    
 - 1.34.2 -- 2020-07-21
 
     - fix BaseRealistRowsRenderer->render passing potentially null value to renderColumnContent method, where string was expected

@@ -4,7 +4,7 @@
 
 The LightRealistService class
 ================
-2019-08-12 --> 2020-07-21
+2019-08-12 --> 2020-08-06
 
 
 
@@ -216,4 +216,4 @@ See the source code of [Ling\Light_Realist\Service\LightRealistService](https://
 
 SeeAlso
 ==============
-Previous class: [RequestIdAwareRendererInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RequestIdAwareRendererInterface.md)<br>Next class: [LightRealistTool](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool.md)<br>
+Previous class: [LightRealistCustomServiceInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistCustomServiceInterface.md)<br>Next class: [LightRealistTool](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool.md)<br>
