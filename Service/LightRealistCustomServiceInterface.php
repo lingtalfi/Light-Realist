@@ -20,5 +20,5 @@ interface LightRealistCustomServiceInterface
      * @param string $requestId
      * @return mixed
      */
-    public function registerByRequestId( string $requestId);
+    public function registerRealistByRequestId( string $requestId);
 }

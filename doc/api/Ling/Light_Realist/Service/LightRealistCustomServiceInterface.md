@@ -25,7 +25,7 @@ Class synopsis
 abstract class <span class="pl-k">LightRealistCustomServiceInterface</span>  {
 
 - Methods
-    - abstract public [registerByRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistCustomServiceInterface/registerByRequestId.md)(string $requestId) : mixed
+    - abstract public [registerRealistByRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistCustomServiceInterface/registerRealistByRequestId.md)(string $requestId) : mixed
 
 }
 
@@ -37,7 +37,7 @@ abstract class <span class="pl-k">LightRealistCustomServiceInterface</span>  {
 Methods
 ==============
 
-- [LightRealistCustomServiceInterface::registerByRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistCustomServiceInterface/registerByRequestId.md) &ndash; Registers the plugin to the realist service.
+- [LightRealistCustomServiceInterface::registerRealistByRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistCustomServiceInterface/registerRealistByRequestId.md) &ndash; Registers the plugin to the realist service.
 
 
 

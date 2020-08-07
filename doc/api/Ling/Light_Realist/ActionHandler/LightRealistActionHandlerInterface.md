@@ -55,4 +55,4 @@ See the source code of [Ling\Light_Realist\ActionHandler\LightRealistActionHandl
 
 SeeAlso
 ==============
-Previous class: [LightRealistAbstractActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ActionHandler/LightRealistAbstractActionHandler.md)<br>Next class: [LightRealistAjaxCustomHandlerInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/AjaxCustomHandler/LightRealistAjaxCustomHandlerInterface.md)<br>
+Previous class: [LightRealistAbstractActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ActionHandler/LightRealistAbstractActionHandler.md)<br>Next class: [LightRealistAjaxHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/AjaxHandler/LightRealistAjaxHandler.md)<br>

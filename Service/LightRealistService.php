@@ -1020,7 +1020,7 @@ class LightRealistService
                      */
                     $service = $this->container->get($serviceName);
                     if ($service instanceof LightRealistCustomServiceInterface) {
-                        $service->registerByRequestId($requestId);
+                        $service->registerRealistByRequestId($requestId);
                     }
                 }
             }
