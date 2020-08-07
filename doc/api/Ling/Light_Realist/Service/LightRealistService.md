@@ -4,7 +4,7 @@
 
 The LightRealistService class
 ================
-2019-08-12 --> 2020-08-06
+2019-08-12 --> 2020-08-07
 
 
 
@@ -69,6 +69,7 @@ class <span class="pl-k">LightRealistService</span>  {
     - protected [Ling\Light_Realist\Rendering\RealistListRendererInterface[]](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RealistListRendererInterface.md) [$listRenderers](#property-listRenderers) ;
     - protected [Ling\Light_Realist\DynamicInjection\RealistDynamicInjectionHandlerInterface[]](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/DynamicInjection/RealistDynamicInjectionHandlerInterface.md) [$dynamicInjectionHandlers](#property-dynamicInjectionHandlers) ;
     - private array [$_requestDeclarationCache](#property-_requestDeclarationCache) ;
+    - private array [$lateRegistered](#property-lateRegistered) ;
 
 - Methods
     - public [__construct](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/__construct.md)() : void
@@ -95,6 +96,7 @@ class <span class="pl-k">LightRealistService</span>  {
     - protected [checkCsrfToken](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/checkCsrfToken.md)(string $token) : void
     - private [prepareGenericActionItem](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/prepareGenericActionItem.md)(array &$item, array $handlers, string $requestId) : bool
     - private [convertCsrfTokenByItem](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/convertCsrfTokenByItem.md)(array &$item, string $requestId) : void
+    - private [latePrepareByRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/latePrepareByRequestId.md)(string $requestId) : void
 
 }
 
@@ -173,6 +175,14 @@ Properties
     
     
 
+- <span id="property-lateRegistered"><b>lateRegistered</b></span>
+
+    This property holds the lateRegistered for this instance.
+    
+    An array of already registered requestId.
+    
+    
+
 
 
 Methods
@@ -202,6 +212,7 @@ Methods
 - [LightRealistService::checkCsrfToken](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/checkCsrfToken.md) &ndash; Checks whether the csrf token is valid, throws an exception if that's not the case.
 - [LightRealistService::prepareGenericActionItem](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/prepareGenericActionItem.md) &ndash; Converts the given item into a [generic action item](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/generic-action-item.md).
 - [LightRealistService::convertCsrfTokenByItem](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/convertCsrfTokenByItem.md) &ndash; entries to an actual csrf_token value.
+- [LightRealistService::latePrepareByRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/latePrepareByRequestId.md) &ndash; Provides the opportunity for plugin authors to lately register to our service.
 
 
 

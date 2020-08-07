@@ -57,11 +57,6 @@ Params an array containing the following:
          already trust that the user is who she claimed she is).
 
 
-Available options are:
-- customManager: null|LightRealistCustomManager, if set, is used to get the rows_renderer object.
-     This has precedence over anything defined in the configuration.
-
-
 If the sql query is not valid, an exception will be thrown.
 
 
@@ -103,7 +98,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [LightRealistService::executeRequestById](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L229-L432)
+See the source code for method [LightRealistService::executeRequestById](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L234-L438)
 
 
 See Also

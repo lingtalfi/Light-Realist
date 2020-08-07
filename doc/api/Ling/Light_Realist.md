@@ -1,6 +1,6 @@
 Ling/Light_Realist
 ================
-2019-08-12 --> 2020-08-06
+2019-08-12 --> 2020-08-07
 
 
 
@@ -16,16 +16,12 @@ Table of contents
 - [LightRealistActionHandlerInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ActionHandler/LightRealistActionHandlerInterface.md) &ndash; The LightRealistActionHandlerInterface interface.
     - [LightRealistActionHandlerInterface::getHandledIds](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ActionHandler/LightRealistActionHandlerInterface/getHandledIds.md) &ndash; Returns the array of handled action ids.
     - [LightRealistActionHandlerInterface::execute](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ActionHandler/LightRealistActionHandlerInterface/execute.md) &ndash; Executes the action identified by the given action id.
-- [AjaxCustomHandlerInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/AjaxCustomHandler/AjaxCustomHandlerInterface.md) &ndash; The AjaxCustomHandlerInterface interface.
-    - [AjaxCustomHandlerInterface::executeRequestById](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/AjaxCustomHandler/AjaxCustomHandlerInterface/executeRequestById.md) &ndash; Returns an array of key/value pairs representing the updated state of the list to display.
+- [LightRealistAjaxCustomHandlerInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/AjaxCustomHandler/LightRealistAjaxCustomHandlerInterface.md) &ndash; The LightRealistAjaxCustomHandlerInterface interface.
+    - [LightRealistAjaxCustomHandlerInterface::executeRequestById](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/AjaxCustomHandler/LightRealistAjaxCustomHandlerInterface/executeRequestById.md) &ndash; Returns an array of key/value pairs representing the updated state of the list to display.
 - [LightRealistAjaxHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/AjaxHandler/LightRealistAjaxHandler.md) &ndash; The LightRealistAjaxHandler class.
     - [LightRealistAjaxHandler::handle](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/AjaxHandler/LightRealistAjaxHandler/handle.md) &ndash; Process the given parameters, and returns the appropriate response.
     - ContainerAwareLightAjaxHandler::__construct &ndash; Builds the ContainerAwareLightAjaxHandler instance.
     - ContainerAwareLightAjaxHandler::setContainer &ndash; Sets the light service container interface.
-- [LightRealistCustomManager](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/CustomManager/LightRealistCustomManager.md) &ndash; The LightRealistCustomManager class.
-    - [LightRealistCustomManager::__construct](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/CustomManager/LightRealistCustomManager/__construct.md) &ndash; Builds the LightRealistCustomManager instance.
-    - [LightRealistCustomManager::getRowsRenderer](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/CustomManager/LightRealistCustomManager/getRowsRenderer.md) &ndash; Returns the rowsRenderer of this instance.
-    - [LightRealistCustomManager::setRowsRenderer](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/CustomManager/LightRealistCustomManager/setRowsRenderer.md) &ndash; Sets the rowsRenderer.
 - [ContainerAwareRealistDynamicInjectionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/DynamicInjection/ContainerAwareRealistDynamicInjectionHandler.md) &ndash; The ContainerAwareRealistDynamicInjectionHandler class
     - [ContainerAwareRealistDynamicInjectionHandler::__construct](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/DynamicInjection/ContainerAwareRealistDynamicInjectionHandler/__construct.md) &ndash; Builds the ContainerAwareRealistDynamicInjectionHandler instance.
     - [ContainerAwareRealistDynamicInjectionHandler::setContainer](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/DynamicInjection/ContainerAwareRealistDynamicInjectionHandler/setContainer.md) &ndash; Sets the light service container interface.
@@ -104,7 +100,7 @@ Table of contents
 - [RequestIdAwareRendererInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RequestIdAwareRendererInterface.md) &ndash; The RequestIdAwareRendererInterface interface.
     - [RequestIdAwareRendererInterface::setRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RequestIdAwareRendererInterface/setRequestId.md) &ndash; Sets the request id for the current instance.
 - [LightRealistCustomServiceInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistCustomServiceInterface.md) &ndash; The LightRealistCustomServiceInterface interface.
-    - [LightRealistCustomServiceInterface::getCustomAjaxHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistCustomServiceInterface/getCustomAjaxHandler.md) &ndash; Returns the custom ajax handler to use for the given request id, or false if no custom ajax handler is defined for this request id.
+    - [LightRealistCustomServiceInterface::registerByRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistCustomServiceInterface/registerByRequestId.md) &ndash; Registers the plugin to the realist service.
 - [LightRealistService](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService.md) &ndash; The LightRealistService class.
     - [LightRealistService::__construct](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/__construct.md) &ndash; Builds the LightRealistService instance.
     - [LightRealistService::executeRequestById](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/executeRequestById.md) &ndash;      the .byml extension.

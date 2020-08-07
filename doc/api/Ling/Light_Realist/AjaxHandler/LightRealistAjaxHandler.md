@@ -4,7 +4,7 @@
 
 The LightRealistAjaxHandler class
 ================
-2019-08-12 --> 2020-08-06
+2019-08-12 --> 2020-08-07
 
 
 
@@ -67,4 +67,4 @@ See the source code of [Ling\Light_Realist\AjaxHandler\LightRealistAjaxHandler](
 
 SeeAlso
 ==============
-Previous class: [AjaxCustomHandlerInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/AjaxCustomHandler/AjaxCustomHandlerInterface.md)<br>Next class: [LightRealistCustomManager](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/CustomManager/LightRealistCustomManager.md)<br>
+Previous class: [LightRealistAjaxCustomHandlerInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/AjaxCustomHandler/LightRealistAjaxCustomHandlerInterface.md)<br>Next class: [ContainerAwareRealistDynamicInjectionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/DynamicInjection/ContainerAwareRealistDynamicInjectionHandler.md)<br>

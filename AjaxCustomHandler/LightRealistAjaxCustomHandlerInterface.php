@@ -5,9 +5,9 @@ namespace Ling\Light_Realist\AjaxCustomHandler;
 
 
 /**
- * The AjaxCustomHandlerInterface interface.
+ * The LightRealistAjaxCustomHandlerInterface interface.
  */
-interface AjaxCustomHandlerInterface
+interface LightRealistAjaxCustomHandlerInterface
 {
 
     /**

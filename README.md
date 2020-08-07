@@ -108,6 +108,10 @@ Related
 History Log
 =============
 
+- 1.37.0 -- 2020-08-07
+
+    - add LightRealistCustomServiceInterface
+    
 - 1.36.1 -- 2020-08-06
 
     - fix LightRealistAjaxHandler->handle code oversight

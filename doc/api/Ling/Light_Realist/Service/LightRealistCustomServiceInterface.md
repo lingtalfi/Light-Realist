@@ -4,7 +4,7 @@
 
 The LightRealistCustomServiceInterface class
 ================
-2019-08-12 --> 2020-08-06
+2019-08-12 --> 2020-08-07
 
 
 
@@ -25,7 +25,7 @@ Class synopsis
 abstract class <span class="pl-k">LightRealistCustomServiceInterface</span>  {
 
 - Methods
-    - abstract public [getCustomAjaxHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistCustomServiceInterface/getCustomAjaxHandler.md)(string $requestId) : false | [AjaxCustomHandlerInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/AjaxCustomHandler/AjaxCustomHandlerInterface.md)
+    - abstract public [registerByRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistCustomServiceInterface/registerByRequestId.md)(string $requestId) : mixed
 
 }
 
@@ -37,7 +37,7 @@ abstract class <span class="pl-k">LightRealistCustomServiceInterface</span>  {
 Methods
 ==============
 
-- [LightRealistCustomServiceInterface::getCustomAjaxHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistCustomServiceInterface/getCustomAjaxHandler.md) &ndash; Returns the custom ajax handler to use for the given request id, or false if no custom ajax handler is defined for this request id.
+- [LightRealistCustomServiceInterface::registerByRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistCustomServiceInterface/registerByRequestId.md) &ndash; Registers the plugin to the realist service.
 
 
 

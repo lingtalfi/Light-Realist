@@ -1,6 +1,6 @@
 Light_Realist, documentation
 =============
-2020-08-06
+2020-08-06 -> 2020-08-07
 
 
 
@@ -81,33 +81,12 @@ We provide an [ajax handler](#our-ajax-handler) to help plugin authors implement
  
 Our ajax handler
 ------------
-2020-08-06 
+2020-08-06 -> 2020-08-07
  
  
 Our ajax handler will receive some input parameters, including the **list identifier**, and will output an array of key/value pairs 
 representing the updated state of the list, and to send back to the ajax caller.
 
-
-Our ajax handler let you use a custom class if you want.
-
-To use a custom class, your list identifier must have the following format:
-
-- planet_name:list_identifier
-
-With:
-
-- planet_name: the planet name  
-- list_identifier: an arbitrary identifier to be passed to your custom class
-
-
-
-Also, to use a custom class, you must fulfill the following conditions:
-
-- your planet must provide a service which name is directly derived from the planet name (i.e. Light_MyPlanet -> my_planet), using the [LightNamesAndPathHelper::getServiceName](https://github.com/lingtalfi/Light/blob/master/doc/api/Ling/Light/Helper/LightNamesAndPathHelper/getServiceName.md) method
-- the service must implement our interface: LightRealistCustomServiceInterface
- 
-
-If you don't use a custom class, then our ajax handler will be used by default.
 
 Our default ajax handler works with modes, and it has the following modes so far:
 
@@ -121,6 +100,31 @@ Please see the [rest of the documentation](#the-rest-of-the-documentation) for m
 
 
  
+ 
+Registering to our services
+-------------
+2020-08-07
+
+
+There are two ways to register to our services.
+
+- static
+- dynamic
+
+The **static** way is the standard way of registering to services in [Light](https://github.com/lingtalfi/Light), and is done from your service configuration file.
+
+With the **dynamic** way, you don't need to write anything in your service configuration file, but rather you need to fulfill those conditions:
+
+- your service implements our [LightRealistCustomServiceInterface interface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistCustomServiceInterface.md)
+- your service name is derived from your planet name, by using the [LightNamesAndPathHelper::getServiceName method](https://github.com/lingtalfi/Light/blob/master/doc/api/Ling/Light/Helper/LightNamesAndPathHelper/getServiceName.md) 
+- your requestId use the following format: **planetName:listIdentifier**, with:
+    - planetName: the name of your planet 
+    - listIdentifier: an arbitrary identifier for your list 
+
+
+We recommend using the **dynamic** way, as it makes the call to our service faster, because we don't need to 
+register all the plugins on the first call.
+
 
 
 

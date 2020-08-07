@@ -9,12 +9,12 @@ use Ling\BabyYaml\BabyYamlUtil;
 use Ling\Bat\ArrayTool;
 use Ling\Bat\BDotTool;
 use Ling\Bat\SmartCodeTool;
+use Ling\Light\Helper\LightNamesAndPathHelper;
 use Ling\Light\ServiceContainer\LightServiceContainerAwareInterface;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
 use Ling\Light_CsrfSession\Service\LightCsrfSessionService;
 use Ling\Light_Database\LightDatabasePdoWrapper;
 use Ling\Light_Realist\ActionHandler\LightRealistActionHandlerInterface;
-use Ling\Light_Realist\CustomManager\LightRealistCustomManager;
 use Ling\Light_Realist\DynamicInjection\RealistDynamicInjectionHandlerInterface;
 use Ling\Light_Realist\Exception\LightRealistException;
 use Ling\Light_Realist\Helper\DuelistHelper;
@@ -153,6 +153,15 @@ class LightRealistService
      */
     private $_requestDeclarationCache;
 
+    /**
+     * This property holds the lateRegistered for this instance.
+     *
+     * An array of already registered requestId.
+     *
+     * @var array
+     */
+    private $lateRegistered;
+
 
     /**
      * Builds the LightRealistService instance.
@@ -169,6 +178,7 @@ class LightRealistService
         $this->listRenderers = [];
         $this->dynamicInjectionHandlers = [];
         $this->_requestDeclarationCache = [];
+        $this->lateRegistered = [];
     }
 
 
@@ -210,11 +220,6 @@ class LightRealistService
      *          already trust that the user is who she claimed she is).
      *
      *
-     * Available options are:
-     * - customManager: null|LightRealistCustomManager, if set, is used to get the rows_renderer object.
-     *      This has precedence over anything defined in the configuration.
-     *
-     *
      * If the sql query is not valid, an exception will be thrown.
      *
      *
@@ -228,6 +233,9 @@ class LightRealistService
      */
     public function executeRequestById(string $requestId, array $params = [], array $options = []): array
     {
+
+        $this->latePrepareByRequestId($requestId);
+
 
         $customManager = $options['customManager'] ?? null;
         $requestDeclaration = $this->getConfigurationArrayByRequestId($requestId);
@@ -320,20 +328,18 @@ class LightRealistService
         $rowsRenderer = $rendering['rows_renderer'] ?? [];
         $rowsRendererInstance = null;
 
-        if ($customManager instanceof LightRealistCustomManager) {
-            $rowsRendererInstance = $customManager->getRowsRenderer();
+
+        if (array_key_exists('class', $rowsRenderer)) {
+            $rowsRendererInstance = new $rowsRenderer['class'];
         } else {
-            if (array_key_exists('class', $rowsRenderer)) {
-                $rowsRendererInstance = new $rowsRenderer['class'];
+            if (array_key_exists("identifier", $rowsRenderer)) {
+                $identifier = $rowsRenderer['identifier'];
+                $rowsRendererInstance = $this->realistRowsRenderers[$identifier] ?? null;
             } else {
-                if (array_key_exists("identifier", $rowsRenderer)) {
-                    $identifier = $rowsRenderer['identifier'];
-                    $rowsRendererInstance = $this->realistRowsRenderers[$identifier] ?? null;
-                } else {
-                    $this->error("Bad configuration error. For the \"rendering.rows_renderer\" setting, either the \"class\" or the \"identifier\" must be set.");
-                }
+                $this->error("Bad configuration error. For the \"rendering.rows_renderer\" setting, either the \"class\" or the \"identifier\" must be set.");
             }
         }
+
 
         if ($rowsRendererInstance instanceof RealistRowsRendererInterface) {
 
@@ -574,8 +580,16 @@ class LightRealistService
      */
     public function executeListAction(string $actionId, array $params): array
     {
+        // custom override?
+        if (array_key_exists("request_id", $params)) {
+            $requestId = $params['request_id'];
+            $this->latePrepareByRequestId($requestId);
+        }
+
+
         list($pluginName, $actionName) = explode('.', $actionId, 2);
         $handler = $this->listActionHandlers[$pluginName];
+
         return $handler->execute($actionName, $params);
     }
 
@@ -592,6 +606,12 @@ class LightRealistService
      */
     public function executeListGeneralAction(string $actionId, array $params): array
     {
+        // custom override?
+        if (array_key_exists("request_id", $params)) {
+            $requestId = $params['request_id'];
+            $this->latePrepareByRequestId($requestId);
+        }
+
         list($pluginName, $actionName) = explode('.', $actionId, 2);
         $handler = $this->listGeneralActionHandlers[$pluginName];
         return $handler->execute($actionName, $params);
@@ -608,7 +628,11 @@ class LightRealistService
      */
     public function getListRendererByRequestId(string $requestId): RealistListRendererInterface
     {
+        $this->latePrepareByRequestId($requestId);
+
+
         $requestDeclaration = $this->getConfigurationArrayByRequestId($requestId);
+
 
         $rendering = $requestDeclaration['rendering'] ?? [];
         $listRendererConf = $rendering['list_renderer'] ?? [];
@@ -622,6 +646,7 @@ class LightRealistService
         }
 
         $listRenderer = $this->listRenderers[$listRendererId];
+
 
         // a list renderer should be able to prepare itself.
         // Note: some might need the service container?, we could pass it to them if that happened,
@@ -641,6 +666,8 @@ class LightRealistService
      */
     public function prepareListActionGroups(array &$items, string $requestId)
     {
+        $this->latePrepareByRequestId($requestId);
+
 
         foreach ($items as $k => $item) {
             if (array_key_exists('action_id', $item)) {
@@ -660,7 +687,6 @@ class LightRealistService
             }
 
         }
-
     }
 
 
@@ -697,7 +723,7 @@ class LightRealistService
      */
     public function getConfigurationArrayByRequestId(string $requestId): array
     {
-
+        $this->latePrepareByRequestId($requestId);
         if (array_key_exists($requestId, $this->_requestDeclarationCache)) {
             return $this->_requestDeclarationCache[$requestId];
         }
@@ -969,4 +995,36 @@ class LightRealistService
             $item['csrf_token'] = $csrfService->getToken();
         }
     }
+
+
+    /**
+     * Provides the opportunity for plugin authors to lately register to our service.
+     *
+     * See the @page(late registration) concept for more info.
+     *
+     * @param string $requestId
+     */
+    private function latePrepareByRequestId(string $requestId)
+    {
+        if (false === in_array($requestId, $this->lateRegistered, true)) {
+
+            $p = explode(':', $requestId, 2);
+            if (2 === count($p)) {
+                $planet = array_shift($p);
+                $serviceName = LightNamesAndPathHelper::getServiceName($planet);
+
+                if (true === $this->container->has($serviceName)) {
+                    $this->lateRegistered[] = $requestId;
+                    /**
+                     * @var $service LightRealistCustomServiceInterface
+                     */
+                    $service = $this->container->get($serviceName);
+                    if ($service instanceof LightRealistCustomServiceInterface) {
+                        $service->registerByRequestId($requestId);
+                    }
+                }
+            }
+        }
+    }
+
 }
