@@ -182,6 +182,7 @@ https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realis
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool/ricsToIntegersOnlyInString.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Tool/LightRealistTool.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist.md
+https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/_faq-developer.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/conception-notes-2019-08-12.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/conception-notes-2019-08-13.md
 https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/conception-notes.md

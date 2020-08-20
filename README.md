@@ -1,6 +1,6 @@
 Light_Realist
 ===========
-2019-08-09 -> 2020-08-07
+2019-08-09 -> 2020-08-20
 
 
 
@@ -108,6 +108,10 @@ Related
 History Log
 =============
 
+- 1.37.2 -- 2020-08-20
+
+    - add faq developer document
+    
 - 1.37.1 -- 2020-08-07
 
     - rename LightRealistCustomServiceInterface->registerByRequestId to registerRealistByRequestId
