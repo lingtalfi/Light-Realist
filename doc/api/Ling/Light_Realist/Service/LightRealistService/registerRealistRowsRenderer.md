@@ -53,7 +53,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [LightRealistService::registerRealistRowsRenderer](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L477-L480)
+See the source code for method [LightRealistService::registerRealistRowsRenderer](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L478-L481)
 
 
 See Also

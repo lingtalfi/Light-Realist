@@ -56,7 +56,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [LightRealistService::getConfigurationArrayByRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L724-L802)
+See the source code for method [LightRealistService::getConfigurationArrayByRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L725-L803)
 
 
 See Also

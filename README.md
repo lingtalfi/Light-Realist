@@ -108,6 +108,10 @@ Related
 History Log
 =============
 
+- 1.38.0 -- 2020-08-20
+
+    - update duelist, add base_where_sep setting
+    
 - 1.37.2 -- 2020-08-20
 
     - add faq developer document

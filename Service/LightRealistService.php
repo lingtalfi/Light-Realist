@@ -278,6 +278,7 @@ class LightRealistService
 
 
 //        $this->parametrizedSqlQuery->setLogger($this->container->get('logger'));
+
         $sqlQuery = $this->parametrizedSqlQuery->getSqlQuery($requestDeclaration, $tags);
         $markers = $sqlQuery->getMarkers();
 
