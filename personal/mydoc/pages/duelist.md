@@ -105,6 +105,43 @@ The developer writes this section by using the following settings:
             - first_name asc
 
 
+
+
+The developer injections
+------------
+2020-08-20
+
+
+This is a dynamic variable replacement mechanism for the developer.
+
+
+Since the **request declaration** is usually stored in a static file, the developer sometimes need to do some dynamic injections.
+
+For instance, instead of writing this:
+
+- base_where: un.lud_user_id=2
+
+The developer might want to use a more dynamic notation, like this:
+
+- base_where: un.lud_user_id=${userId}
+
+
+The notation is: ${variableName}.
+
+
+Note that developer injections and user injections use different notations, to really separate them, for security reasons (a user
+shall never be able to overwrite what a developer wrote).
+
+
+Developer injections are currently only possible in the following settings:
+
+- base_where
+
+
+
+
+
+
 The user injections
 --------------
 2019-08-23 -> 2019-10-10

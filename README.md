@@ -108,6 +108,10 @@ Related
 History Log
 =============
 
+- 1.39.0 -- 2020-08-20
+
+    - update duelist, developer injection concept
+
 - 1.38.0 -- 2020-08-20
 
     - update duelist, add base_where_sep setting
