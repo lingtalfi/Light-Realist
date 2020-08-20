@@ -20,6 +20,8 @@ Table of contents
     - [LightRealistAjaxHandler::handle](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/AjaxHandler/LightRealistAjaxHandler/handle.md) &ndash; Process the given parameters, and returns the appropriate response.
     - ContainerAwareLightAjaxHandler::__construct &ndash; Builds the ContainerAwareLightAjaxHandler instance.
     - ContainerAwareLightAjaxHandler::setContainer &ndash; Sets the light service container interface.
+- [DeveloperVariableProviderInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/DeveloperVariableProvider/DeveloperVariableProviderInterface.md) &ndash; The DeveloperVariableProviderInterface interface.
+    - [DeveloperVariableProviderInterface::getVariables](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/DeveloperVariableProvider/DeveloperVariableProviderInterface/getVariables.md) &ndash; Returns the developer variables for the given contextId.
 - [ContainerAwareRealistDynamicInjectionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/DynamicInjection/ContainerAwareRealistDynamicInjectionHandler.md) &ndash; The ContainerAwareRealistDynamicInjectionHandler class
     - [ContainerAwareRealistDynamicInjectionHandler::__construct](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/DynamicInjection/ContainerAwareRealistDynamicInjectionHandler/__construct.md) &ndash; Builds the ContainerAwareRealistDynamicInjectionHandler instance.
     - [ContainerAwareRealistDynamicInjectionHandler::setContainer](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/DynamicInjection/ContainerAwareRealistDynamicInjectionHandler/setContainer.md) &ndash; Sets the light service container interface.
@@ -102,6 +104,7 @@ Table of contents
 - [LightRealistService](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService.md) &ndash; The LightRealistService class.
     - [LightRealistService::__construct](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/__construct.md) &ndash; Builds the LightRealistService instance.
     - [LightRealistService::executeRequestById](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/executeRequestById.md) &ndash;      the .byml extension.
+    - [LightRealistService::getStandardDeveloperVariables](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/getStandardDeveloperVariables.md) &ndash; Returns an array of standard developer variables.
     - [LightRealistService::setContainer](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/setContainer.md) &ndash; Sets the container.
     - [LightRealistService::setBaseDir](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/setBaseDir.md) &ndash; Sets the baseDir.
     - [LightRealistService::registerRealistRowsRenderer](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/registerRealistRowsRenderer.md) &ndash; Registers a duelistRowsRenderer.
@@ -140,6 +143,8 @@ Dependencies
 - [ArrayToString](https://github.com/lingtalfi/ArrayToString)
 - [BabyYaml](https://github.com/lingtalfi/BabyYaml)
 - [Light_Database](https://github.com/lingtalfi/Light_Database)
+- [Light_UserManager](https://github.com/lingtalfi/Light_UserManager)
+- [Light_User](https://github.com/lingtalfi/Light_User)
 - [ParametrizedSqlQuery](https://github.com/lingtalfi/ParametrizedSqlQuery)
 - [JAcpHep](https://github.com/lingtalfi/JAcpHep)
 - [JResponsiveTableHelper](https://github.com/lingtalfi/JResponsiveTableHelper)

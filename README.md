@@ -108,6 +108,10 @@ Related
 History Log
 =============
 
+- 1.40.0 -- 2020-08-20
+
+    - update duelist, add developer_variables setting
+    
 - 1.39.0 -- 2020-08-20
 
     - update duelist, developer injection concept

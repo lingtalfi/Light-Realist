@@ -7,6 +7,7 @@ Table of Contents
 =================
 
 * [The base sql query](#the-base-sql-query)
+* [The developer injections](#the-developer-injections)
 * [The user injections](#the-user-injections)
  * [Variables](#variables)
  * [Inner markers](#inner-markers)
@@ -137,6 +138,18 @@ Developer injections are currently only possible in the following settings:
 
 - base_where
 
+
+
+### Providing developer variables
+2020-08-20
+
+We offer the **developer_variables** setting in the **request declaration**, as a mean to provide those developer variables.
+
+The **developer_variables** setting accept the [Light execute notation](https://github.com/lingtalfi/Light/blob/master/personal/mydoc/pages/notation/light-execute-notation.md),
+and shall return either:
+
+- an array of variables
+- a DeveloperVariableProviderInterface instance
 
 
 

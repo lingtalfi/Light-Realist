@@ -12,6 +12,8 @@ dependencies:
         - ArrayToString
         - BabyYaml
         - Light_Database
+        - Light_UserManager
+        - Light_User
         - ParametrizedSqlQuery
         - JAcpHep
         - JResponsiveTableHelper

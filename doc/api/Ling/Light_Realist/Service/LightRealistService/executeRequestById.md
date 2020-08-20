@@ -98,7 +98,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [LightRealistService::executeRequestById](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L234-L439)
+See the source code for method [LightRealistService::executeRequestById](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L238-L464)
 
 
 See Also
@@ -106,5 +106,5 @@ See Also
 
 The [LightRealistService](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService.md) class.
 
-Previous method: [__construct](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/__construct.md)<br>Next method: [setContainer](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/setContainer.md)<br>
+Previous method: [__construct](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/__construct.md)<br>Next method: [getStandardDeveloperVariables](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistService/getStandardDeveloperVariables.md)<br>
 

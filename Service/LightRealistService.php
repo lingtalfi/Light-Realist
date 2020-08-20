@@ -9,12 +9,14 @@ use Ling\BabyYaml\BabyYamlUtil;
 use Ling\Bat\ArrayTool;
 use Ling\Bat\BDotTool;
 use Ling\Bat\SmartCodeTool;
+use Ling\Light\Helper\LightHelper;
 use Ling\Light\Helper\LightNamesAndPathHelper;
 use Ling\Light\ServiceContainer\LightServiceContainerAwareInterface;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
 use Ling\Light_CsrfSession\Service\LightCsrfSessionService;
 use Ling\Light_Database\LightDatabasePdoWrapper;
 use Ling\Light_Realist\ActionHandler\LightRealistActionHandlerInterface;
+use Ling\Light_Realist\DeveloperVariableProvider\DeveloperVariableProviderInterface;
 use Ling\Light_Realist\DynamicInjection\RealistDynamicInjectionHandlerInterface;
 use Ling\Light_Realist\Exception\LightRealistException;
 use Ling\Light_Realist\Helper\DuelistHelper;
@@ -25,6 +27,8 @@ use Ling\Light_Realist\Rendering\RealistListRendererInterface;
 use Ling\Light_Realist\Rendering\RealistRowsRendererInterface;
 use Ling\Light_Realist\Rendering\RequestIdAwareRendererInterface;
 use Ling\Light_Realist\Tool\LightRealistTool;
+use Ling\Light_User\LightWebsiteUser;
+use Ling\Light_UserManager\Service\LightUserManagerService;
 use Ling\ParametrizedSqlQuery\Helper\ParametrizedSqlQueryHelper;
 use Ling\ParametrizedSqlQuery\ParametrizedSqlQueryUtil;
 
@@ -239,6 +243,8 @@ class LightRealistService
 
         $customManager = $options['customManager'] ?? null;
         $requestDeclaration = $this->getConfigurationArrayByRequestId($requestId);
+
+
         $table = DuelistHelper::getRawTableName($requestDeclaration['table']);
         $useRowRestriction = $requestDeclaration['use_row_restriction'] ?? false;
         $showQueryErrorDebug = $requestDeclaration['query_error_show_debug_info'] ?? false;
@@ -278,6 +284,25 @@ class LightRealistService
 
 
 //        $this->parametrizedSqlQuery->setLogger($this->container->get('logger'));
+
+
+        // adding developer variables if any
+        if (array_key_exists("developer_variables", $requestDeclaration)) {
+            $developerVars = $requestDeclaration['developer_variables'];
+            $res = LightHelper::executeMethod($developerVars, $this->container);
+            $vars = [];
+            if (is_array($res)) {
+                $vars = $res;
+            } elseif ($res instanceof DeveloperVariableProviderInterface) {
+                $vars = $res->getVariables($requestId);
+            } else {
+                $type = gettype($res);
+                $this->error("Unknown developer_variables result: an array or an instance of DeveloperVariableProviderInterface was expected, $type given.");
+            }
+
+            $this->parametrizedSqlQuery->setDeveloperVariables($vars);
+        }
+
 
         $sqlQuery = $this->parametrizedSqlQuery->getSqlQuery($requestDeclaration, $tags);
         $markers = $sqlQuery->getMarkers();
@@ -444,6 +469,39 @@ class LightRealistService
 //
 //    }
 
+
+    //--------------------------------------------
+    //
+    //--------------------------------------------
+    /**
+     * Returns an array of standard developer variables.
+     *
+     * See the @page(duelist developer variables concept) for more info.
+     *
+     * This particular array contains the following variables:
+     * - user_id, this assumes a valid LightWebsiteUser, see the [Light_User planet](https://github.com/lingtalfi/Light_User) for more info
+     *
+     *
+     * @return array
+     */
+    public function getStandardDeveloperVariables(): array
+    {
+
+        /**
+         * @var $manager LightUserManagerService
+         */
+        $manager = $this->container->get("user_manager");
+        $user = $manager->getUser();
+        if (true === $user->isValid() && $user instanceof LightWebsiteUser) {
+            $userId = $user->getId();
+        } else {
+            $this->error("Problem with the current user. Either he's not valid, or not an instance of LightWebsiteUser.");
+        }
+
+        return [
+            'user_id' => $userId,
+        ];
+    }
 
     //--------------------------------------------
     //
