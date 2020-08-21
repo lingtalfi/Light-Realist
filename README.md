@@ -1,6 +1,6 @@
 Light_Realist
 ===========
-2019-08-09 -> 2020-08-20
+2019-08-09 -> 2020-08-21
 
 
 
@@ -108,6 +108,10 @@ Related
 History Log
 =============
 
+- 1.41.0 -- 2020-08-21
+
+    - update service to work with micro-permission3
+    
 - 1.40.0 -- 2020-08-20
 
     - update duelist, add developer_variables setting

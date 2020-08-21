@@ -241,7 +241,6 @@ class LightRealistService
         $this->latePrepareByRequestId($requestId);
 
 
-        $customManager = $options['customManager'] ?? null;
         $requestDeclaration = $this->getConfigurationArrayByRequestId($requestId);
 
 
@@ -276,7 +275,7 @@ class LightRealistService
         //--------------------------------------------
         $useMicroPermission = $requestDeclaration['use_micro_permission'] ?? true;
         if (true === $useMicroPermission) {
-            $microPermission = "tables.$table.read";
+            $microPermission = "store.$table.read";
             if (false === $this->container->get("micro_permission")->hasMicroPermission($microPermission)) {
                 throw new LightRealistException("Access denied: you don't have the micro-permission: $microPermission.");
             }
@@ -639,6 +638,21 @@ class LightRealistService
      */
     public function executeListAction(string $actionId, array $params): array
     {
+
+        /**
+         * If you're wondering: yes by default we execute the action no matter what, without checking if it's allowed
+         * by the request declaration.
+         *
+         * This means a malicious user could trigger any action provided by the concrete class.
+         * Should not be a problem if you set the micro-permissions correctly.
+         * Note: to make this more secure we could check that the **rendering.list_action_groups** contains the given actionId
+         * for instance, or such similar checking mechanism, but as I said as long as your permissions are correctly
+         * set you should be "safe", at least for that specific problem of allowing/not allowing some action to execute.
+         *
+         *
+         */
+
+
         // custom override?
         if (array_key_exists("request_id", $params)) {
             $requestId = $params['request_id'];
@@ -705,7 +719,6 @@ class LightRealistService
         }
 
         $listRenderer = $this->listRenderers[$listRendererId];
-
 
         // a list renderer should be able to prepare itself.
         // Note: some might need the service container?, we could pass it to them if that happened,

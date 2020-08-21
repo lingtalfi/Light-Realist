@@ -51,7 +51,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [LightRealistService::latePrepareByRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L1066-L1087)
+See the source code for method [LightRealistService::latePrepareByRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L1079-L1100)
 
 
 See Also
