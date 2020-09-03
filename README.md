@@ -1,6 +1,6 @@
 Light_Realist
 ===========
-2019-08-09 -> 2020-08-21
+2019-08-09 -> 2020-09-03
 
 
 
@@ -33,13 +33,6 @@ Summary
 - [Light_Realist api](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist.md) (generated with [DocTools](https://github.com/lingtalfi/DocTools))
 - [Documentation](https://github.com/lingtalfi/Light-Realist/tree/master/doc/pages/documentation.md)
 - [Services](#services)
-
-
-
-What is it?
-============
-
-Read the conceptions notes (link in the summary), starting with the realist conception notes.
 
 
 
@@ -94,6 +87,8 @@ $ajax_handler.methods_collection:
                 instance: Ling\Light_Realist\AjaxHandler\LightRealistAjaxHandler
 
 
+
+
 ```
 
 
@@ -108,6 +103,10 @@ Related
 History Log
 =============
 
+- 2.0.0 -- 2020-09-03
+
+    - new api
+    
 - 1.41.0 -- 2020-08-21
 
     - update service to work with micro-permission3

@@ -4,7 +4,7 @@
 
 The RequestIdAwareRendererInterface class
 ================
-2019-08-12 --> 2020-08-21
+2019-08-12 --> 2020-09-03
 
 
 
@@ -52,4 +52,4 @@ See the source code of [Ling\Light_Realist\Rendering\RequestIdAwareRendererInter
 
 SeeAlso
 ==============
-Previous class: [RealistRowsRendererInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RealistRowsRendererInterface.md)<br>Next class: [LightRealistCustomServiceInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistCustomServiceInterface.md)<br>
+Previous class: [RealistListRendererInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/RealistListRendererInterface.md)<br>Next class: [LightRealistCustomServiceInterface](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Service/LightRealistCustomServiceInterface.md)<br>

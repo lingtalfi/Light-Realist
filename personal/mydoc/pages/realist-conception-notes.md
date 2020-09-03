@@ -6,7 +6,7 @@ Realist conception notes
 
 Overview
 ===========
-2019-08-28
+2019-08-28 -> 2020-08-27
 
 
 The goal of realist is to be the medium between the developer and the (my)sql database as far as fetching rows 
@@ -18,7 +18,7 @@ so that the developer knows exactly where to look when he wants to change anythi
 
 
 
-There are three sides in realist:
+There are two sides in realist:
 
 - the model
 - the gui
@@ -180,7 +180,6 @@ Note: the default name is used as long as you don't define the checkbox_column.n
 # About ric implementation
 
 2019-08-28
-
 
 
 We recommend using the [ric admin table helper](https://github.com/lingtalfi/JRicAdminTableHelper) js tool to handle

@@ -9,15 +9,16 @@ use Ling\Light\ServiceContainer\LightServiceContainerInterface;
 use Ling\Light_AjaxHandler\Service\LightAjaxHandlerService;
 use Ling\Light_ControllerHub\Service\LightControllerHubService;
 use Ling\Light_CsrfSession\Service\LightCsrfSessionService;
-use Ling\Light_CsrfSimple\Service\LightCsrfSimpleService;
 use Ling\Light_Kit_Admin\Exception\LightKitAdminException;
+use Ling\Light_Realist\Exception\LightRealistException;
 use Ling\Light_ReverseRouter\Service\LightReverseRouterService;
 
 /**
- * The BaseRealistRowsRenderer interface.
+ * The BaseRealistListItemRenderer class.
+ *
  *
  */
-class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServiceContainerAwareInterface, RequestIdAwareRendererInterface
+class BaseRealistListItemRenderer implements RealistListItemRendererInterface, LightServiceContainerAwareInterface, RequestIdAwareRendererInterface
 {
 
 
@@ -36,21 +37,21 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
     protected $container;
 
     /**
-     * This property holds the dynamicColumns for this instance.
+     * This property holds the dynamicProperties for this instance.
      * It's an array of position => columnNames.
      * With columnNames being an array of column names.
      *
      *
      * @var array
      */
-    protected $dynamicColumns;
+    protected $dynamicProperties;
+
 
     /**
-     * This property holds the hiddenColumns for this instance.
-     * It's an array of column names.
+     * This names of the properties to display, and in the order they should be displayed.
      * @var array
      */
-    protected $hiddenColumns;
+    protected $propertiesToDisplay;
 
 
     /**
@@ -94,8 +95,8 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
     public function __construct()
     {
         $this->types = [];
-        $this->dynamicColumns = [];
-        $this->hiddenColumns = [];
+        $this->dynamicProperties = [];
+        $this->propertiesToDisplay = [];
         $this->ric = [];
         $this->container = null;
         $this->requestId = null;
@@ -105,6 +106,10 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
     }
 
 
+
+    //--------------------------------------------
+    // LightServiceContainerAwareInterface
+    //--------------------------------------------
     /**
      * @implementation
      */
@@ -114,35 +119,9 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
     }
 
 
-    /**
-     * @implementation
-     */
-    public function setColumnType(string $columnName, string $type, array $options = [])
-    {
-        $this->types[$columnName] = [$type, $options];
-    }
-
-
-    /**
-     * @implementation
-     */
-    public function addDynamicColumn(string $columnName, $position = 'post')
-    {
-        if (false === array_key_exists($position, $this->dynamicColumns)) {
-            $this->dynamicColumns[$position] = [];
-        }
-        $this->dynamicColumns[$position][] = $columnName;
-    }
-
-
-    /**
-     * @implementation
-     */
-    public function setHiddenColumns(array $hiddenColumns)
-    {
-        $this->hiddenColumns = $hiddenColumns;
-    }
-
+    //--------------------------------------------
+    // RequestIdAwareRendererInterface
+    //--------------------------------------------
     /**
      * @implementation
      */
@@ -152,47 +131,15 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
     }
 
 
+    //--------------------------------------------
+    // RealistListItemRendererInterface
+    //--------------------------------------------
     /**
      * @implementation
      */
-    public function render(array $rows): string
+    public function setPropertyType(string $property, string $type, array $options = [])
     {
-        $s = '';
-        $preCols = $this->dynamicColumns["pre"] ?? [];
-        $postCols = $this->dynamicColumns["post"] ?? [];
-
-
-        foreach ($rows as $row) {
-            $s .= '<tr>';
-
-            // dynamic pre columns
-            foreach ($preCols as $col) {
-                $s .= '<td>';
-                $type = $this->types[$col] ?? ["text", []];
-                $s .= $this->renderColumnContent('', $type[0], $type[1], $row);
-                $s .= '</td>';
-            }
-
-            // data columns
-            foreach ($row as $col => $val) {
-                if (false === in_array($col, $this->hiddenColumns, true)) {
-                    $type = $this->types[$col] ?? ["text", []];
-                    $s .= '<td>';
-                    $s .= $this->renderColumnContent((string)$val, $type[0], $type[1], $row);
-                    $s .= '</td>';
-                }
-            }
-
-            // dynamic post columns
-            foreach ($postCols as $col) {
-                $s .= '<td>';
-                $type = $this->types[$col] ?? ["text", []];
-                $s .= $this->renderColumnContent('', $type[0], $type[1], $row);
-                $s .= '</td>';
-            }
-            $s .= '</tr>';
-        }
-        return $s;
+        $this->types[$property] = [$type, $options];
     }
 
     /**
@@ -202,6 +149,72 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
     {
         $this->ric = $ric;
     }
+
+
+    /**
+     * @implementation
+     */
+    public function setPropertiesToDisplay(array $propertyNames)
+    {
+        $this->propertiesToDisplay = $propertyNames;
+    }
+
+
+    /**
+     * @implementation
+     */
+    public function addDynamicProperty(string $property)
+    {
+        $this->dynamicProperties[] = $property;
+    }
+
+
+    /**
+     * @implementation
+     */
+    public function render(array $rows): string
+    {
+
+        $s = '';
+
+
+        foreach ($rows as $row) {
+            $s .= '<tr>';
+
+
+            foreach ($this->propertiesToDisplay as $pName) {
+
+
+                //--------------------------------------------
+                // regular data from the storage
+                //--------------------------------------------
+                if (array_key_exists($pName, $row)) {
+                    $val = $row[$pName];
+
+                    $type = $this->types[$pName] ?? ["text", []];
+                    $s .= '<td>';
+                    $s .= $this->renderPropertyContent((string)$val, $type[0], $type[1], $row);
+                    $s .= '</td>';
+
+                }
+                //--------------------------------------------
+                // dynamic
+                //--------------------------------------------
+                elseif (in_array($pName, $this->dynamicProperties)) {
+                    $s .= '<td>';
+                    $type = $this->types[$pName] ?? ["text", []];
+                    $s .= $this->renderPropertyContent('', $type[0], $type[1], $row);
+                    $s .= '</td>';
+                } else {
+                    throw new LightRealistException("ListItemRenderer: don't know how to display the property $pName.");
+                }
+            }
+
+            $s .= '</tr>';
+        }
+        return $s;
+    }
+
 
 
 
@@ -221,7 +234,7 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
      * @throws \Exception
      *
      */
-    protected function renderColumnContent(string $value, string $type, array $options, array $row): string
+    protected function renderPropertyContent(string $value, string $type, array $options, array $row): string
     {
         switch ($type) {
             case "Light_Realist.image":
@@ -292,7 +305,7 @@ class BaseRealistRowsRenderer implements RealistRowsRendererInterface, LightServ
                     if (0 !== $c) {
                         $s .= $separator;
                     }
-                    $s .= $this->renderColumnContent($value, $item['type'], $item, $row);
+                    $s .= $this->renderPropertyContent($value, $item['type'], $item, $row);
                     $c++;
                 }
                 return $s;

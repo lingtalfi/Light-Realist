@@ -5,26 +5,23 @@ namespace Ling\Light_Realist\Service;
 
 
 use Ling\ArrayToString\ArrayToStringTool;
-use Ling\BabyYaml\BabyYamlUtil;
 use Ling\Bat\ArrayTool;
 use Ling\Bat\BDotTool;
 use Ling\Bat\SmartCodeTool;
 use Ling\Light\Helper\LightHelper;
-use Ling\Light\Helper\LightNamesAndPathHelper;
 use Ling\Light\ServiceContainer\LightServiceContainerAwareInterface;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
 use Ling\Light_CsrfSession\Service\LightCsrfSessionService;
 use Ling\Light_Database\LightDatabasePdoWrapper;
+use Ling\Light_Nugget\Service\LightNuggetService;
 use Ling\Light_Realist\ActionHandler\LightRealistActionHandlerInterface;
 use Ling\Light_Realist\DeveloperVariableProvider\DeveloperVariableProviderInterface;
 use Ling\Light_Realist\DynamicInjection\RealistDynamicInjectionHandlerInterface;
 use Ling\Light_Realist\Exception\LightRealistException;
 use Ling\Light_Realist\Helper\DuelistHelper;
-use Ling\Light_Realist\Helper\RealistHelper;
 use Ling\Light_Realist\ListActionHandler\LightRealistListActionHandlerInterface;
-use Ling\Light_Realist\ListGeneralActionHandler\LightRealistListGeneralActionHandlerInterface;
+use Ling\Light_Realist\Rendering\RealistListItemRendererInterface;
 use Ling\Light_Realist\Rendering\RealistListRendererInterface;
-use Ling\Light_Realist\Rendering\RealistRowsRendererInterface;
 use Ling\Light_Realist\Rendering\RequestIdAwareRendererInterface;
 use Ling\Light_Realist\Tool\LightRealistTool;
 use Ling\Light_User\LightWebsiteUser;
@@ -99,13 +96,14 @@ class LightRealistService
     protected $parametrizedSqlQuery;
 
     /**
-     * This property holds the array of realistRowsRenderer instances.
-     * It's an array of str:identifier => instance:realistRowsRenderer.
+     * The list item renderer.
+     * See more details in the @page(list item renderer page).
      *
      *
-     * @var RealistRowsRendererInterface[]
+     *
+     * @var RealistListItemRendererInterface
      */
-    protected $realistRowsRenderers;
+    protected $listItemRenderer;
 
 
     /**
@@ -118,18 +116,12 @@ class LightRealistService
 
 
     /**
-     * This property holds the listActionHandlers for this instance.
-     * It's an array of LightRealistListActionHandlerInterface instances.
+     * The LightRealistListActionHandlerInterface instance used to handle the list actions.
+     * See the @page(realist list actions) document for more details.
      *
-     * @var LightRealistListActionHandlerInterface[]
+     * @var LightRealistListActionHandlerInterface
      */
-    protected $listActionHandlers;
-
-    /**
-     * This property holds the listGeneralActionHandlers for this instance.
-     * @var LightRealistListGeneralActionHandlerInterface[]
-     */
-    protected $listGeneralActionHandlers;
+    protected $listActionHandler;
 
 
     /**
@@ -175,10 +167,9 @@ class LightRealistService
         $this->container = null;
         $this->baseDir = "/tmp";
         $this->parametrizedSqlQuery = new ParametrizedSqlQueryUtil();
-        $this->realistRowsRenderers = [];
+        $this->listItemRenderer = null;
         $this->actionHandlers = [];
-        $this->listActionHandlers = [];
-        $this->listGeneralActionHandlers = [];
+        $this->listActionHandler = null;
         $this->listRenderers = [];
         $this->dynamicInjectionHandlers = [];
         $this->_requestDeclarationCache = [];
@@ -238,36 +229,19 @@ class LightRealistService
     public function executeRequestById(string $requestId, array $params = [], array $options = []): array
     {
 
-        $this->latePrepareByRequestId($requestId);
-
+        $tags = $params['tags'] ?? [];
 
         $requestDeclaration = $this->getConfigurationArrayByRequestId($requestId);
-
-
-        $table = DuelistHelper::getRawTableName($requestDeclaration['table']);
-        $useRowRestriction = $requestDeclaration['use_row_restriction'] ?? false;
+        $table = DuelistHelper::getRawTableNameByRequestDeclaration($requestDeclaration);
         $showQueryErrorDebug = $requestDeclaration['query_error_show_debug_info'] ?? false;
+        $ric = null;
 
 
         //--------------------------------------------
         // CHECKING CSRF TOKEN
         //--------------------------------------------
-        $csrfToken = $requestDeclaration['csrf_token'] ?? true;
-        if (true === $csrfToken) {
-            $csrfTokenValue = $params['csrf_token'] ?? '';
-            $this->checkCsrfToken($csrfTokenValue);
-        }
-
-//        $csrfTokenPass = $params['csrf_token_pass'] ?? false;
-//        if (false === $csrfTokenPass) {
-//            if (null !== $csrfToken) {
-//                $csrfTokenValue = $params['csrf_token'] ?? '';
-//                $this->checkCsrfToken($csrfTokenValue);
-//            }
-//        }
-
-
-        $tags = $params['tags'] ?? [];
+        $csrfTokenValue = $params['csrf_token'] ?? '';
+        $this->checkCsrfToken($csrfTokenValue);
 
 
         //--------------------------------------------
@@ -285,139 +259,144 @@ class LightRealistService
 //        $this->parametrizedSqlQuery->setLogger($this->container->get('logger'));
 
 
-        // adding developer variables if any
-        if (array_key_exists("developer_variables", $requestDeclaration)) {
-            $developerVars = $requestDeclaration['developer_variables'];
-            $res = LightHelper::executeMethod($developerVars, $this->container);
-            $vars = [];
-            if (is_array($res)) {
-                $vars = $res;
-            } elseif ($res instanceof DeveloperVariableProviderInterface) {
-                $vars = $res->getVariables($requestId);
-            } else {
-                $type = gettype($res);
-                $this->error("Unknown developer_variables result: an array or an instance of DeveloperVariableProviderInterface was expected, $type given.");
+        //--------------------------------------------
+        // FETCHING LIST ITEMS
+        //--------------------------------------------
+        if (array_key_exists("duelist", $requestDeclaration)) {
+
+            $duelistDeclaration = $requestDeclaration['duelist'];
+            $ric = $duelistDeclaration['ric'];
+
+
+            // adding developer variables if any
+            if (array_key_exists("developer_variables", $duelistDeclaration)) {
+                $developerVars = $duelistDeclaration['developer_variables'];
+                $res = LightHelper::executeMethod($developerVars, $this->container);
+                $vars = [];
+                if (is_array($res)) {
+                    $vars = $res;
+                } elseif ($res instanceof DeveloperVariableProviderInterface) {
+                    $vars = $res->getVariables($requestId);
+                } else {
+                    $type = gettype($res);
+                    $this->error("Unknown developer_variables result: an array or an instance of DeveloperVariableProviderInterface was expected, $type given.");
+                }
+
+                $this->parametrizedSqlQuery->setDeveloperVariables($vars);
             }
 
-            $this->parametrizedSqlQuery->setDeveloperVariables($vars);
-        }
+
+            $sqlQuery = $this->parametrizedSqlQuery->getSqlQuery($duelistDeclaration, $tags);
+            $markers = $sqlQuery->getMarkers();
+
+            $stmt = $sqlQuery->getSqlQuery();
+            $countStmt = $sqlQuery->getCountSqlQuery();
 
 
-        $sqlQuery = $this->parametrizedSqlQuery->getSqlQuery($requestDeclaration, $tags);
-        $markers = $sqlQuery->getMarkers();
+            /**
+             * @var $db LightDatabasePdoWrapper
+             */
+            $db = $this->container->get("database");
 
-        $stmt = $sqlQuery->getSqlQuery();
-        $countStmt = $sqlQuery->getCountSqlQuery();
+            try {
 
 
-        /**
-         * @var $db LightDatabasePdoWrapper
-         */
-        $db = $this->container->get("database");
-
-        try {
-
-            if (false === $useRowRestriction) {
                 $rows = $db->fetchAll($stmt, $markers);
                 $countRow = $db->fetch($countStmt, $markers);
-            } else {
-                $rows = $db->pfetchAll($stmt, $markers);
-                $countRow = $db->pfetch($countStmt, $markers);
-            }
 
 
-        } catch (\Exception $e) {
+            } catch (\Exception $e) {
 
-            $sMarkers = nl2br(ArrayToStringTool::toPhpArray($markers));
+                $sMarkers = nl2br(ArrayToStringTool::toPhpArray($markers));
 
-            if (false === $showQueryErrorDebug) {
-                $debugMsg = $e->getMessage();
-            } else {
+                if (false === $showQueryErrorDebug) {
+                    $debugMsg = $e->getMessage();
+                } else {
 
-                // sometimes it's easier to have the stmt displayed too, when debugging
-                $debugMsg = "<ul>
+                    // sometimes it's easier to have the stmt displayed too, when debugging
+                    $debugMsg = "<ul>
 <li><b>Query</b>: $stmt</li>
 <li><b>Markers</b>: $sMarkers</li>
 <li><b>Error</b>: {$e->getMessage()}</li>
 </ul>
 ";
+                }
+
+                throw new LightRealistException($debugMsg);
             }
 
-            throw new LightRealistException($debugMsg);
+        } else {
+            $this->error("Don't know yet how to proceed with this type of request declaration.");
         }
 
+
         //--------------------------------------------
-        // RENDERING THE ROWS
+        // RENDERING LIST ITEMS
         //--------------------------------------------
         $rendering = $requestDeclaration['rendering'] ?? [];
-        $rowsRenderer = $rendering['rows_renderer'] ?? [];
-        $rowsRendererInstance = null;
+        $liRenderer = $rendering['list_item_renderer'] ?? [];
+        $liRendererInstance = null;
 
 
-        if (array_key_exists('class', $rowsRenderer)) {
-            $rowsRendererInstance = new $rowsRenderer['class'];
+        if (array_key_exists('class', $liRenderer)) {
+            $liRendererInstance = new $liRenderer['class'];
+            if ($liRendererInstance instanceof LightServiceContainerAwareInterface) {
+                $liRendererInstance->setContainer($this->container);
+            }
         } else {
-            if (array_key_exists("identifier", $rowsRenderer)) {
-                $identifier = $rowsRenderer['identifier'];
-                $rowsRendererInstance = $this->realistRowsRenderers[$identifier] ?? null;
-            } else {
-                $this->error("Bad configuration error. For the \"rendering.rows_renderer\" setting, either the \"class\" or the \"identifier\" must be set.");
+            if (null !== $this->listItemRenderer) {
+                $liRendererInstance = $this->listItemRenderer;
             }
         }
+        if ($liRendererInstance instanceof RealistListItemRendererInterface) {
 
 
-        if ($rowsRendererInstance instanceof RealistRowsRendererInterface) {
-
-
-            if ($rowsRendererInstance instanceof LightServiceContainerAwareInterface) {
-                $rowsRendererInstance->setContainer($this->container);
+            if ($liRendererInstance instanceof LightServiceContainerAwareInterface) {
+                $liRendererInstance->setContainer($this->container);
             }
 
-            if ($rowsRendererInstance instanceof RequestIdAwareRendererInterface) {
-                $rowsRendererInstance->setRequestId($requestId);
+            if ($liRendererInstance instanceof RequestIdAwareRendererInterface) {
+                $liRendererInstance->setRequestId($requestId);
             }
 
-            $ric = $requestDeclaration['ric'] ?? [];
-            $rowsRendererInstance->setRic($ric);
+
+            if (null === $ric) {
+                $ric = $requestDeclaration['ric'] ?? [];
+            }
+            $liRendererInstance->setRic($ric);
 
 
             // adding regular types
-            $types = $rowsRenderer['types'] ?? [];
-            foreach ($types as $columnName => $type) {
+            $types = $liRenderer['types'] ?? [];
+            foreach ($types as $property => $type) {
                 if (false === is_array($type)) {
                     $type = [$type, []];
                 }
                 $theType = array_shift($type);
                 $theOptions = $type;
-                $rowsRendererInstance->setColumnType($columnName, $theType, $theOptions);
-            }
-
-            // adding special checkbox column
-            if (array_key_exists('checkbox_column', $rowsRenderer)) {
-                $conf = $rowsRenderer['checkbox_column'];
-                $name = $conf['name'] ?? 'checkbox';
-                $rowsRendererInstance->addDynamicColumn($name, 'pre');
+                $liRendererInstance->setPropertyType($property, $theType, $theOptions);
             }
 
 
-            // adding special action column
-            $actionColName = RealistHelper::getActionColumnNameByRequestDeclaration($requestDeclaration);
-            if (false !== $actionColName) {
-                $rowsRendererInstance->addDynamicColumn($actionColName, 'post');
+            if (array_key_exists("dynamic", $liRenderer)) {
+                $dynamics = $liRenderer['dynamic'];
+                foreach ($dynamics as $property) {
+                    $liRendererInstance->addDynamicProperty($property);
+                }
             }
 
 
-            // hidden columns
-            if (array_key_exists("hidden_columns", $rendering)) {
-                $rowsRendererInstance->setHiddenColumns($rendering["hidden_columns"]);
+            // filter the properties to display/return
+            if (array_key_exists("properties_to_display", $rendering)) {
+                $liRendererInstance->setPropertiesToDisplay($rendering["properties_to_display"]);
             }
 
 
-            $rowsHtml = $rowsRendererInstance->render($rows);
+            $rowsHtml = $liRendererInstance->render($rows);
 
         } else {
-            $type = gettype($rowsRendererInstance);
-            $this->error("The rowsRenderer is not an instance of RealistRowsRendererInterface ($type given).");
+            $type = gettype($liRendererInstance);
+            $this->error("The rowsRenderer is not an instance of RealistListItemRendererInterface ($type given).");
         }
 
 
@@ -460,6 +439,8 @@ class LightRealistService
             'sql_query' => $stmt,
             'markers' => $markers,
         ];
+
+
     }
 
 
@@ -527,14 +508,14 @@ class LightRealistService
 
 
     /**
-     * Registers a duelistRowsRenderer.
+     * Registers a RealistListRendererInterface.
      *
      * @param string $identifier
-     * @param RealistRowsRendererInterface $realistRowsRenderer
+     * @param RealistListItemRendererInterface $renderer
      */
-    public function registerRealistRowsRenderer(string $identifier, RealistRowsRendererInterface $realistRowsRenderer)
+    public function registerListItemRenderer(string $identifier, RealistListItemRendererInterface $renderer)
     {
-        $this->realistRowsRenderers[$identifier] = $realistRowsRenderer;
+        $this->realistRowsRenderers[$identifier] = $renderer;
     }
 
     /**
@@ -548,54 +529,19 @@ class LightRealistService
         $this->listRenderers[$identifier] = $renderer;
     }
 
-    /**
-     * Registers an action handler.
-     *
-     * @param LightRealistActionHandlerInterface $handler
-     */
-    public function registerActionHandler(LightRealistActionHandlerInterface $handler)
-    {
-        $ids = $handler->getHandledIds();
-        foreach ($ids as $id) {
-            $this->actionHandlers[$id] = $handler;
-        }
-    }
-
 
     /**
-     * Registers a list action handler.
-     * List action ids should be formatted like this:
+     * Sets the list action handler.
+     * See the @page(realist action handler section) for more details.
      *
-     * - list action id: {pluginName}.{listActionName}
-     *
-     *
-     * @param string $pluginName
      * @param LightRealistListActionHandlerInterface $handler
      */
-    public function registerListActionHandler(string $pluginName, LightRealistListActionHandlerInterface $handler)
+    public function setListActionHandler(LightRealistListActionHandlerInterface $handler)
     {
         if ($handler instanceof LightServiceContainerAwareInterface) {
             $handler->setContainer($this->container);
         }
-        $this->listActionHandlers[$pluginName] = $handler;
-    }
-
-
-    /**
-     * Registers a list general action handler.
-     * List general action ids should be formatted like this:
-     *
-     * - list general action id: {pluginName}.{listGeneralActionName}
-     *
-     * @param string $pluginName
-     * @param LightRealistListGeneralActionHandlerInterface $handler
-     */
-    public function registerListGeneralActionHandler(string $pluginName, LightRealistListGeneralActionHandlerInterface $handler)
-    {
-        if ($handler instanceof LightServiceContainerAwareInterface) {
-            $handler->setContainer($this->container);
-        }
-        $this->listGeneralActionHandlers[$pluginName] = $handler;
+        $this->listActionHandler = $handler;
     }
 
 
@@ -611,83 +557,33 @@ class LightRealistService
 
 
     /**
-     * Returns the action handler identified by the given id.
+     * Returns the action handler for the given request id.
+     * See more in the @page(realist action handler section).
      *
-     * @param string $id
-     * @return LightRealistActionHandlerInterface
+     *
+     * @param string $requestId
+     * @return LightRealistListActionHandlerInterface
      * @throws \Exception
      */
-    public function getActionHandler(string $id): LightRealistActionHandlerInterface
+    public function getActionHandlerByRequestId(string $requestId): LightRealistListActionHandlerInterface
     {
-        if (array_key_exists($id, $this->actionHandlers)) {
-            return $this->actionHandlers[$id];
+        if (null === $this->listActionHandler) {
+            $defined = false;
+            $conf = $this->getConfigurationArrayByRequestId($requestId);
+            if (array_key_exists("action_handler", $conf)) {
+                if (array_key_exists('class', $conf['action_handler'])) {
+                    $handler = new $conf['action_handler']['class']();
+                    if ($handler instanceof LightRealistListActionHandlerInterface) {
+                        $this->setListActionHandler($handler);
+                        $defined = true;
+                    }
+                }
+            }
+            if (false === $defined) {
+                $this->error("Undefined list action handler for this realist (requestId=$requestId).");
+            }
         }
-        throw new LightRealistException("No action handler found with id $id.");
-    }
-
-
-    /**
-     * Executes the list action identified by the given actionId, by calling the corresponding list action handler,
-     * and returns the expected ajax response.
-     *
-     *
-     * @param string $actionId
-     * @param array $params
-     * @return array
-     * @throws \Exception
-     */
-    public function executeListAction(string $actionId, array $params): array
-    {
-
-        /**
-         * If you're wondering: yes by default we execute the action no matter what, without checking if it's allowed
-         * by the request declaration.
-         *
-         * This means a malicious user could trigger any action provided by the concrete class.
-         * Should not be a problem if you set the micro-permissions correctly.
-         * Note: to make this more secure we could check that the **rendering.list_action_groups** contains the given actionId
-         * for instance, or such similar checking mechanism, but as I said as long as your permissions are correctly
-         * set you should be "safe", at least for that specific problem of allowing/not allowing some action to execute.
-         *
-         *
-         */
-
-
-        // custom override?
-        if (array_key_exists("request_id", $params)) {
-            $requestId = $params['request_id'];
-            $this->latePrepareByRequestId($requestId);
-        }
-
-
-        list($pluginName, $actionName) = explode('.', $actionId, 2);
-        $handler = $this->listActionHandlers[$pluginName];
-
-        return $handler->execute($actionName, $params);
-    }
-
-
-    /**
-     * Executes the list general action identified by the given actionId, by calling the corresponding list general action handler,
-     * and returns the expected ajax response.
-     *
-     *
-     * @param string $actionId
-     * @param array $params
-     * @return array
-     * @throws \Exception
-     */
-    public function executeListGeneralAction(string $actionId, array $params): array
-    {
-        // custom override?
-        if (array_key_exists("request_id", $params)) {
-            $requestId = $params['request_id'];
-            $this->latePrepareByRequestId($requestId);
-        }
-
-        list($pluginName, $actionName) = explode('.', $actionId, 2);
-        $handler = $this->listGeneralActionHandlers[$pluginName];
-        return $handler->execute($actionName, $params);
+        return $this->listActionHandler;
     }
 
 
@@ -701,86 +597,101 @@ class LightRealistService
      */
     public function getListRendererByRequestId(string $requestId): RealistListRendererInterface
     {
-        $this->latePrepareByRequestId($requestId);
-
 
         $requestDeclaration = $this->getConfigurationArrayByRequestId($requestId);
 
 
         $rendering = $requestDeclaration['rendering'] ?? [];
         $listRendererConf = $rendering['list_renderer'] ?? [];
+        $listRendererClass = $listRendererConf['class'] ?? null;
         $listRendererId = $listRendererConf['identifier'] ?? null;
-        if (null === $listRendererId) {
-            $this->error("The list renderer id was not defined (requestId=$requestId).");
+
+
+        if (null !== $listRendererClass) {
+            $listRenderer = new $listRendererClass;
+            if ($listRenderer instanceof LightServiceContainerAwareInterface) {
+                $listRenderer->setContainer($this->container);
+            }
+        } elseif (null !== $listRendererId) {
+            if (false === array_key_exists($listRendererId, $this->listRenderers)) {
+                $this->error("List renderer not found with identifier $listRendererId (requestId=$requestId).");
+            }
+
+            $listRenderer = $this->listRenderers[$listRendererId];
+        } else {
+            $this->error("The list renderer was not defined in the request declaration (requestId=$requestId).");
         }
 
-        if (false === array_key_exists($listRendererId, $this->listRenderers)) {
-            $this->error("List renderer not found with identifier $listRendererId (requestId=$requestId).");
-        }
-
-        $listRenderer = $this->listRenderers[$listRendererId];
-
-        // a list renderer should be able to prepare itself.
-        // Note: some might need the service container?, we could pass it to them if that happened,
-        // but for now we try to be conservative and pass only one argument as long as possible.
-        $listRenderer->prepareByRequestDeclaration($requestId, $requestDeclaration, $this->container);
+        $listRenderer->prepareByRequestDeclaration($requestId, $requestDeclaration);
         return $listRenderer;
     }
 
 
     /**
-     * Parses the given list action items (aka @page(toolbar items)) and turns them into @page(generic action items).
-     * If a generic action item is discarded, it won't appear in the resulting list.
      *
-     * @param array $items
+     * Returns the prepared "action items" array representing the "list item group actions" for the list identified by the given requestId.
+     *
+     * For more information about "action items", see the @page(realist action items document).
+     * For more information about "list item group actions", see the @page(realist list-actions document).
+     *
+     * By default, we use the "generic action item" format, which is explained in the "request declaration",
+     * using the "list_item_group_actions" property.
+     *
+     *
+     * See more about that format in the @page(realist generic action item section).
+     * See the @page(request declaration document) for more details.
+     *
+     *
      * @param string $requestId
+     * @param string|null $format
+     * @return array
      * @throws \Exception
      */
-    public function prepareListActionGroups(array &$items, string $requestId)
+    public function prepareListItemGroupActionsByRequestId(string $requestId, string $format = null): array
     {
-        $this->latePrepareByRequestId($requestId);
+        // note: for now we only know the generic action item format, so the $format arg is not really used today
+        $c = $this->getConfigurationArrayByRequestId($requestId);
+        $rendering = $c['rendering'] ?? [];
+        $items = $rendering['list_item_group_actions'] ?? [];
 
 
-        foreach ($items as $k => $item) {
-            if (array_key_exists('action_id', $item)) {
-                $res = $this->prepareGenericActionItem($item, $this->listActionHandlers, $requestId);
-                if (false === $res) {
-                    unset($items[$k]);
-                } else {
-                    $items[$k] = $item;
-                }
-            } else {
-                if (array_key_exists("items", $item)) {
-                    $groupItems = $item['items'];
-                    $this->prepareListActionGroups($groupItems, $requestId);
-                    $item['items'] = $groupItems;
-                    $items[$k] = $item;
-                }
-            }
-
-        }
+        $lah = $this->getActionHandlerByRequestId($requestId);
+        $this->prepareListItemGroupActions($items, $lah, $requestId);
+        return $items;
     }
 
 
     /**
-     * Parses the given list general action items and turns them into @page(generic action items).
-     * If a generic action item is discarded, it won't appear in the resulting list.
+     * Returns the prepared "action items" array representing the "general actions" for the list identified by the given requestId.
+     *
+     * For more information about "action items", see the @page(realist action items document).
+     * For more information about "general actions", see the @page(realist list-actions document).
+     *
+     * By default, we use the "generic action item" format, which is explained in the "request declaration",
+     * using the "list_item_group_actions" property.
      *
      *
-     * @param array $items
+     * See more about that format in the @page(realist generic action item section).
+     * See the @page(request declaration document) for more details.
+     *
      * @param string $requestId
      * @throws \Exception
      */
-    public function prepareListGeneralActions(array &$items, $requestId)
+    public function prepareListGeneralActionsByRequestId($requestId)
     {
+        // note: for now we only know the generic action item format, so the $format arg is not really used today
+        $c = $this->getConfigurationArrayByRequestId($requestId);
+        $rendering = $c['rendering'] ?? [];
+        $items = $rendering['list_general_actions'] ?? [];
         foreach ($items as $k => $item) {
-            $res = $this->prepareGenericActionItem($item, $this->listGeneralActionHandlers, $requestId);
+            $res = $this->prepareGenericActionItem($item, $this->listActionHandler, $requestId);
             if (false === $res) {
                 unset($items[$k]);
             } else {
                 $items[$k] = $item;
             }
         }
+        return $items;
     }
 
 
@@ -795,7 +706,6 @@ class LightRealistService
      */
     public function getConfigurationArrayByRequestId(string $requestId): array
     {
-        $this->latePrepareByRequestId($requestId);
         if (array_key_exists($requestId, $this->_requestDeclarationCache)) {
             return $this->_requestDeclarationCache[$requestId];
         }
@@ -807,29 +717,12 @@ class LightRealistService
             //--------------------------------------------
             // FALLBACK MECHANISM
             //--------------------------------------------
-            $p = explode(":", $requestId, 3);
-            $n = count($p);
-            if (3 === $n) {
-                list($pluginName, $resourceId, $requestDeclarationId) = $p;
-            } elseif (2 === $n) {
-                list($pluginName, $resourceId) = $p;
-                $requestDeclarationId = 'default';
-            } else {
-                $this->error("Invalid syntax for the requestId $requestId using the fallback mechanism.");
-            }
 
-
-            $fileId = "config/data/$pluginName/Light_Realist/$resourceId";
-            $filePath = $this->baseDir . "/$fileId.byml";
-            if (false === file_exists($filePath)) {
-                $this->error("File not found: $filePath for requestId $requestId.");
-            }
-
-            $arr = BabyYamlUtil::readFile($filePath);
-            if (false === array_key_exists($requestDeclarationId, $arr)) {
-                $this->error("Query not found with request declaration id: $requestDeclarationId, in file $filePath.");
-            }
-            $ret = $arr[$requestDeclarationId];
+            /**
+             * @var $nug LightNuggetService
+             */
+            $nug = $this->container->get("nugget");
+            $ret = $nug->getNugget($requestId, "Light_Realist/list");
 
 
             // dynamic injection phase
@@ -839,33 +732,6 @@ class LightRealistService
                 array_shift($args);
                 return $handler->handle($args);
             });
-
-
-            //--------------------------------------------
-            // CSRF TOKEN
-            //--------------------------------------------
-            /**
-             * We do this because we want to allow the developer to simply write csrf_token=true
-             * in the config  to generate an actual csrf token.
-             * This will only work for list actions and list general actions.
-             *
-             */
-            $listGeneralActions = BDotTool::getDotValue("rendering.list_general_actions", $ret, []);
-            if ($listGeneralActions) {
-                foreach ($listGeneralActions as &$item) {
-                    $this->convertCsrfTokenByItem($item, $requestId);
-                }
-                BDotTool::setDotValue("rendering.list_general_actions", $listGeneralActions, $ret);
-            }
-            $listActions = BDotTool::getDotValue("rendering.list_action_groups", $ret, []);
-            if ($listActions) {
-                ArrayTool::walkRowsRecursive($listActions, function (&$item) use ($requestId) {
-                    $this->convertCsrfTokenByItem($item, $requestId);
-                }, "items", false);
-                BDotTool::setDotValue("rendering.list_action_groups", $listActions, $ret);
-            }
-
-
         }
 
 
@@ -873,6 +739,43 @@ class LightRealistService
         return $ret;
     }
 
+
+    /**
+     * Returns the given action is allowed for the given requestId.
+     *
+     *
+     * @param string $actionId
+     * @param string $requestId
+     * @return bool
+     */
+    public function isAvailableActionByRequestId(string $actionId, string $requestId): bool
+    {
+        /**
+         * Note: this algo might evolve as new directives are added to the request declaration.
+         */
+        $c = $this->getConfigurationArrayByRequestId($requestId);
+        $rendering = $c['rendering'] ?? [];
+        $lga = $rendering['list_general_actions'] ?? [];
+        $liga = $rendering['list_item_group_actions'] ?? [];
+        $ah = $c['action_handler'] ?? [];
+        $allowed = $ah['allowed_actions'] ?? [];
+
+
+        foreach ($lga as $i) {
+            if (array_key_exists('action_id', $i)) {
+                $allowed[] = $i['action_id'];
+            }
+        }
+
+        ArrayTool::walkRowsRecursive($liga, function (&$item) use (&$allowed) {
+            if (array_key_exists('action_id', $item)) {
+                $allowed[] = $item['action_id'];
+            }
+        }, "items", false);
+        $allowed = array_unique($allowed);
+
+        return in_array($actionId, $allowed, true);
+    }
 
     /**
      * Performs the csrf validation if necessary (i.e. if the csrf_token key is defined in the @page(generic action item) configuration),
@@ -950,7 +853,7 @@ class LightRealistService
     {
         $ret = $requestDeclaration['base_fields'] ?? [];
         $alias2Expr = ParametrizedSqlQueryHelper::getColumnName2ColumnExpression($ret);
-        $labels = BDotTool::getDotValue("rendering.column_labels", $requestDeclaration, []);
+        $labels = BDotTool::getDotValue("rendering.property_labels", $requestDeclaration, []);
         return array_intersect_key($labels, $alias2Expr);
     }
 
@@ -1021,82 +924,63 @@ class LightRealistService
     //
     //--------------------------------------------
     /**
-     * Converts the given item into a @page(generic action item).
+     * Converts the given item into a @page(generic action item) in expanded form.
+     *
      * Returns false if the item should be discarded (i.e. the user isn't granted access to it).
      *
      *
      *
      * @param array $item
-     * @param array $handlers
+     * @param LightRealistListActionHandlerInterface $actionHandler
      * @param string $requestId
-     * @return bool
+     * @return false|null
      * @throws \Exception
      */
-    private function prepareGenericActionItem(array &$item, array $handlers, string $requestId)
+    private function prepareGenericActionItem(array &$item, LightRealistListActionHandlerInterface $actionHandler, string $requestId)
     {
-        list($pluginName, $actionName) = explode(".", $item['action_id'], 2);
-        $handler = $handlers[$pluginName];
-        $res = $handler->prepare($actionName, $item, $requestId);
-        if (false === $res) {
-            return false;
-        } else {
-            if (array_key_exists('modal', $item)) {
-                $this->container->get('html_page_copilot')->addModal($item['modal']);
+        if (array_key_exists('action_id', $item)) {
+            $actionId = $item['action_id'];
+            if (false === $actionHandler->doWeShowTrigger($actionId, $requestId)) {
+                return false;
+            } else {
+                $actionHandler->prepareListAction($actionId, $requestId, $item);
+                if (array_key_exists('modal', $item)) {
+                    $this->container->get('html_page_copilot')->addModal($item['modal']);
+                }
             }
+        } else {
+            $this->error("Invalid \"generic action item\" format. The action_id property is not defined (requestId=$requestId).");
         }
     }
 
 
     /**
-     * Parses the given item, and converts csrf_token = true
-     * entries to an actual csrf_token value.
+     * Parses the given list action items (aka @page(toolbar items)) and turns them into @page(generic action items).
+     * If a generic action item is discarded, it won't appear in the resulting list.
      *
-     * Note: if ajax, then the value is not generated, and a fake value is used.
-     *
-     * @param array $item
+     * @param array $items
+     * @param LightRealistListActionHandlerInterface $actionHandler
      * @param string $requestId
      * @throws \Exception
      */
-    private function convertCsrfTokenByItem(array &$item, string $requestId)
+    private function prepareListItemGroupActions(array &$items, LightRealistListActionHandlerInterface $actionHandler, string $requestId)
     {
-        if (array_key_exists("csrf_token", $item) && true === $item['csrf_token']) {
-            /**
-             * @var $csrfService LightCsrfSessionService
-             */
-            $csrfService = $this->container->get('csrf_session');
-            $item['csrf_token'] = $csrfService->getToken();
-        }
-    }
-
-
-    /**
-     * Provides the opportunity for plugin authors to lately register to our service.
-     *
-     * See the @page(late registration) concept for more info.
-     *
-     * @param string $requestId
-     */
-    private function latePrepareByRequestId(string $requestId)
-    {
-        if (false === in_array($requestId, $this->lateRegistered, true)) {
-
-            $p = explode(':', $requestId, 2);
-            if (2 === count($p)) {
-                $planet = array_shift($p);
-                $serviceName = LightNamesAndPathHelper::getServiceName($planet);
-
-                if (true === $this->container->has($serviceName)) {
-                    $this->lateRegistered[] = $requestId;
-                    /**
-                     * @var $service LightRealistCustomServiceInterface
-                     */
-                    $service = $this->container->get($serviceName);
-                    if ($service instanceof LightRealistCustomServiceInterface) {
-                        $service->registerRealistByRequestId($requestId);
-                    }
+        foreach ($items as $k => $item) {
+            if (array_key_exists('action_id', $item)) {
+                $res = $this->prepareGenericActionItem($item, $actionHandler, $requestId);
+                if (false === $res) {
+                    unset($items[$k]);
+                } else {
+                    $items[$k] = $item;
+                }
+            } else {
+                if (array_key_exists("items", $item)) {
+                    $groupItems = $item['items'];
+                    $this->prepareListItemGroupActions($groupItems, $actionHandler, $requestId);
+                    $item['items'] = $groupItems;
+                    $items[$k] = $item;
                 }
             }
         }
     }
-
 }
