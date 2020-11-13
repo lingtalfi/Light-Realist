@@ -849,7 +849,7 @@ class LightRealistService
      */
     public function getSqlColumnsByRequestDeclaration(array $requestDeclaration): array
     {
-        $ret = $requestDeclaration['base_fields'] ?? [];
+        $ret = $requestDeclaration['duelist']['base_fields'] ?? [];
         $alias2Expr = ParametrizedSqlQueryHelper::getColumnName2ColumnExpression($ret);
         $labels = BDotTool::getDotValue("rendering.property_labels", $requestDeclaration, []);
         return array_intersect_key($labels, $alias2Expr);
