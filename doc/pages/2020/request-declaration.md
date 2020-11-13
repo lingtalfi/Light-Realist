@@ -11,7 +11,7 @@ The **request declaration** is identified by a **requestId**, which is a small s
 
 The **request declaration** is composed of different **properties**.
 
-You an also add your own.
+You can also add your own.
 
 
 The already implemented request declaration properties are listed below, using [bdot notation](https://github.com/karayabin/universe-snapshot/blob/master/universe/Ling/Bat/doc/bdot-notation.md).

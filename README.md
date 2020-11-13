@@ -103,6 +103,10 @@ Related
 History Log
 =============
 
+- 2.0.3 -- 2020-11-13
+
+    - fix typo in documentation
+    
 - 2.0.2 -- 2020-11-13
 
     - fix service->getSqlColumnsByRequestDeclaration not returning expected array
