@@ -600,7 +600,6 @@ class LightRealistService
 
         $requestDeclaration = $this->getConfigurationArrayByRequestId($requestId);
 
-
         $rendering = $requestDeclaration['rendering'] ?? [];
         $listRendererConf = $rendering['list_renderer'] ?? [];
         $listRendererClass = $listRendererConf['class'] ?? null;
@@ -653,7 +652,6 @@ class LightRealistService
         $c = $this->getConfigurationArrayByRequestId($requestId);
         $rendering = $c['rendering'] ?? [];
         $items = $rendering['list_item_group_actions'] ?? [];
-
 
         $lah = $this->getActionHandlerByRequestId($requestId);
         $this->prepareListItemGroupActions($items, $lah, $requestId);

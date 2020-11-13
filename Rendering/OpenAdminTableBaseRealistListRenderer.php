@@ -201,6 +201,9 @@ abstract class OpenAdminTableBaseRealistListRenderer implements RealistListRende
         $this->setPropertiesToDisplay($propDisplay);
 
 
+        a($realist->getSqlColumnsByRequestDeclaration($requestDeclaration));
+        az($requestDeclaration);
+
         $this->setSqlColumns($realist->getSqlColumnsByRequestDeclaration($requestDeclaration));
 
 

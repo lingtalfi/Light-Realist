@@ -1,6 +1,6 @@
 The request declaration
 ============
-2020-08-24 -> 2020-09-03
+2020-08-24 -> 2020-11-13
 
 
 
@@ -14,7 +14,7 @@ The **request declaration** is composed of different **properties**.
 You an also add your own.
 
 
-The request declaration properties alredy implemented are listed below, using [bdot notation](https://github.com/karayabin/universe-snapshot/blob/master/universe/Ling/Bat/doc/bdot-notation.md).
+The already implemented request declaration properties are listed below, using [bdot notation](https://github.com/karayabin/universe-snapshot/blob/master/universe/Ling/Bat/doc/bdot-notation.md).
 When similar properties are achieving the same results, all alternatives are listed in a "Similar properties" footnote.
 
 
