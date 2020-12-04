@@ -103,6 +103,10 @@ Related
 History Log
 =============
 
+- 2.0.6 -- 2020-12-04
+
+    - Add lpi-deps.byml file
+
 - 2.0.5 -- 2020-11-17
 
     - update BaseRealistListItemRenderer's Light_Realist.hub_link action now accepts icon option
