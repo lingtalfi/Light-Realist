@@ -103,6 +103,10 @@ Related
 History Log
 =============
 
+- 2.0.12 -- 2021-02-22
+
+    - clean assets/map dir for real (2)
+  
 - 2.0.11 -- 2021-02-22
 
     - clean assets/map dir for real
