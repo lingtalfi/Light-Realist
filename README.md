@@ -103,6 +103,10 @@ Related
 History Log
 =============
 
+- 2.0.10 -- 2021-02-22
+
+    - clean assets/map dir
+  
 - 2.0.9 -- 2021-02-22
 
     - adapt to new light universe assets organization
