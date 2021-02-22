@@ -1,6 +1,6 @@
 Light_Realist
 ===========
-2019-08-09 -> 2020-11-17
+2019-08-09 -> 2021-02-22
 
 
 
@@ -103,6 +103,10 @@ Related
 History Log
 =============
 
+- 2.0.9 -- 2021-02-22
+
+    - adapt to new light universe assets organization
+  
 - 2.0.8 -- 2021-02-19
 
     - upgrade dependencies
