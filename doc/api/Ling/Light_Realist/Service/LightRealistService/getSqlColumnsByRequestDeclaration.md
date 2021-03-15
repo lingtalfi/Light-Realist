@@ -51,7 +51,7 @@ Returns array.
 
 Source Code
 ===========
-See the source code for method [LightRealistService::getSqlColumnsByRequestDeclaration](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L850-L856)
+See the source code for method [LightRealistService::getSqlColumnsByRequestDeclaration](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L851-L857)
 
 
 See Also

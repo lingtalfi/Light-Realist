@@ -597,8 +597,9 @@ class LightRealistService
      */
     public function getListRendererByRequestId(string $requestId): RealistListRendererInterface
     {
-
+        
         $requestDeclaration = $this->getConfigurationArrayByRequestId($requestId);
+
 
         $rendering = $requestDeclaration['rendering'] ?? [];
         $listRendererConf = $rendering['list_renderer'] ?? [];
@@ -720,7 +721,7 @@ class LightRealistService
              * @var $nug LightNuggetService
              */
             $nug = $this->container->get("nugget");
-            $ret = $nug->getNugget($requestId, "Light_Realist/list");
+            $ret = $nug->getNugget($requestId, "Ling.Light_Realist/list");
 
 
             // dynamic injection phase
