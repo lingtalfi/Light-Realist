@@ -64,7 +64,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [LightRealistService::prepareListGeneralActionsByRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L679-L694)
+See the source code for method [LightRealistService::prepareListGeneralActionsByRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L680-L695)
 
 
 See Also

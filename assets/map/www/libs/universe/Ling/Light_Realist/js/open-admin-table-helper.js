@@ -983,7 +983,7 @@ if ("undefined" === typeof window.OpenAdminTableHelper) {
 
         window.OpenAdminTableHelper._defaults = {
             service_url: '/ajax-handler',
-            handler: 'Light_Realist',
+            handler: 'Ling.Light_Realist',
             action: 'realist-request',
             request_id: 'none',
             csrf_token: 'your_csrf_token_value',

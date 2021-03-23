@@ -53,7 +53,7 @@ Returns bool.
 
 Source Code
 ===========
-See the source code for method [LightRealistService::isAvailableActionByRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L750-L777)
+See the source code for method [LightRealistService::isAvailableActionByRequestId](https://github.com/lingtalfi/Light_Realist/blob/master/Service/LightRealistService.php#L752-L779)
 
 
 See Also

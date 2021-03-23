@@ -601,6 +601,7 @@ class LightRealistService
         $requestDeclaration = $this->getConfigurationArrayByRequestId($requestId);
 
 
+
         $rendering = $requestDeclaration['rendering'] ?? [];
         $listRendererConf = $rendering['list_renderer'] ?? [];
         $listRendererClass = $listRendererConf['class'] ?? null;
@@ -722,6 +723,7 @@ class LightRealistService
              */
             $nug = $this->container->get("nugget");
             $ret = $nug->getNugget($requestId, "Ling.Light_Realist/list");
+
 
 
             // dynamic injection phase
