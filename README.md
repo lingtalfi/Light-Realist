@@ -1,6 +1,6 @@
 Light_Realist
 ===========
-2019-08-09 -> 2021-03-23
+2019-08-09 -> 2021-04-09
 
 
 
@@ -108,6 +108,11 @@ Related
 History Log
 =============
 
+- 2.0.16 -- 2021-04-09
+  
+    - update realist tag transfer documentation
+    - fix open-admin-table-helper.js not resetting pagination correctly in some cases
+  
 - 2.0.15 -- 2021-03-23
 
     - update api, change Light_Realist identifiers to Ling.Light_Realist
