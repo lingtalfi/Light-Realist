@@ -52,6 +52,40 @@ class RequestDeclarationHelper
 
 
     /**
+     * Unregisters the planet by removing the given dir content from the expected location.
+     *
+     * See more details in the @page(open registration system of Ling.Light_Realist).
+     *
+     *
+     *
+     * @param OutputInterface $output
+     * @param string $appDir
+     * @param string $planetDotName
+     * @param string $dir
+     */
+    public static function unregisterRequestDeclarationsByDirectory(OutputInterface $output, string $appDir, string $planetDotName, string $dir)
+    {
+        if (true === is_dir($dir)) {
+
+            $relPaths = YorgDirScannerTool::getFilesWithExtension($dir, "byml", false, true, true);
+            $dstDir = $appDir . "/config/open/Ling.Light_Realist/$planetDotName";
+            if ($relPaths) {
+
+                $n = 0;
+                foreach ($relPaths as $path) {
+                    $dstFile = $dstDir . "/$path";
+                    if (true === file_exists($dstFile)) {
+                        FileSystemTool::remove($dstFile);
+                        $n++;
+                    }
+                }
+                $output->write("Removed <b>$n</b> request declaration(s) from <blue>$dstDir</blue>." . PHP_EOL);
+            }
+        }
+    }
+
+
+    /**
      * Returns the ric from the given request declaration.
      * Throws an exception if the ric is not defined.
      *

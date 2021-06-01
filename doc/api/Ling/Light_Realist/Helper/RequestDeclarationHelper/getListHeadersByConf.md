@@ -61,7 +61,7 @@ Returns array | false.
 
 Source Code
 ===========
-See the source code for method [RequestDeclarationHelper::getListHeadersByConf](https://github.com/lingtalfi/Light_Realist/blob/master/Helper/RequestDeclarationHelper.php#L92-L146)
+See the source code for method [RequestDeclarationHelper::getListHeadersByConf](https://github.com/lingtalfi/Light_Realist/blob/master/Helper/RequestDeclarationHelper.php#L126-L180)
 
 
 See Also

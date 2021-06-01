@@ -108,6 +108,10 @@ Related
 History Log
 =============
 
+- 2.1.2 -- 2021-06-01
+
+    - add RequestDeclarationHelper::unregisterRequestDeclarationsByDirectory method
+
 - 2.1.1 -- 2021-06-01
 
     - add RequestDeclarationHelper::registerRequestDeclarationsByDirectory method
