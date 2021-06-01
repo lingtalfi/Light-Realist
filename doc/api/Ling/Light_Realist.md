@@ -1,6 +1,6 @@
 Ling/Light_Realist
 ================
-2019-08-12 --> 2021-05-31
+2019-08-12 --> 2021-06-01
 
 
 
@@ -137,8 +137,11 @@ Table of contents
 Dependencies
 ============
 - [ArrayToString](https://github.com/lingtalfi/ArrayToString)
+- [ArrayVariableResolver](https://github.com/lingtalfi/ArrayVariableResolver)
+- [BabyYaml](https://github.com/lingtalfi/BabyYaml)
 - [Bat](https://github.com/lingtalfi/Bat)
 - [CheapLogger](https://github.com/lingtalfi/CheapLogger)
+- [ConventionTools](https://github.com/lingtalfi/ConventionTools)
 - [JAcpHep](https://github.com/lingtalfi/JAcpHep)
 - [JResponsiveTableHelper](https://github.com/lingtalfi/JResponsiveTableHelper)
 - [JRicAdminTableHelper](https://github.com/lingtalfi/JRicAdminTableHelper)

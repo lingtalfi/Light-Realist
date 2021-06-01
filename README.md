@@ -1,6 +1,6 @@
 Light_Realist
 ===========
-2019-08-09 -> 2021-04-09
+2019-08-09 -> 2021-06-01
 
 
 
@@ -107,6 +107,10 @@ Related
 
 History Log
 =============
+
+- 2.1.0 -- 2021-06-01
+
+    - replaced nugget system with open registration system (to fetch request declarations)
 
 - 2.0.18 -- 2021-05-31
 
