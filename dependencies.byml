@@ -5,7 +5,9 @@ dependencies:
         - BabyYaml
         - Bat
         - CheapLogger
+        - CliTools
         - ConventionTools
+        - DirScanner
         - JAcpHep
         - JResponsiveTableHelper
         - JRicAdminTableHelper

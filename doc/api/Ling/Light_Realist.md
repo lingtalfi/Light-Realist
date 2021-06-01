@@ -48,6 +48,7 @@ Table of contents
 - [DuelistHelper](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Helper/DuelistHelper.md) &ndash; The DuelistHelper class.
     - [DuelistHelper::getRawTableNameByRequestDeclaration](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Helper/DuelistHelper/getRawTableNameByRequestDeclaration.md) &ndash; Returns the raw table name from the given request declaration.
 - [RequestDeclarationHelper](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Helper/RequestDeclarationHelper.md) &ndash; The RequestDeclarationHelper class.
+    - [RequestDeclarationHelper::registerRequestDeclarationsByDirectory](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Helper/RequestDeclarationHelper/registerRequestDeclarationsByDirectory.md) &ndash; Registers the planet by copying the given dir content to the expected location.
     - [RequestDeclarationHelper::getRicByConf](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Helper/RequestDeclarationHelper/getRicByConf.md) &ndash; Returns the ric from the given request declaration.
     - [RequestDeclarationHelper::getListHeadersByConf](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Helper/RequestDeclarationHelper/getListHeadersByConf.md) &ndash; Returns an array of property name => label representing the headers of the list defined in the given request declaration.
 - [LightRealistBaseListActionHandler](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/ListActionHandler/LightRealistBaseListActionHandler.md) &ndash; The LightRealistBaseListActionHandler class.
@@ -141,7 +142,9 @@ Dependencies
 - [BabyYaml](https://github.com/lingtalfi/BabyYaml)
 - [Bat](https://github.com/lingtalfi/Bat)
 - [CheapLogger](https://github.com/lingtalfi/CheapLogger)
+- [CliTools](https://github.com/lingtalfi/CliTools)
 - [ConventionTools](https://github.com/lingtalfi/ConventionTools)
+- [DirScanner](https://github.com/lingtalfi/DirScanner)
 - [JAcpHep](https://github.com/lingtalfi/JAcpHep)
 - [JResponsiveTableHelper](https://github.com/lingtalfi/JResponsiveTableHelper)
 - [JRicAdminTableHelper](https://github.com/lingtalfi/JRicAdminTableHelper)

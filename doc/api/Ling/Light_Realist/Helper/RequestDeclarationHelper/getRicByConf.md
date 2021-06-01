@@ -52,7 +52,7 @@ Returns array.
 
 Source Code
 ===========
-See the source code for method [RequestDeclarationHelper::getRicByConf](https://github.com/lingtalfi/Light_Realist/blob/master/Helper/RequestDeclarationHelper.php#L28-L36)
+See the source code for method [RequestDeclarationHelper::getRicByConf](https://github.com/lingtalfi/Light_Realist/blob/master/Helper/RequestDeclarationHelper.php#L65-L73)
 
 
 See Also
@@ -60,5 +60,5 @@ See Also
 
 The [RequestDeclarationHelper](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Helper/RequestDeclarationHelper.md) class.
 
-Next method: [getListHeadersByConf](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Helper/RequestDeclarationHelper/getListHeadersByConf.md)<br>
+Previous method: [registerRequestDeclarationsByDirectory](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Helper/RequestDeclarationHelper/registerRequestDeclarationsByDirectory.md)<br>Next method: [getListHeadersByConf](https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Helper/RequestDeclarationHelper/getListHeadersByConf.md)<br>
 

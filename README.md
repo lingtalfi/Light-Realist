@@ -108,6 +108,10 @@ Related
 History Log
 =============
 
+- 2.1.1 -- 2021-06-01
+
+    - add RequestDeclarationHelper::registerRequestDeclarationsByDirectory method
+  
 - 2.1.0 -- 2021-06-01
 
     - replaced nugget system with open registration system (to fetch request declarations)
