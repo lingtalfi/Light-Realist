@@ -17,7 +17,6 @@ dependencies:
         - Light_ControllerHub
         - Light_CsrfSession
         - Light_Database
-        - Light_Kit_Admin
         - Light_MicroPermission
         - Light_Nugget
         - Light_ReverseRouter

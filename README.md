@@ -1,6 +1,6 @@
 Light_Realist
 ===========
-2019-08-09 -> 2021-06-01
+2019-08-09 -> 2021-07-30
 
 
 
@@ -107,6 +107,10 @@ Related
 
 History Log
 =============
+
+- 2.1.3 -- 2021-07-30
+
+    - fix unwanted dependency to Ling.Light_Kit_Admin 
 
 - 2.1.2 -- 2021-06-01
 
